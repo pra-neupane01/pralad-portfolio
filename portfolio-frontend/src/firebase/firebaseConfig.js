@@ -13,6 +13,7 @@ const firebaseConfig = {
 export const isFirebaseConfigured = Object.values(firebaseConfig).every(Boolean);
 
 // Add Firebase values to .env before expecting contact form submissions to be stored.
+// Vite exposes only variables prefixed with VITE_ to the browser.
 const app = isFirebaseConfigured ? initializeApp(firebaseConfig) : null;
 
 export const db = app ? getFirestore(app) : null;

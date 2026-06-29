@@ -1,5 +1,12 @@
 import { motion } from "framer-motion";
-import { HiArrowDownTray, HiCircleStack, HiCpuChip, HiServerStack } from "react-icons/hi2";
+import {
+  HiArrowDownTray,
+  HiCircleStack,
+  HiCodeBracketSquare,
+  HiCpuChip,
+  HiServerStack,
+  HiShieldCheck,
+} from "react-icons/hi2";
 import ExperienceCard from "../components/ExperienceCard.jsx";
 import SectionTitle from "../components/SectionTitle.jsx";
 import SkillBadge from "../components/SkillBadge.jsx";
@@ -7,28 +14,22 @@ import { profile, resumePath } from "../data/socials.js";
 
 const timeline = [
   {
-    label: "Education",
-    title: "Undergraduate IT Student - Itahari International College",
+    label: "2025 - Present",
+    title: "BSc (Hons) Computing - Itahari International College",
     description:
-      "Studying computing foundations while turning course concepts into practical software projects.",
+      "Studying computing through the London Metropolitan University pathway while converting classroom concepts into working software projects.",
   },
   {
-    label: "Learning",
-    title: "Backend Development Learning Journey - Java, Spring Boot, Node.js",
+    label: "2022 - 2024",
+    title: "+2 Science - Bright Future Secondary School",
     description:
-      "Building a strong foundation in APIs, databases, server-side architecture, and clean project structure.",
-  },
-  {
-    label: "Internship",
-    title: "Internship - Sitoula Tech Solutions",
-    description:
-      "Learning professional development habits, collaboration, debugging, and real-world project flow.",
+      "Built analytical thinking, problem-solving discipline, and the technical base that supports my computing path.",
   },
   {
     label: "Projects",
-    title: "Building real-world projects - SajiloYatra, TrustMart, Restaurant-App",
+    title: "Java, Spring Boot, APIs, databases, and clean architecture",
     description:
-      "Practicing booking systems, marketplace workflows, restaurant APIs, and database-backed features.",
+      "Building systems such as SajiloYatra, TrustMart, Restaurant-App, and Java OOP management applications to sharpen backend design.",
   },
 ];
 
@@ -42,6 +43,29 @@ const focusAreas = [
 
 const networkNodes = ["API", "Database", "Auth", "Cloud", "Security", "Network"];
 
+const developerDna = [
+  {
+    title: "Object-first thinking",
+    description: "I like turning real-world workflows into clear models, services, and responsibilities.",
+    icon: HiCodeBracketSquare,
+  },
+  {
+    title: "Reliable APIs",
+    description: "My direction is backend systems that are predictable, documented, and easy to extend.",
+    icon: HiServerStack,
+  },
+  {
+    title: "Data discipline",
+    description: "I care about clean schemas, relationships, validation, and keeping application data trustworthy.",
+    icon: HiCircleStack,
+  },
+  {
+    title: "Security mindset",
+    description: "Authentication, authorization, networking fundamentals, and safe access patterns interest me.",
+    icon: HiShieldCheck,
+  },
+];
+
 export default function About() {
   return (
     <>
@@ -50,13 +74,14 @@ export default function About() {
           <div>
             <SectionTitle
               eyebrow="About"
-              title="Backend developer growing through projects, internship work, and systems thinking."
-              description={`I am ${profile.displayName}, also known as ${profile.alternateName}. I am an undergraduate IT student at ${profile.college} and currently doing an internship at ${profile.internship}.`}
+              title="A Java-focused developer building toward scalable backend engineering."
+              description={`I am ${profile.displayName}, also known as ${profile.alternateName}. I am pursuing ${profile.degree} at ${profile.college}, affiliated with ${profile.university}.`}
             />
             <p className="mt-6 leading-8 text-slate-400">
-              My interest is centered on backend development, networking, APIs, databases, and
-              scalable systems. I enjoy taking real-world ideas like bus booking, marketplaces, and
-              restaurant workflows, then shaping them into structured backend projects.
+              My goal is to become a skilled Java developer who builds efficient, scalable, and
+              reliable software. I focus on Java, Spring Boot, REST APIs, databases, OOP,
+              networking fundamentals, and clean code because those are the foundations of systems
+              that can grow without becoming fragile.
             </p>
             <a href={resumePath} download className="primary-button mt-8">
               <HiArrowDownTray />
@@ -94,8 +119,8 @@ export default function About() {
         <div className="page-container">
           <SectionTitle
             eyebrow="Timeline"
-            title="The path I am building."
-            description="A simple view of where I am learning, working, and applying my skills."
+            title="Education and technical direction."
+            description="A focused view of where I am studying and the engineering path I am building."
           />
           <div className="mt-12 grid gap-8">
             {timeline.map((item, index) => (
@@ -110,12 +135,18 @@ export default function About() {
           <div>
             <SectionTitle
               eyebrow="Focus Now"
-              title="What I am focused on now."
-              description="These are the skills and practices I want to keep improving through internship work and projects."
+              title="Developer DNA."
+              description="The habits and technical instincts I want my portfolio to communicate clearly."
             />
-            <div className="mt-8 flex flex-wrap gap-3">
-              {focusAreas.map((focus) => (
-                <SkillBadge key={focus}>{focus}</SkillBadge>
+            <div className="mt-8 grid gap-4">
+              {developerDna.map((item) => (
+                <div key={item.title} className="soft-card flex gap-4">
+                  <item.icon className="mt-1 shrink-0 text-2xl text-cyan" />
+                  <div>
+                    <h3 className="font-black text-white">{item.title}</h3>
+                    <p className="mt-2 text-sm leading-6 text-slate-400">{item.description}</p>
+                  </div>
+                </div>
               ))}
             </div>
           </div>
@@ -134,6 +165,11 @@ export default function About() {
                 >
                   {node}
                 </div>
+              ))}
+            </div>
+            <div className="mt-8 flex flex-wrap gap-3">
+              {focusAreas.map((focus) => (
+                <SkillBadge key={focus}>{focus}</SkillBadge>
               ))}
             </div>
           </div>

@@ -8,6 +8,7 @@ const navLinks = [
   { label: "About", to: "/about" },
   { label: "Projects", to: "/projects" },
   { label: "Certifications", to: "/certifications" },
+  { label: "Playground", to: "/playground" },
   { label: "Contact", to: "/contact" },
 ];
 
@@ -29,7 +30,9 @@ export default function Navbar() {
             PN
           </span>
           <span>
-            <strong className="block text-base font-black text-white">{profile.brand}</strong>
+            <strong className="brand-font block text-base font-black tracking-wide text-white">
+              {profile.brand}
+            </strong>
             <small className="block text-xs font-semibold text-slate-400">{profile.title}</small>
           </span>
         </NavLink>

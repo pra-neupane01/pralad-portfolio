@@ -27,6 +27,11 @@ export default function CertificateCard({ certificate, index = 0 }) {
       <h3 className="mt-3 text-xl font-black text-white">{certificate.title}</h3>
       <p className="mt-2 text-sm text-slate-400">{certificate.issuer}</p>
       <p className="mt-1 text-sm font-bold text-slate-500">{certificate.date}</p>
+      {certificate.certificateId && (
+        <p className="mt-3 break-all rounded-xl border border-line bg-white/[0.035] p-3 mono text-xs text-slate-400">
+          ID: {certificate.certificateId}
+        </p>
+      )}
       {certificate.credentialUrl ? (
         <a
           href={certificate.credentialUrl}

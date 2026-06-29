@@ -4,16 +4,17 @@ import { MdEmail } from "react-icons/md";
 export const profile = {
   displayName: "Pralad Neupane",
   alternateName: "Prakash Neupane",
-  brand: "Pralad.dev",
-  title: "Backend Developer",
-  headline: "Java, Spring Boot, Node.js, Express, PostgreSQL, MySQL and scalable API systems.",
-  email: "neupaneprakash9999@gmail.com",
-  location: "Morang / Itahari, Nepal",
+  brand: "NEUPANE.CODE",
+  title: "Java-focused Backend Developer",
+  headline: "Java, Spring Boot, REST APIs, databases, clean code, OOP, and scalable backend systems.",
+  email: "pra2026neupane@gmail.com",
+  location: "Sundarharaicha / Itahari region, Nepal",
   college: "Itahari International College",
-  internship: "Sitoula Tech Solutions",
+  degree: "BSc (Hons) Computing",
+  university: "London Metropolitan University",
 };
 
-// Place your resume file inside public/resume.pdf.
+// Place your latest resume at public/resume.pdf.
 export const resumePath = "/resume.pdf";
 
 export const socials = [
@@ -39,7 +40,7 @@ export const socials = [
   },
   {
     label: "Email",
-    href: "mailto:neupaneprakash9999@gmail.com",
+    href: "mailto:pra2026neupane@gmail.com",
     icon: MdEmail,
   },
 ];

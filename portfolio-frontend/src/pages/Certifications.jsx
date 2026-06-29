@@ -15,8 +15,8 @@ export default function Certifications() {
     <section className="page-container py-16 lg:py-24">
       <SectionTitle
         eyebrow="Certifications"
-        title="A professional certificate wall ready for real credentials."
-        description="These placeholders are editable in src/data/certifications.js when you add verified certificates."
+        title="Verified learning, with room for the next credentials."
+        description="The Java OOP certificate is recorded with its real certificate ID. Placeholder entries stay clearly marked until verified."
       />
 
       <div className="mt-8 flex flex-wrap gap-3">
@@ -35,15 +35,19 @@ export default function Certifications() {
         ))}
       </div>
 
-      <div className="mt-10 grid gap-6 md:grid-cols-2 xl:grid-cols-4">
+      <div className="mt-10 grid gap-6 md:grid-cols-2 xl:grid-cols-3">
         {filteredCertifications.map((certificate, index) => (
           <CertificateCard key={certificate.title} certificate={certificate} index={index} />
         ))}
       </div>
 
-      <p className="mt-10 rounded-2xl border border-line bg-white/[0.04] p-5 text-center font-bold text-slate-300">
-        More certifications will be added soon.
-      </p>
+      <div className="mt-10 grid gap-4 rounded-3xl border border-line bg-slate-950/55 p-5 sm:grid-cols-3">
+        {["Java-first learning", "Backend direction", "No fake certificate IDs"].map((item) => (
+          <p key={item} className="rounded-2xl border border-cyan/20 bg-cyan/10 p-4 text-sm font-black text-cyan">
+            {item}
+          </p>
+        ))}
+      </div>
     </section>
   );
 }

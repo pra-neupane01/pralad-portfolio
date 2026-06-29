@@ -1,34 +1,16 @@
 import { lazy, Suspense } from "react";
-import { AnimatePresence, motion } from "framer-motion";
+import { AnimatePresence } from "framer-motion";
 import { Route, Routes, useLocation } from "react-router-dom";
 import Navbar from "./components/Navbar.jsx";
 import Footer from "./components/Footer.jsx";
+import PageTransition from "./components/PageTransition.jsx";
 
 const Home = lazy(() => import("./pages/Home.jsx"));
 const About = lazy(() => import("./pages/About.jsx"));
 const Projects = lazy(() => import("./pages/Projects.jsx"));
 const Certifications = lazy(() => import("./pages/Certifications.jsx"));
+const Playground = lazy(() => import("./pages/Playground.jsx"));
 const Contact = lazy(() => import("./pages/Contact.jsx"));
-
-const pageVariants = {
-  initial: { opacity: 0, y: 18 },
-  animate: { opacity: 1, y: 0 },
-  exit: { opacity: 0, y: -12 },
-};
-
-function PageShell({ children }) {
-  return (
-    <motion.main
-      variants={pageVariants}
-      initial="initial"
-      animate="animate"
-      exit="exit"
-      transition={{ duration: 0.35, ease: "easeOut" }}
-    >
-      {children}
-    </motion.main>
-  );
-}
 
 export default function App() {
   const location = useLocation();
@@ -48,41 +30,49 @@ export default function App() {
             <Route
               path="/"
               element={
-                <PageShell>
+                <PageTransition>
                   <Home />
-                </PageShell>
+                </PageTransition>
               }
             />
             <Route
               path="/about"
               element={
-                <PageShell>
+                <PageTransition>
                   <About />
-                </PageShell>
+                </PageTransition>
               }
             />
             <Route
               path="/projects"
               element={
-                <PageShell>
+                <PageTransition>
                   <Projects />
-                </PageShell>
+                </PageTransition>
               }
             />
             <Route
               path="/certifications"
               element={
-                <PageShell>
+                <PageTransition>
                   <Certifications />
-                </PageShell>
+                </PageTransition>
+              }
+            />
+            <Route
+              path="/playground"
+              element={
+                <PageTransition>
+                  <Playground />
+                </PageTransition>
               }
             />
             <Route
               path="/contact"
               element={
-                <PageShell>
+                <PageTransition>
                   <Contact />
-                </PageShell>
+                </PageTransition>
               }
             />
           </Routes>

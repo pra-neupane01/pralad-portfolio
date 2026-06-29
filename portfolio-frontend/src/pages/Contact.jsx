@@ -1,11 +1,11 @@
 import { useState } from "react";
 import { motion } from "framer-motion";
 import { addDoc, collection, serverTimestamp } from "firebase/firestore";
-import { HiEnvelope, HiMapPin, HiPaperAirplane } from "react-icons/hi2";
+import { HiArrowDownTray, HiEnvelope, HiMapPin, HiPaperAirplane, HiSignal } from "react-icons/hi2";
 import SectionTitle from "../components/SectionTitle.jsx";
 import SocialLinks from "../components/SocialLinks.jsx";
 import { db, isFirebaseConfigured } from "../firebase/firebaseConfig.js";
-import { profile } from "../data/socials.js";
+import { profile, resumePath } from "../data/socials.js";
 
 const initialForm = {
   fullName: "",
@@ -34,7 +34,7 @@ export default function Contact() {
     if (!isFirebaseConfigured || !db) {
       setStatus({
         type: "error",
-        message: "Firebase is not configured yet. Add your .env values to enable Firestore messages.",
+        message: "Firebase is not configured yet. Add your Vite .env values to enable Firestore messages.",
       });
       return;
     }
@@ -42,16 +42,19 @@ export default function Contact() {
     try {
       setStatus({ type: "loading", message: "Sending message..." });
       await addDoc(collection(db, "contactMessages"), {
-        ...form,
+        fullName: form.fullName.trim(),
+        email: form.email.trim(),
+        subject: form.subject.trim(),
+        message: form.message.trim(),
         createdAt: serverTimestamp(),
         source: "portfolio-contact-page",
       });
       setForm(initialForm);
-      setStatus({ type: "success", message: "Message sent successfully. Thank you for reaching out." });
+      setStatus({ type: "success", message: "Message sent. Thank you for reaching out." });
     } catch (error) {
       setStatus({
         type: "error",
-        message: "Something went wrong while sending. Please email me directly.",
+        message: "The form could not send right now. Please email me directly.",
       });
     }
   };
@@ -61,9 +64,9 @@ export default function Contact() {
       <div className="grid gap-10 lg:grid-cols-[0.85fr_1.15fr] lg:items-start">
         <div>
           <SectionTitle
-            eyebrow="Contact"
-            title="Interested in collaborating, building APIs, backend systems, or tech projects?"
-            description="Let's connect. I am open to networking, backend projects, internships, mentorship, and practical software ideas."
+            eyebrow="Contact Console"
+            title="Open to collaboration, networking, and backend-focused software ideas."
+            description="Send a message for Java, Spring Boot, API, database, or full-stack collaboration. The form is prepared for Firebase Firestore once your project is configured."
           />
 
           <div className="mt-8 grid gap-4">
@@ -80,16 +83,31 @@ export default function Contact() {
               </a>
             </div>
             <div className="soft-card">
+              <HiSignal className="text-2xl text-cyan" />
+              <p className="mt-3 text-sm font-black uppercase tracking-[0.18em] text-slate-500">
+                Networking
+              </p>
+              <strong className="mt-2 block text-lg text-white">Open to developer connections</strong>
+              <p className="mt-2 text-sm leading-6 text-slate-400">
+                Especially around Java, backend systems, databases, and practical software projects.
+              </p>
+            </div>
+            <div className="soft-card">
               <HiMapPin className="text-2xl text-cyan" />
               <p className="mt-3 text-sm font-black uppercase tracking-[0.18em] text-slate-500">
-                Based in Nepal
+                Region
               </p>
               <strong className="mt-2 block text-lg text-white">{profile.location}</strong>
+              <p className="mt-2 text-sm leading-6 text-slate-400">General location only.</p>
             </div>
           </div>
 
-          <div className="mt-8">
+          <div className="mt-8 flex flex-wrap gap-3">
             <SocialLinks />
+            <a href={resumePath} download className="secondary-button">
+              <HiArrowDownTray />
+              Resume
+            </a>
           </div>
         </div>
 
@@ -166,21 +184,19 @@ export default function Contact() {
                 {status.message}
               </p>
             )}
-
-            {/* Optional email notifications can be added with EmailJS or a Firebase Cloud Function. */}
           </div>
         </motion.form>
       </div>
 
       <div className="mt-12 overflow-hidden rounded-3xl border border-line bg-slate-950/60">
         <div className="border-b border-line p-5">
-          <h2 className="text-xl font-black text-white">Morang / Itahari, Nepal</h2>
+          <h2 className="text-xl font-black text-white">Sundarharaicha / Itahari Region, Nepal</h2>
           <p className="mt-2 text-sm text-slate-400">
-            General location only. Exact home address is not exposed.
+            A regional map signal for visitors while keeping the exact home address private.
           </p>
         </div>
         <iframe
-          title="Morang / Itahari, Nepal map"
+          title="Sundarharaicha / Itahari region map"
           className="h-[360px] w-full grayscale invert-[0.9] contrast-75"
           src="https://www.openstreetmap.org/export/embed.html?bbox=87.15%2C26.35%2C87.65%2C26.85&layer=mapnik&marker=26.65%2C87.35"
           loading="lazy"
