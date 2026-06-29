@@ -1,0 +1,32 @@
+Pralad Neupane
+Backend Developer | Node.js, Express, Java
+Morang, Nepal
+
+Profile
+Backend developer focused on scalable APIs, reliable systems, and practical web applications. Open to internships, collaboration, and software development opportunities in Nepal.
+
+Current
+Internship: Sitoula Tech Solutions
+Education: Itahari International College
+
+Core Skills
+Java, Node.js, Express, Spring Boot, PostgreSQL, Firebase, REST APIs, Git, React
+
+Selected Projects
+SajiloYatra
+Travel bus booking and management system built around route discovery, bookings, and travel operations.
+
+ArthaFlow
+Advanced Java-based project focused on structured application logic and backend workflows.
+
+Restaurant-App
+Node.js and Express food ordering backend with PostgreSQL for menus, orders, and customer data.
+
+pralad-portfolio
+Personal portfolio website for presenting work, certifications, and collaboration channels.
+
+Links
+GitHub: https://github.com/pra-neupane01
+LinkedIn: https://www.linkedin.com/in/pralad-neupane-435874392
+Facebook: https://www.facebook.com/praNeupane01
+Instagram: https://www.instagram.com/praka5h_n
