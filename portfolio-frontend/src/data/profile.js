@@ -24,7 +24,6 @@ export const profile = {
   internship: "Sitoula Tech Solutions",
   email: "praneupane01@gmail.com",
   phone: "",
-  image: "/pralad-profile.jpeg",
   resume: "/resume-pralad-neupane.txt",
   github: "https://github.com/pra-neupane01",
   linkedin: "https://www.linkedin.com/in/pralad-neupane-435874392",

@@ -7,9 +7,9 @@ import {
   Instagram,
   Linkedin,
   Mail,
-  MapPin,
   Radio,
 } from "lucide-react";
+import HeroConsole from "../components/HeroConsole.jsx";
 import ProjectCard from "../components/ProjectCard.jsx";
 import {
   focusLines,
@@ -90,16 +90,7 @@ export default function HomePage({ goToPage }) {
           </div>
         </div>
 
-        <div className="hero-visual">
-          <img src={profile.image} alt="Pralad Neupane" />
-          <div className="profile-panel">
-            <span>
-              <MapPin size={16} />
-              {profile.location}
-            </span>
-            <strong>{githubStatus}</strong>
-          </div>
-        </div>
+        <HeroConsole githubStatus={githubStatus} featuredProjects={featuredProjects} />
       </section>
 
       <section className="stats-band" aria-label="Profile snapshot">
