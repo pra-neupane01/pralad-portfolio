@@ -1,3 +1,4 @@
+import { useEffect, useMemo, useState } from "react";
 import {
   ArrowDownToLine,
   ArrowRight,
@@ -7,19 +8,57 @@ import {
   Linkedin,
   Mail,
   MapPin,
+  Radio,
 } from "lucide-react";
 import ProjectCard from "../components/ProjectCard.jsx";
-import { highlights, profile, projects, skills, stats } from "../data/profile.js";
+import {
+  focusLines,
+  highlights,
+  profile,
+  projects,
+  services,
+  skillGroups,
+  stats,
+  timeline,
+} from "../data/profile.js";
+import { useGithubRepos } from "../hooks/useGithubRepos.js";
 
 export default function HomePage({ goToPage }) {
+  const [focusIndex, setFocusIndex] = useState(0);
+  const { projects: liveProjects, repos, status } = useGithubRepos();
+
+  useEffect(() => {
+    const timer = window.setInterval(() => {
+      setFocusIndex((current) => (current + 1) % focusLines.length);
+    }, 2800);
+
+    return () => window.clearInterval(timer);
+  }, []);
+
+  const featuredProjects = useMemo(() => {
+    const source = liveProjects.length ? liveProjects : projects;
+    return source.filter((project) => project.featured).slice(0, 3);
+  }, [liveProjects]);
+
+  const githubStatus =
+    status === "ready"
+      ? `${repos.length} public repos synced`
+      : status === "fallback"
+        ? "Using curated project data"
+        : "Syncing GitHub projects";
+
   return (
     <>
       <section className="hero-section">
         <div className="hero-copy">
-          <p className="eyebrow">Open to opportunities in Nepal</p>
+          <p className="eyebrow">Backend developer in Morang, Nepal</p>
           <h1>{profile.name}</h1>
           <h2>{profile.headline}</h2>
           <p className="hero-intro">{profile.intro}</p>
+          <div className="dynamic-line" aria-live="polite">
+            <Radio size={18} />
+            <span>{focusLines[focusIndex]}</span>
+          </div>
 
           <div className="hero-actions">
             <button className="button solid" onClick={() => goToPage("projects")}>
@@ -58,7 +97,7 @@ export default function HomePage({ goToPage }) {
               <MapPin size={16} />
               {profile.location}
             </span>
-            <strong>Backend systems, APIs, and Java workflows</strong>
+            <strong>{githubStatus}</strong>
           </div>
         </div>
       </section>
@@ -78,8 +117,8 @@ export default function HomePage({ goToPage }) {
 
       <section className="content-section" id="internship">
         <div className="section-heading">
-          <p className="eyebrow">Now</p>
-          <h2>Learning in public, building with purpose.</h2>
+          <p className="eyebrow">Current signal</p>
+          <h2>Learning through real work, college projects, and public repositories.</h2>
         </div>
         <div className="highlight-grid">
           {highlights.map((item) => {
@@ -95,28 +134,58 @@ export default function HomePage({ goToPage }) {
         </div>
       </section>
 
-      <section className="content-section split-section">
+      <section className="content-section split-section capability-section">
         <div>
-          <p className="eyebrow">Skills</p>
-          <h2>Backend stack with frontend confidence.</h2>
+          <p className="eyebrow">Capability map</p>
+          <h2>Backend stack with enough frontend to ship the full story.</h2>
           <p>
             My core interest is backend development: server logic, clean APIs,
             database design, and reliable workflows. I also work with React so I
             can connect complete product experiences end to end.
           </p>
         </div>
-        <div className="skill-cloud">
-          {skills.map((skill) => (
-            <span key={skill}>{skill}</span>
+        <div className="skill-board">
+          {skillGroups.map((group) => (
+            <article className="skill-track" key={group.title}>
+              <div>
+                <h3>{group.title}</h3>
+                <strong>{group.strength}%</strong>
+              </div>
+              <span className="skill-meter">
+                <span style={{ width: `${group.strength}%` }} />
+              </span>
+              <p>{group.skills.join(" / ")}</p>
+            </article>
           ))}
+        </div>
+      </section>
+
+      <section className="content-section service-section">
+        <div className="section-heading inline">
+          <div>
+            <p className="eyebrow">What I can help with</p>
+            <h2>Practical backend work for student teams, startups, and mentors.</h2>
+          </div>
+        </div>
+        <div className="service-grid">
+          {services.map((service) => {
+            const Icon = service.icon;
+            return (
+              <article className="service-card" key={service.title}>
+                <Icon size={24} />
+                <h3>{service.title}</h3>
+                <p>{service.detail}</p>
+              </article>
+            );
+          })}
         </div>
       </section>
 
       <section className="content-section">
         <div className="section-heading inline">
           <div>
-            <p className="eyebrow">Featured work</p>
-            <h2>Projects that show how I think.</h2>
+            <p className="eyebrow">Live project board</p>
+            <h2>Projects that show how I think and build.</h2>
           </div>
           <button className="button ghost" onClick={() => goToPage("projects")}>
             All projects
@@ -124,8 +193,24 @@ export default function HomePage({ goToPage }) {
           </button>
         </div>
         <div className="project-grid preview">
-          {projects.slice(0, 3).map((project) => (
+          {featuredProjects.map((project) => (
             <ProjectCard key={project.name} project={project} />
+          ))}
+        </div>
+      </section>
+
+      <section className="content-section timeline-section">
+        <div className="section-heading">
+          <p className="eyebrow">Trajectory</p>
+          <h2>Where I am putting my energy next.</h2>
+        </div>
+        <div className="timeline">
+          {timeline.map((item) => (
+            <article key={item.title}>
+              <span>{item.label}</span>
+              <h3>{item.title}</h3>
+              <p>{item.detail}</p>
+            </article>
           ))}
         </div>
       </section>

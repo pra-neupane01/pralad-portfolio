@@ -63,7 +63,7 @@ export default function ContactPage() {
     <section className="page-section contact-page">
       <div className="page-heading">
         <p className="eyebrow">Contact</p>
-        <h1>Let’s collaborate, learn, and build something useful.</h1>
+        <h1>Let's collaborate, learn, and build something useful.</h1>
         <p>
           I am interested in networking with developers, teams, founders, and
           mentors around backend development, internships, and product ideas.
