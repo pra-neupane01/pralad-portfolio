@@ -1,47 +1,74 @@
-import { CalendarClock, ExternalLink, GitFork, Star } from "lucide-react";
+import { motion } from "framer-motion";
+import { FaGithub } from "react-icons/fa";
+import { HiArrowUpRight, HiSparkles } from "react-icons/hi2";
 
-export default function ProjectCard({ project }) {
+export default function ProjectCard({ project, index = 0 }) {
   return (
-    <article className={`project-card ${project.accent}`}>
-      <div className="project-card-main">
-        <div className="project-card-topline">
-          <p>{project.type}</p>
-          {project.featured && <strong>Featured</strong>}
+    <motion.article
+      initial={{ opacity: 0, y: 24 }}
+      whileInView={{ opacity: 1, y: 0 }}
+      viewport={{ once: true, amount: 0.25 }}
+      transition={{ duration: 0.45, delay: index * 0.06 }}
+      whileHover={{ y: -7, rotateX: 1.2, rotateY: -1.2 }}
+      className={`group relative overflow-hidden rounded-2xl border bg-slate-950/60 p-5 shadow-card backdrop-blur-xl ${
+        project.major ? "border-cyan/45 shadow-glow" : "border-line"
+      }`}
+    >
+      <div className="absolute inset-0 opacity-0 transition group-hover:opacity-100">
+        <div className="absolute -right-12 -top-12 h-32 w-32 rounded-full bg-cyan/20 blur-3xl" />
+        <div className="absolute -bottom-12 left-8 h-28 w-28 rounded-full bg-violet/20 blur-3xl" />
+      </div>
+
+      <div className="relative">
+        <div className="mb-5 flex items-start justify-between gap-4">
+          <div>
+            <span className="rounded-full border border-line bg-white/[0.04] px-3 py-1 text-xs font-black uppercase tracking-[0.18em] text-cyan">
+              {project.category}
+            </span>
+            <h3 className="mt-4 text-2xl font-black text-white">{project.title}</h3>
+          </div>
+          {project.major && (
+            <span className="inline-flex items-center gap-1 rounded-full bg-cyan/10 px-3 py-1 text-xs font-black text-cyan">
+              <HiSparkles />
+              Major
+            </span>
+          )}
         </div>
-        <h3>{project.name}</h3>
-        <span>{project.liveDescription || project.description}</span>
+
+        <p className="min-h-24 text-sm leading-7 text-slate-400">{project.description}</p>
+
+        <div className="mt-5 flex flex-wrap gap-2">
+          {project.techStack.map((tech) => (
+            <span
+              key={tech}
+              className="rounded-full border border-line bg-white/[0.04] px-3 py-1.5 text-xs font-bold text-slate-300"
+            >
+              {tech}
+            </span>
+          ))}
+        </div>
+
+        <p className="mt-5 border-l-2 border-cyan/60 pl-3 text-sm leading-7 text-slate-300">
+          {project.details}
+        </p>
+
+        <div className="mt-6 flex flex-wrap items-center gap-3">
+          <a className="secondary-button" href={project.githubUrl} target="_blank" rel="noreferrer">
+            <FaGithub />
+            GitHub
+          </a>
+          {project.liveUrl ? (
+            <a className="primary-button" href={project.liveUrl} target="_blank" rel="noreferrer">
+              Live Demo
+              <HiArrowUpRight />
+            </a>
+          ) : (
+            <span className="rounded-xl border border-line bg-white/[0.035] px-4 py-2.5 text-sm font-bold text-slate-400">
+              Live Demo Coming Soon
+            </span>
+          )}
+        </div>
       </div>
-
-      <div className="project-impact">{project.impact}</div>
-
-      <ul>
-        {project.stack.map((item) => (
-          <li key={item}>{item}</li>
-        ))}
-      </ul>
-
-      <div className="project-meta">
-        <span>
-          <CalendarClock size={15} />
-          {project.updatedAt || "Recently"}
-        </span>
-        <span>
-          <Star size={15} />
-          {project.stars ?? 0}
-        </span>
-        <span>
-          <GitFork size={15} />
-          {project.forks ?? 0}
-        </span>
-      </div>
-
-      <div className="project-card-footer">
-        <span className="project-language">{project.liveLanguage || project.category}</span>
-        <a href={project.repo} target="_blank" rel="noreferrer">
-          <ExternalLink size={17} />
-          Repository
-        </a>
-      </div>
-    </article>
+    </motion.article>
   );
 }

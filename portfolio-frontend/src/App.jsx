@@ -1,97 +1,94 @@
-import { useMemo, useState } from "react";
-import {
-  ArrowDownToLine,
-  Award,
-  BriefcaseBusiness,
-  FolderKanban,
-  Home,
-  Mail,
-  Menu,
-  X,
-} from "lucide-react";
-import HomePage from "./pages/HomePage.jsx";
-import ProjectsPage from "./pages/ProjectsPage.jsx";
-import CertificationsPage from "./pages/CertificationsPage.jsx";
-import ContactPage from "./pages/ContactPage.jsx";
-import { profile } from "./data/profile.js";
+import { lazy, Suspense } from "react";
+import { AnimatePresence, motion } from "framer-motion";
+import { Route, Routes, useLocation } from "react-router-dom";
+import Navbar from "./components/Navbar.jsx";
+import Footer from "./components/Footer.jsx";
 
-const navItems = [
-  { id: "home", label: "Home", icon: Home },
-  { id: "projects", label: "Projects", icon: FolderKanban },
-  { id: "certifications", label: "Certifications", icon: Award },
-  { id: "contact", label: "Contact", icon: Mail },
-];
+const Home = lazy(() => import("./pages/Home.jsx"));
+const About = lazy(() => import("./pages/About.jsx"));
+const Projects = lazy(() => import("./pages/Projects.jsx"));
+const Certifications = lazy(() => import("./pages/Certifications.jsx"));
+const Contact = lazy(() => import("./pages/Contact.jsx"));
 
-const pageMap = {
-  home: HomePage,
-  projects: ProjectsPage,
-  certifications: CertificationsPage,
-  contact: ContactPage,
+const pageVariants = {
+  initial: { opacity: 0, y: 18 },
+  animate: { opacity: 1, y: 0 },
+  exit: { opacity: 0, y: -12 },
 };
 
-export default function App() {
-  const [activePage, setActivePage] = useState("home");
-  const [menuOpen, setMenuOpen] = useState(false);
-  const Page = useMemo(() => pageMap[activePage], [activePage]);
+function PageShell({ children }) {
+  return (
+    <motion.main
+      variants={pageVariants}
+      initial="initial"
+      animate="animate"
+      exit="exit"
+      transition={{ duration: 0.35, ease: "easeOut" }}
+    >
+      {children}
+    </motion.main>
+  );
+}
 
-  const goToPage = (page) => {
-    setActivePage(page);
-    setMenuOpen(false);
-    window.scrollTo({ top: 0, behavior: "smooth" });
-  };
+export default function App() {
+  const location = useLocation();
 
   return (
-    <div className="site-shell">
-      <header className="topbar">
-        <button className="brand" onClick={() => goToPage("home")} aria-label="Go to home">
-          <span className="brand-mark">PN</span>
-          <span>
-            <strong>{profile.name}</strong>
-            <small>{profile.headline}</small>
-          </span>
-        </button>
-
-        <nav className={menuOpen ? "nav-links open" : "nav-links"} aria-label="Main navigation">
-          {navItems.map((item) => {
-            const Icon = item.icon;
-            return (
-              <button
-                key={item.id}
-                className={activePage === item.id ? "active" : ""}
-                onClick={() => goToPage(item.id)}
-              >
-                <Icon size={18} />
-                <span>{item.label}</span>
-              </button>
-            );
-          })}
-        </nav>
-
-        <div className="topbar-actions">
-          <a className="icon-button primary" href={profile.resume} download title="Download resume">
-            <ArrowDownToLine size={19} />
-          </a>
-          <a className="icon-button" href="#internship" title="Current internship">
-            <BriefcaseBusiness size={19} />
-          </a>
-          <button
-            className="icon-button menu-toggle"
-            onClick={() => setMenuOpen((current) => !current)}
-            aria-label="Toggle menu"
-          >
-            {menuOpen ? <X size={20} /> : <Menu size={20} />}
-          </button>
-        </div>
-      </header>
-
-      <main>
-        <Page goToPage={goToPage} />
-      </main>
-
-      <footer className="footer">
-        <span>Built for collaboration, internships, and meaningful backend work.</span>
-        <span>{profile.location}</span>
-      </footer>
+    <div className="min-h-screen bg-night text-slate-100">
+      <Navbar />
+      <Suspense
+        fallback={
+          <div className="page-container grid min-h-[60vh] place-items-center text-sm font-black uppercase tracking-[0.24em] text-cyan">
+            Loading portfolio
+          </div>
+        }
+      >
+        <AnimatePresence mode="wait">
+          <Routes location={location} key={location.pathname}>
+            <Route
+              path="/"
+              element={
+                <PageShell>
+                  <Home />
+                </PageShell>
+              }
+            />
+            <Route
+              path="/about"
+              element={
+                <PageShell>
+                  <About />
+                </PageShell>
+              }
+            />
+            <Route
+              path="/projects"
+              element={
+                <PageShell>
+                  <Projects />
+                </PageShell>
+              }
+            />
+            <Route
+              path="/certifications"
+              element={
+                <PageShell>
+                  <Certifications />
+                </PageShell>
+              }
+            />
+            <Route
+              path="/contact"
+              element={
+                <PageShell>
+                  <Contact />
+                </PageShell>
+              }
+            />
+          </Routes>
+        </AnimatePresence>
+      </Suspense>
+      <Footer />
     </div>
   );
 }
