@@ -1,16 +1,15 @@
 Pralad Neupane
-Backend Developer | Node.js, Express, Java
-Morang, Nepal
+Backend Developer | Java, Spring Boot, REST APIs
+SundarHaraicha 11, Morang, Nepal
 
 Profile
-Backend developer focused on scalable APIs, reliable systems, and practical web applications. Open to internships, collaboration, and software development opportunities in Nepal.
+Backend developer focused on scalable APIs, reliable systems, and practical web applications.
 
 Current
-Internship: Sitoula Tech Solutions
 Education: Itahari International College
 
 Core Skills
-Java, Node.js, Express, Spring Boot, PostgreSQL, Firebase, REST APIs, Git, React
+Java, Spring Boot, REST APIs, PostgreSQL, MySQL, Node.js, Express, Git, React
 
 Selected Projects
 SajiloYatra

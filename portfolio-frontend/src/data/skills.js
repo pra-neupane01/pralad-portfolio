@@ -1,38 +1,34 @@
-export const skillGroups = [
-  {
-    title: "Languages",
-    skills: ["Java", "JavaScript", "Python", "SQL"],
+export const skillsData = {
+  backend: {
+    category: 'Backend',
+    icon: 'Server',
+    skills: ['Java', 'Node.js', 'Express.js'],
+    proficiency: 'Advanced',
   },
-  {
-    title: "Backend",
-    skills: ["Spring Boot", "Node.js", "Express.js", "REST APIs", "Spring Data JPA", "JWT Authentication", "API Design"],
+  frontend: {
+    category: 'Frontend',
+    icon: 'Code2',
+    skills: ['React.js', 'HTML5', 'CSS3', 'Tailwind CSS'],
+    proficiency: 'Intermediate',
   },
-  {
-    title: "Database",
-    skills: ["PostgreSQL", "MySQL", "OracleSQL"],
+  databases: {
+    category: 'Databases',
+    icon: 'Database',
+    skills: ['PostgreSQL', 'MySQL', 'OracleSQL'],
+    proficiency: 'Intermediate',
   },
-  {
-    title: "Frontend",
-    skills: ["React.js", "HTML5", "CSS3", "Tailwind CSS"],
+  languages: {
+    category: 'Programming Languages',
+    icon: 'FileCode',
+    skills: ['Java', 'JavaScript', 'Python'],
+    proficiency: 'Advanced',
   },
-  {
-    title: "Tools",
-    skills: ["Git", "GitHub", "Postman", "Swagger", "IntelliJ IDEA", "VS Code"],
+  soft: {
+    category: 'Soft Skills',
+    icon: 'Users',
+    skills: ['Problem-Solving', 'Collaboration', 'Communication', 'Time Management'],
+    proficiency: 'Expert',
   },
-  {
-    title: "Soft Skills",
-    skills: ["Problem Solving", "Collaboration", "Communication", "Time Management"],
-  },
-  {
-    title: "Interests",
-    skills: ["Networking", "Cybersecurity Basics", "Backend Architecture", "Scalable Systems"],
-  },
-];
+};
 
-export const roleTexts = [
-  "Backend Developer",
-  "Spring Boot Developer",
-  "Node.js Developer",
-  "API Builder",
-  "Networking Enthusiast",
-];
+export const allSkills = Object.values(skillsData);

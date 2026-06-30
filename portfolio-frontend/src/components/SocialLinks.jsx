@@ -1,25 +1,32 @@
-import { socials } from "../data/socials.js";
+import { motion } from 'framer-motion';
+import { Github, Linkedin, Mail } from 'lucide-react';
+import { profile } from '@/data/profile';
 
-export default function SocialLinks({ compact = false }) {
+export default function SocialLinks({ layout = 'flex' }) {
+  const socials = [
+    { icon: Github, url: profile.social.github, label: 'GitHub' },
+    { icon: Linkedin, url: profile.social.linkedin, label: 'LinkedIn' },
+    { icon: Mail, url: `mailto:${profile.email}`, label: 'Email' },
+  ];
+
+  const containerClass = layout === 'grid' ? 'grid grid-cols-3 gap-4' : 'flex gap-4';
+
   return (
-    <div className="flex flex-wrap items-center gap-3">
-      {socials.map((social) => {
-        const Icon = social.icon;
-
-        return (
-          <a
-            key={social.label}
-            href={social.href}
-            target={social.href.startsWith("mailto:") || social.href === "#" ? undefined : "_blank"}
-            rel={social.href.startsWith("mailto:") || social.href === "#" ? undefined : "noreferrer"}
-            className="group inline-flex items-center gap-2 rounded-xl border border-line bg-white/[0.04] px-3 py-3 text-slate-200 transition hover:-translate-y-0.5 hover:border-cyan/60 hover:bg-cyan/10"
-            aria-label={social.label}
-          >
-            <Icon className="text-lg text-cyan transition group-hover:text-lime-100" />
-            {!compact && <span className="text-sm font-semibold">{social.label}</span>}
-          </a>
-        );
-      })}
+    <div className={containerClass}>
+      {socials.map(({ icon: Icon, url, label }) => (
+        <motion.a
+          key={label}
+          whileHover={{ scale: 1.2, y: -5 }}
+          whileTap={{ scale: 0.95 }}
+          href={url}
+          target="_blank"
+          rel="noopener noreferrer"
+          className="p-3 glass rounded-lg text-accent hover:bg-accent hover:text-bg-primary transition-all duration-300 flex items-center justify-center"
+          title={label}
+        >
+          <Icon size={24} />
+        </motion.a>
+      ))}
     </div>
   );
 }

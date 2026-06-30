@@ -1,53 +1,54 @@
-import { useMemo, useState } from "react";
-import CertificateCard from "../components/CertificateCard.jsx";
-import SectionTitle from "../components/SectionTitle.jsx";
-import { certificationCategories, certifications } from "../data/certifications.js";
+import { motion } from 'framer-motion';
+import { profile } from '@/data/profile';
+import SectionTitle from '@/components/SectionTitle';
+import GlassCard from '@/components/GlassCard';
+import { Award, ExternalLink } from 'lucide-react';
 
 export default function Certifications() {
-  const [activeCategory, setActiveCategory] = useState("All");
-
-  const filteredCertifications = useMemo(() => {
-    if (activeCategory === "All") return certifications;
-    return certifications.filter((certificate) => certificate.category === activeCategory);
-  }, [activeCategory]);
-
   return (
-    <section className="page-container py-16 lg:py-24">
-      <SectionTitle
-        eyebrow="Certifications"
-        title="Verified learning, with room for the next credentials."
-        description="The Java OOP certificate is recorded with its real certificate ID. Placeholder entries stay clearly marked until verified."
-      />
+    <main className="min-h-screen pt-32 pb-20 px-4 md:px-8">
+      <div className="max-w-4xl mx-auto">
+        <SectionTitle
+          title="Certifications"
+          subtitle="Professional achievements and credentials"
+        />
 
-      <div className="mt-8 flex flex-wrap gap-3">
-        {certificationCategories.map((category) => (
-          <button
-            key={category}
-            onClick={() => setActiveCategory(category)}
-            className={`rounded-xl border px-4 py-2 text-sm font-black transition ${
-              activeCategory === category
-                ? "border-cyan bg-cyan text-slate-950"
-                : "border-line bg-white/[0.04] text-slate-300 hover:border-cyan/60 hover:text-white"
-            }`}
-          >
-            {category}
-          </button>
-        ))}
+        <div className="space-y-6">
+          {profile.certifications.map((cert, index) => (
+            <motion.div
+              key={cert.id}
+              initial={{ opacity: 0, x: -20 }}
+              whileInView={{ opacity: 1, x: 0 }}
+              transition={{ duration: 0.6, delay: index * 0.1 }}
+              viewport={{ once: true }}
+            >
+              <GlassCard className="flex gap-6 items-start">
+                <div className="p-4 bg-accent/20 rounded-full">
+                  <Award className="text-accent" size={32} />
+                </div>
+                <div className="flex-1">
+                  <h3 className="text-2xl font-bold font-display text-text-primary mb-2">
+                    {cert.title}
+                  </h3>
+                  <p className="text-accent font-semibold mb-3">{cert.issuer}</p>
+                  <p className="text-text-secondary text-sm mb-4">Issued: {cert.issueDate}</p>
+                  {cert.verificationUrl && (
+                    <motion.a
+                      whileHover={{ scale: 1.05 }}
+                      href={cert.verificationUrl}
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      className="inline-flex items-center gap-2 text-accent hover:text-accent-dark transition-colors"
+                    >
+                      Verify Certificate <ExternalLink size={16} />
+                    </motion.a>
+                  )}
+                </div>
+              </GlassCard>
+            </motion.div>
+          ))}
+        </div>
       </div>
-
-      <div className="mt-10 grid gap-6 md:grid-cols-2 xl:grid-cols-3">
-        {filteredCertifications.map((certificate, index) => (
-          <CertificateCard key={certificate.title} certificate={certificate} index={index} />
-        ))}
-      </div>
-
-      <div className="mt-10 grid gap-4 rounded-3xl border border-line bg-slate-950/55 p-5 sm:grid-cols-3">
-        {["Java-first learning", "Backend direction", "No fake certificate IDs"].map((item) => (
-          <p key={item} className="rounded-2xl border border-cyan/20 bg-cyan/10 p-4 text-sm font-black text-cyan">
-            {item}
-          </p>
-        ))}
-      </div>
-    </section>
+    </main>
   );
 }

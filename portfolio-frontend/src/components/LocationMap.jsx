@@ -1,0 +1,36 @@
+import 'leaflet/dist/leaflet.css';
+import { MapContainer, TileLayer, Marker, Popup } from 'react-leaflet';
+import L from 'leaflet';
+import { profile } from '@/data/profile';
+
+const customIcon = L.icon({
+  iconUrl:
+    'data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="%2306d6ff" width="32" height="32"><path d="M12 2C6.48 2 2 6.48 2 12c0 4.84 3.94 8.75 8.75 8.75 0 0 0 0 0 0h0v-3.5h-.75c-2.84 0-5.25-2.41-5.25-5.25s2.41-5.25 5.25-5.25 5.25 2.41 5.25 5.25v.75h3.5v-.75C22 6.48 17.52 2 12 2z"/></svg>',
+  shadowUrl: null,
+  iconSize: [32, 32],
+  iconAnchor: [16, 32],
+  popupAnchor: [0, -32],
+});
+
+export default function LocationMap() {
+  return (
+    <MapContainer
+      center={[profile.location.latitude, profile.location.longitude]}
+      zoom={13}
+      style={{ width: '100%', height: '100%' }}
+    >
+      <TileLayer
+        url="https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png"
+        attribution="&copy; OpenStreetMap contributors"
+      />
+      <Marker position={[profile.location.latitude, profile.location.longitude]} icon={customIcon}>
+        <Popup>
+          <div className="p-2">
+            <p className="font-bold">{profile.fullName}</p>
+            <p className="text-sm">{profile.location.address}</p>
+          </div>
+        </Popup>
+      </Marker>
+    </MapContainer>
+  );
+}

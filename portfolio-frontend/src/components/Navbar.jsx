@@ -1,85 +1,73 @@
-import { useState } from "react";
-import { NavLink } from "react-router-dom";
-import { HiArrowDownTray, HiBars3, HiXMark } from "react-icons/hi2";
-import { profile, resumePath } from "../data/socials.js";
-
-const navLinks = [
-  { label: "Home", to: "/" },
-  { label: "About", to: "/about" },
-  { label: "Projects", to: "/projects" },
-  { label: "Certifications", to: "/certifications" },
-  { label: "Playground", to: "/playground" },
-  { label: "Contact", to: "/contact" },
-];
-
-const linkClass = ({ isActive }) =>
-  `rounded-xl px-3 py-2 text-sm font-bold transition ${
-    isActive
-      ? "bg-cyan/10 text-cyan"
-      : "text-slate-300 hover:bg-white/[0.055] hover:text-white"
-  }`;
+import { useState } from 'react';
+import { NavLink } from 'react-router-dom';
+import { Menu, X } from 'lucide-react';
+import { motion } from 'framer-motion';
 
 export default function Navbar() {
-  const [open, setOpen] = useState(false);
+  const [isOpen, setIsOpen] = useState(false);
+
+  const navItems = [
+    { name: 'Home', path: '/' },
+    { name: 'About', path: '/about' },
+    { name: 'Projects', path: '/projects' },
+    { name: 'Certifications', path: '/certifications' },
+    { name: 'Playground', path: '/playground' },
+    { name: 'Contact', path: '/contact' },
+  ];
 
   return (
-    <header className="sticky top-0 z-50 border-b border-line bg-night/75 backdrop-blur-2xl">
-      <nav className="page-container flex min-h-20 items-center justify-between gap-4">
-        <NavLink to="/" className="flex items-center gap-3" onClick={() => setOpen(false)}>
-          <span className="grid h-11 w-11 place-items-center rounded-xl border border-cyan/40 bg-cyan/10 text-sm font-black text-cyan">
-            PN
-          </span>
-          <span>
-            <strong className="brand-font block text-base font-black tracking-wide text-white">
-              {profile.brand}
-            </strong>
-            <small className="block text-xs font-semibold text-slate-400">{profile.title}</small>
-          </span>
-        </NavLink>
+    <nav className="fixed top-0 left-0 right-0 z-50 py-4 px-4 md:px-8">
+      <div className="glass rounded-full max-w-7xl mx-auto px-6 py-4 flex justify-between items-center">
+        <motion.div whileHover={{ scale: 1.05 }} className="text-xl font-bold font-display glow-text">
+          PN
+        </motion.div>
 
-        <div className="hidden items-center gap-1 lg:flex">
-          {navLinks.map((link) => (
-            <NavLink key={link.to} to={link.to} className={linkClass}>
-              {link.label}
+        <div className="hidden md:flex gap-1">
+          {navItems.map((item) => (
+            <NavLink
+              key={item.path}
+              to={item.path}
+              className={({ isActive }) =>
+                `px-4 py-2 rounded-lg font-medium transition-all duration-300 ${
+                  isActive
+                    ? 'text-accent bg-glass-light'
+                    : 'text-text-secondary hover:text-accent'
+                }`
+              }
+            >
+              {item.name}
             </NavLink>
           ))}
         </div>
 
-        <div className="flex items-center gap-2">
-          <a href={resumePath} download className="hidden sm:inline-flex secondary-button">
-            <HiArrowDownTray />
-            Resume
-          </a>
-          <button
-            className="inline-grid h-11 w-11 place-items-center rounded-xl border border-line bg-white/[0.04] text-slate-100 lg:hidden"
-            onClick={() => setOpen((current) => !current)}
-            aria-label="Toggle menu"
-          >
-            {open ? <HiXMark className="text-2xl" /> : <HiBars3 className="text-2xl" />}
-          </button>
-        </div>
-      </nav>
+        <button
+          onClick={() => setIsOpen(!isOpen)}
+          className="md:hidden text-text-primary hover:text-accent transition-colors"
+          aria-label={isOpen ? 'Close menu' : 'Open menu'}
+        >
+          {isOpen ? <X size={24} /> : <Menu size={24} />}
+        </button>
+      </div>
 
-      {open && (
-        <div className="page-container pb-4 lg:hidden">
-          <div className="glass-panel grid gap-1 rounded-2xl p-2">
-            {navLinks.map((link) => (
-              <NavLink
-                key={link.to}
-                to={link.to}
-                className={linkClass}
-                onClick={() => setOpen(false)}
-              >
-                {link.label}
-              </NavLink>
-            ))}
-            <a href={resumePath} download className="secondary-button mt-2">
-              <HiArrowDownTray />
-              Download Resume
-            </a>
-          </div>
-        </div>
+      {isOpen && (
+        <motion.div
+          initial={{ opacity: 0, y: -10 }}
+          animate={{ opacity: 1, y: 0 }}
+          exit={{ opacity: 0, y: -10 }}
+          className="md:hidden glass rounded-2xl mt-4 max-w-7xl mx-auto p-6"
+        >
+          {navItems.map((item) => (
+            <NavLink
+              key={item.path}
+              to={item.path}
+              onClick={() => setIsOpen(false)}
+              className="block py-3 px-4 text-text-secondary hover:text-accent transition-colors"
+            >
+              {item.name}
+            </NavLink>
+          ))}
+        </motion.div>
       )}
-    </header>
+    </nav>
   );
 }

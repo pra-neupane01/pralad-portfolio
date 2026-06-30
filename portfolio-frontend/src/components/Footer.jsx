@@ -1,42 +1,39 @@
-import { Link } from "react-router-dom";
-import SocialLinks from "./SocialLinks.jsx";
-import { profile } from "../data/socials.js";
+import { Link } from 'react-router-dom';
+import { profile } from '@/data/profile';
+import SocialLinks from './SocialLinks';
 
 const quickLinks = [
-  { label: "About", to: "/about" },
-  { label: "Projects", to: "/projects" },
-  { label: "Certifications", to: "/certifications" },
-  { label: "Playground", to: "/playground" },
-  { label: "Contact", to: "/contact" },
+  { name: 'About', path: '/about' },
+  { name: 'Projects', path: '/projects' },
+  { name: 'Certifications', path: '/certifications' },
+  { name: 'Playground', path: '/playground' },
+  { name: 'Contact', path: '/contact' },
 ];
 
 export default function Footer() {
   return (
-    <footer className="border-t border-line bg-slate-950/70 py-10">
-      <div className="page-container grid gap-8 md:grid-cols-[1.1fr_0.9fr] md:items-center">
+    <footer className="border-t border-glass-border py-12 px-4 md:px-8 mt-20">
+      <div className="max-w-7xl mx-auto grid gap-8 md:grid-cols-2 md:items-center">
         <div>
-          <h2 className="brand-font text-2xl font-black text-white">{profile.brand}</h2>
-          <p className="mt-3 max-w-xl leading-7 text-slate-400">
-            Java-focused backend developer building APIs, database-backed systems, and practical
-            software projects from Nepal.
-          </p>
-          <p className="mt-4 text-sm font-semibold text-slate-500">
-            Copyright {new Date().getFullYear()} {profile.displayName}. All rights reserved.
+          <h2 className="text-2xl font-bold font-display glow-text">{profile.fullName}</h2>
+          <p className="mt-3 max-w-xl text-text-secondary leading-relaxed">{profile.title}</p>
+          <p className="mt-4 text-sm text-text-secondary">
+            &copy; {new Date().getFullYear()} {profile.fullName}. All rights reserved.
           </p>
         </div>
         <div className="grid gap-5 md:justify-items-end">
-          <div className="flex flex-wrap gap-3">
+          <div className="flex flex-wrap gap-4">
             {quickLinks.map((link) => (
               <Link
-                key={link.to}
-                to={link.to}
-                className="text-sm font-bold text-slate-400 transition hover:text-cyan"
+                key={link.path}
+                to={link.path}
+                className="text-sm font-medium text-text-secondary hover:text-accent transition-colors"
               >
-                {link.label}
+                {link.name}
               </Link>
             ))}
           </div>
-          <SocialLinks compact />
+          <SocialLinks />
         </div>
       </div>
     </footer>
