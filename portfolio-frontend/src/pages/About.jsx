@@ -2,103 +2,106 @@ import { motion } from 'framer-motion';
 import { profile } from '@/data/profile';
 import { skillsData } from '@/data/skills';
 import SectionTitle from '@/components/SectionTitle';
-import GlassCard from '@/components/GlassCard';
-import { Code2, Database, Server, FileCode, Users } from 'lucide-react';
-
-const iconMap = {
-  Code2,
-  Database,
-  Server,
-  FileCode,
-  Users,
-};
+import FloatingCard from '@/components/FloatingCard';
+import SkillOrb from '@/components/SkillOrb';
+import { GraduationCap, MapPin, Calendar } from 'lucide-react';
 
 export default function About() {
   return (
-    <main className="min-h-screen pt-32 pb-20 px-4 md:px-8">
+    <main className="min-h-screen pt-36 pb-24 px-4 md:px-8">
       <div className="max-w-6xl mx-auto">
+
+        {/* Career Objective */}
         <SectionTitle title="About Me" subtitle="My journey and expertise" />
 
         <motion.div
-          initial={{ opacity: 0, y: 20 }}
+          initial={{ opacity: 0, y: 30 }}
           whileInView={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.6 }}
+          transition={{ duration: 0.7 }}
           viewport={{ once: true }}
-          className="glass p-8 rounded-2xl mb-20"
+          className="mb-24"
         >
-          <p className="text-lg text-text-secondary leading-relaxed">{profile.careerObjective}</p>
+          <FloatingCard glow="cyan" className="border border-neon-cyan/20">
+            <div className="flex gap-4 items-start">
+              <div
+                className="w-1 rounded-full flex-shrink-0 self-stretch"
+                style={{ background: 'linear-gradient(to bottom, #00f5ff, #ff006e, #b537f2)' }}
+              />
+              <p className="text-text-muted text-base md:text-lg leading-relaxed font-body">
+                {profile.careerObjective}
+              </p>
+            </div>
+          </FloatingCard>
         </motion.div>
 
-        <SectionTitle title="Education" subtitle="My academic background" />
+        {/* Education */}
+        <SectionTitle title="Education Journey" subtitle="Academic background" />
 
-        <div className="space-y-6 mb-20">
+        <div className="space-y-6 mb-24">
           {profile.education.map((edu, index) => (
             <motion.div
               key={edu.id}
-              initial={{ opacity: 0, x: -20 }}
+              initial={{ opacity: 0, x: index % 2 === 0 ? -30 : 30 }}
               whileInView={{ opacity: 1, x: 0 }}
               transition={{ duration: 0.6, delay: index * 0.1 }}
               viewport={{ once: true }}
             >
-              <GlassCard>
-                <div className="md:flex justify-between items-start gap-4">
-                  <div className="flex-1">
-                    <h3 className="text-2xl font-bold font-display text-text-primary mb-2">
-                      {edu.degree}
-                    </h3>
-                    <p className="text-accent font-semibold mb-2">{edu.institution}</p>
-                    <p className="text-text-secondary">{edu.description}</p>
+              <FloatingCard
+                glow={index % 2 === 0 ? 'cyan' : 'pink'}
+                float={false}
+                className={`border ${index % 2 === 0 ? 'border-neon-cyan/20' : 'border-neon-pink/20'}`}
+              >
+                <div className="flex flex-col md:flex-row justify-between gap-4">
+                  <div className="flex gap-4 items-start flex-1">
+                    <div className={`p-3 rounded-xl flex-shrink-0 ${
+                      index % 2 === 0 ? 'bg-neon-cyan/10' : 'bg-neon-pink/10'
+                    }`}>
+                      <GraduationCap
+                        size={24}
+                        className={index % 2 === 0 ? 'text-neon-cyan' : 'text-neon-pink'}
+                      />
+                    </div>
+                    <div>
+                      <h3 className={`text-xl font-bold font-display mb-1 ${
+                        index % 2 === 0 ? 'neon-text' : 'neon-text pink'
+                      }`}>
+                        {edu.degree}
+                      </h3>
+                      <p className="text-text-light font-semibold font-body mb-1">{edu.institution}</p>
+                      <p className="text-text-muted text-sm font-body">{edu.description}</p>
+                    </div>
                   </div>
-                  <div className="text-right mt-4 md:mt-0">
-                    <p className="text-accent font-semibold">
+
+                  <div className="flex flex-col gap-2 md:text-right text-sm text-text-muted font-mono flex-shrink-0">
+                    <span className="flex items-center gap-1.5 md:justify-end">
+                      <Calendar size={12} />
                       {edu.startDate} – {edu.endDate}
-                    </p>
-                    <p className="text-text-secondary text-sm">{edu.location}</p>
+                    </span>
+                    <span className="flex items-center gap-1.5 md:justify-end">
+                      <MapPin size={12} />
+                      {edu.location}
+                    </span>
                   </div>
                 </div>
-              </GlassCard>
+              </FloatingCard>
             </motion.div>
           ))}
         </div>
 
-        <SectionTitle title="Skills & Expertise" subtitle="Technical proficiencies" />
+        {/* Skills */}
+        <SectionTitle title="Skills & Expertise" subtitle="Technical proficiencies in my arsenal" />
 
-        <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-6 mb-20">
-          {Object.values(skillsData).map((skillGroup, index) => {
-            const IconComponent = iconMap[skillGroup.icon] || FileCode;
-            return (
-              <motion.div
-                key={skillGroup.category}
-                initial={{ opacity: 0, y: 20 }}
-                whileInView={{ opacity: 1, y: 0 }}
-                transition={{ duration: 0.6, delay: index * 0.1 }}
-                viewport={{ once: true }}
-              >
-                <GlassCard className="h-full flex flex-col">
-                  <div className="flex items-center gap-3 mb-4">
-                    <IconComponent className="text-accent" size={28} />
-                    <h3 className="text-xl font-bold font-display text-text-primary">
-                      {skillGroup.category}
-                    </h3>
-                  </div>
-                  <div className="flex flex-wrap gap-2">
-                    {skillGroup.skills.map((skill) => (
-                      <span
-                        key={skill}
-                        className="px-3 py-1 bg-accent/20 border border-accent/50 rounded-full text-sm text-accent font-semibold"
-                      >
-                        {skill}
-                      </span>
-                    ))}
-                  </div>
-                  <p className="text-text-secondary text-sm mt-auto pt-4">
-                    Proficiency: <span className="text-accent">{skillGroup.proficiency}</span>
-                  </p>
-                </GlassCard>
-              </motion.div>
-            );
-          })}
+        <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-6">
+          {Object.values(skillsData).map((skillGroup, index) => (
+            <SkillOrb
+              key={skillGroup.category}
+              skill={skillGroup}
+              delay={index * 0.08}
+              index={index}
+            />
+          ))}
         </div>
+
       </div>
     </main>
   );

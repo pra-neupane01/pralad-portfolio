@@ -1,53 +1,65 @@
 import { motion } from 'framer-motion';
 import { profile } from '@/data/profile';
 import SectionTitle from '@/components/SectionTitle';
-import GlassCard from '@/components/GlassCard';
-import { Award, ExternalLink } from 'lucide-react';
+import CertificationCard from '@/components/CertificationCard';
+import FloatingCard from '@/components/FloatingCard';
+import { ShieldCheck, Star } from 'lucide-react';
 
 export default function Certifications() {
   return (
-    <main className="min-h-screen pt-32 pb-20 px-4 md:px-8">
+    <main className="min-h-screen pt-36 pb-24 px-4 md:px-8">
       <div className="max-w-4xl mx-auto">
         <SectionTitle
           title="Certifications"
           subtitle="Professional achievements and credentials"
         />
 
+        {/* Header stat */}
+        <motion.div
+          initial={{ opacity: 0, scale: 0.9 }}
+          whileInView={{ opacity: 1, scale: 1 }}
+          transition={{ duration: 0.5 }}
+          viewport={{ once: true }}
+          className="flex justify-center mb-14"
+        >
+          <FloatingCard glow="purple" className="border border-neon-purple/30 flex items-center gap-4 px-8 py-4">
+            <div className="p-3 bg-neon-purple/10 rounded-xl">
+              <ShieldCheck className="text-neon-purple" size={28} />
+            </div>
+            <div>
+              <p className="text-2xl font-bold font-display neon-text purple">
+                {profile.certifications.length}
+              </p>
+              <p className="text-text-muted text-sm font-body">
+                Verified {profile.certifications.length === 1 ? 'Certification' : 'Certifications'}
+              </p>
+            </div>
+          </FloatingCard>
+        </motion.div>
+
+        {/* Certs list */}
         <div className="space-y-6">
           {profile.certifications.map((cert, index) => (
-            <motion.div
-              key={cert.id}
-              initial={{ opacity: 0, x: -20 }}
-              whileInView={{ opacity: 1, x: 0 }}
-              transition={{ duration: 0.6, delay: index * 0.1 }}
-              viewport={{ once: true }}
-            >
-              <GlassCard className="flex gap-6 items-start">
-                <div className="p-4 bg-accent/20 rounded-full">
-                  <Award className="text-accent" size={32} />
-                </div>
-                <div className="flex-1">
-                  <h3 className="text-2xl font-bold font-display text-text-primary mb-2">
-                    {cert.title}
-                  </h3>
-                  <p className="text-accent font-semibold mb-3">{cert.issuer}</p>
-                  <p className="text-text-secondary text-sm mb-4">Issued: {cert.issueDate}</p>
-                  {cert.verificationUrl && (
-                    <motion.a
-                      whileHover={{ scale: 1.05 }}
-                      href={cert.verificationUrl}
-                      target="_blank"
-                      rel="noopener noreferrer"
-                      className="inline-flex items-center gap-2 text-accent hover:text-accent-dark transition-colors"
-                    >
-                      Verify Certificate <ExternalLink size={16} />
-                    </motion.a>
-                  )}
-                </div>
-              </GlassCard>
-            </motion.div>
+            <CertificationCard key={cert.id} cert={cert} index={index} />
           ))}
         </div>
+
+        {/* More coming soon */}
+        <motion.div
+          initial={{ opacity: 0 }}
+          whileInView={{ opacity: 1 }}
+          transition={{ duration: 0.7, delay: 0.3 }}
+          viewport={{ once: true }}
+          className="mt-12 text-center"
+        >
+          <FloatingCard glow="pink" className="border border-dashed border-neon-pink/30">
+            <div className="flex items-center justify-center gap-3 text-text-muted font-mono text-sm">
+              <Star size={16} className="text-neon-pink animate-pulse" />
+              More certifications in progress…
+              <Star size={16} className="text-neon-pink animate-pulse" />
+            </div>
+          </FloatingCard>
+        </motion.div>
       </div>
     </main>
   );

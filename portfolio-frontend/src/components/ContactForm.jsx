@@ -1,12 +1,12 @@
 import { useState } from 'react';
+import emailjs from 'emailjs-com';
 import { motion } from 'framer-motion';
-import { Send, CheckCircle, AlertCircle } from 'lucide-react';
-import GlassCard from './GlassCard';
-import { sendContactEmail } from '@/utils/emailService';
+import FloatingCard from './FloatingCard';
+import { Send, CheckCircle, AlertCircle, Loader } from 'lucide-react';
 
 export default function ContactForm() {
   const [formData, setFormData] = useState({ name: '', email: '', message: '' });
-  const [status, setStatus] = useState('idle');
+  const [status, setStatus] = useState('idle'); // idle | loading | success | error
   const [errorMsg, setErrorMsg] = useState('');
 
   const handleChange = (e) => {
@@ -19,102 +19,138 @@ export default function ContactForm() {
     setStatus('loading');
 
     try {
-      await sendContactEmail(formData);
+      emailjs.init(import.meta.env.VITE_EMAILJS_PUBLIC_KEY);
+
+      await emailjs.send(
+        import.meta.env.VITE_EMAILJS_SERVICE_ID,
+        import.meta.env.VITE_EMAILJS_TEMPLATE_ID,
+        {
+          to_email: 'pra2026neupane@gmail.com',
+          from_name: formData.name,
+          from_email: formData.email,
+          message: formData.message,
+        }
+      );
+
       setStatus('success');
       setFormData({ name: '', email: '', message: '' });
-      setTimeout(() => setStatus('idle'), 5000);
+      setTimeout(() => setStatus('idle'), 6000);
     } catch (error) {
-      console.error('Email send error:', error);
-      setErrorMsg('Failed to send message. Please try again.');
+      console.error('EmailJS error:', error);
+      setErrorMsg('Transmission failed. Please try again or email directly.');
       setStatus('error');
-      setTimeout(() => setStatus('idle'), 5000);
+      setTimeout(() => setStatus('idle'), 6000);
     }
   };
 
-  return (
-    <GlassCard className="max-w-2xl">
-      <h3 className="text-2xl font-bold font-display glow-text mb-6">Get in Touch</h3>
+  const inputBase =
+    'w-full px-4 py-3 bg-space-dark/60 rounded-lg text-text-light placeholder-text-muted/50 focus:outline-none transition-all duration-300 font-mono text-sm';
 
-      <form onSubmit={handleSubmit} className="space-y-4">
+  return (
+    <FloatingCard glow="cyan" className="border border-neon-cyan/30">
+      <h3 className="text-2xl font-bold font-display neon-text mb-2">Let's Talk</h3>
+      <p className="text-text-muted text-sm font-body mb-6">Send a message into the cosmos…</p>
+
+      <form onSubmit={handleSubmit} className="space-y-5">
+        {/* Name */}
         <div>
-          <label className="block text-sm font-medium text-text-secondary mb-2">Your Name</label>
+          <label className="block text-xs font-mono text-neon-cyan mb-2 uppercase tracking-wider">
+            Your Name
+          </label>
           <input
+            id="contact-name"
             type="text"
             name="name"
             value={formData.name}
             onChange={handleChange}
             required
-            className="w-full px-4 py-3 bg-glass-light border border-glass-border rounded-lg text-text-primary placeholder-text-secondary focus:outline-none focus:border-accent transition-colors"
+            className={`${inputBase} border border-neon-cyan/20 focus:border-neon-cyan focus:shadow-neon-cyan`}
             placeholder="John Doe"
           />
         </div>
 
+        {/* Email */}
         <div>
-          <label className="block text-sm font-medium text-text-secondary mb-2">
+          <label className="block text-xs font-mono text-neon-pink mb-2 uppercase tracking-wider">
             Email Address
           </label>
           <input
+            id="contact-email"
             type="email"
             name="email"
             value={formData.email}
             onChange={handleChange}
             required
-            className="w-full px-4 py-3 bg-glass-light border border-glass-border rounded-lg text-text-primary placeholder-text-secondary focus:outline-none focus:border-accent transition-colors"
+            className={`${inputBase} border border-neon-pink/20 focus:border-neon-pink`}
             placeholder="john@example.com"
           />
         </div>
 
+        {/* Message */}
         <div>
-          <label className="block text-sm font-medium text-text-secondary mb-2">Message</label>
+          <label className="block text-xs font-mono text-neon-purple mb-2 uppercase tracking-wider">
+            Message
+          </label>
           <textarea
+            id="contact-message"
             name="message"
             value={formData.message}
             onChange={handleChange}
             required
             rows="5"
-            className="w-full px-4 py-3 bg-glass-light border border-glass-border rounded-lg text-text-primary placeholder-text-secondary focus:outline-none focus:border-accent transition-colors resize-none"
-            placeholder="Your message here..."
+            className={`${inputBase} border border-neon-purple/20 focus:border-neon-purple resize-none`}
+            placeholder="Your message…"
           />
         </div>
 
+        {/* Submit */}
         <motion.button
           whileHover={{ scale: 1.02 }}
           whileTap={{ scale: 0.98 }}
           type="submit"
           disabled={status === 'loading'}
-          className="w-full py-3 bg-accent hover:bg-accent-dark disabled:opacity-50 text-bg-primary font-bold rounded-lg flex items-center justify-center gap-2 transition-all duration-300"
+          id="contact-submit"
+          className="w-full py-3 rounded-lg font-bold font-mono flex items-center justify-center gap-2 transition-all duration-300 disabled:opacity-60"
+          style={{
+            background: 'linear-gradient(90deg, #00f5ff, #ff006e)',
+            color: '#0a0e27',
+            boxShadow: '0 0 20px rgba(0,245,255,0.3)',
+          }}
         >
           {status === 'loading' ? (
-            <>Sending...</>
+            <>
+              <Loader size={18} className="animate-spin" /> Transmitting…
+            </>
           ) : (
             <>
-              <Send size={18} /> Send Message
+              <Send size={18} /> Launch Message
             </>
           )}
         </motion.button>
 
+        {/* Status messages */}
         {status === 'success' && (
           <motion.div
-            initial={{ opacity: 0, y: -10 }}
+            initial={{ opacity: 0, y: -8 }}
             animate={{ opacity: 1, y: 0 }}
-            className="flex items-center gap-3 p-4 bg-green-500/20 border border-green-500/50 rounded-lg text-green-400"
+            className="flex items-center gap-3 p-4 rounded-lg border border-neon-green/50 bg-neon-green/10 text-neon-green"
           >
-            <CheckCircle size={20} />
-            <span>Message sent successfully! I&apos;ll get back to you soon.</span>
+            <CheckCircle size={18} />
+            <span className="font-mono text-sm">Message received! I'll get back to you soon.</span>
           </motion.div>
         )}
 
         {status === 'error' && (
           <motion.div
-            initial={{ opacity: 0, y: -10 }}
+            initial={{ opacity: 0, y: -8 }}
             animate={{ opacity: 1, y: 0 }}
-            className="flex items-center gap-3 p-4 bg-red-500/20 border border-red-500/50 rounded-lg text-red-400"
+            className="flex items-center gap-3 p-4 rounded-lg border border-neon-pink/50 bg-neon-pink/10 text-neon-pink"
           >
-            <AlertCircle size={20} />
-            <span>{errorMsg}</span>
+            <AlertCircle size={18} />
+            <span className="font-mono text-sm">{errorMsg}</span>
           </motion.div>
         )}
       </form>
-    </GlassCard>
+    </FloatingCard>
   );
 }

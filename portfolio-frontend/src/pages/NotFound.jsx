@@ -1,27 +1,49 @@
 import { Link } from 'react-router-dom';
 import { motion } from 'framer-motion';
-import { Home } from 'lucide-react';
-import GlassCard from '@/components/GlassCard';
+import { Home, Satellite } from 'lucide-react';
 
 export default function NotFound() {
   return (
-    <main className="min-h-screen pt-32 pb-20 px-4 md:px-8 flex items-center justify-center">
-      <GlassCard className="text-center max-w-lg">
-        <motion.h1
-          initial={{ opacity: 0, scale: 0.8 }}
-          animate={{ opacity: 1, scale: 1 }}
-          className="text-8xl font-bold font-display glow-text mb-4"
+    <main className="min-h-screen flex items-center justify-center px-4">
+      <motion.div
+        initial={{ opacity: 0, scale: 0.8 }}
+        animate={{ opacity: 1, scale: 1 }}
+        transition={{ duration: 0.8, type: 'spring' }}
+        className="text-center max-w-md"
+      >
+        {/* Floating 404 */}
+        <motion.div
+          animate={{ y: [0, -20, 0] }}
+          transition={{ duration: 4, repeat: Infinity, ease: 'easeInOut' }}
         >
-          404
-        </motion.h1>
-        <p className="text-text-secondary text-lg mb-8">Page not found. It may have moved or never existed.</p>
-        <Link
-          to="/"
-          className="inline-flex items-center gap-2 px-8 py-3 bg-accent hover:bg-accent-dark text-bg-primary font-bold rounded-lg transition-all"
-        >
-          <Home size={20} /> Back to Home
-        </Link>
-      </GlassCard>
+          <p className="text-[8rem] font-bold font-display leading-none mb-4 neon-text"
+            style={{ textShadow: '0 0 30px rgba(0,245,255,0.8), 0 0 80px rgba(0,245,255,0.4)' }}
+          >
+            404
+          </p>
+        </motion.div>
+
+        <div className="mb-3 flex justify-center">
+          <Satellite size={40} className="text-neon-pink animate-spin-slow" />
+        </div>
+
+        <h1 className="text-2xl font-bold font-display neon-text pink mb-3">
+          Lost in Space
+        </h1>
+        <p className="text-text-muted font-body mb-8">
+          This sector of the cosmos doesn't exist. Let's get you back to safety.
+        </p>
+
+        <motion.div whileHover={{ scale: 1.05 }} whileTap={{ scale: 0.95 }}>
+          <Link
+            to="/"
+            className="inline-flex items-center gap-2 px-8 py-3 font-bold font-mono rounded-lg text-space-black"
+            style={{ background: 'linear-gradient(90deg, #00f5ff, #ff006e)' }}
+          >
+            <Home size={18} /> Return Home
+          </Link>
+        </motion.div>
+      </motion.div>
     </main>
   );
 }
