@@ -1,12 +1,12 @@
 import { useState } from 'react';
 import emailjs from 'emailjs-com';
 import { motion } from 'framer-motion';
-import FloatingCard from './FloatingCard';
-import { Send, CheckCircle, AlertCircle, Loader } from 'lucide-react';
+import ModernCard from './ModernCard';
+import { Send, CheckCircle, AlertCircle } from 'lucide-react';
 
 export default function ContactForm() {
   const [formData, setFormData] = useState({ name: '', email: '', message: '' });
-  const [status, setStatus] = useState('idle'); // idle | loading | success | error
+  const [status, setStatus] = useState('idle');
   const [errorMsg, setErrorMsg] = useState('');
 
   const handleChange = (e) => {
@@ -34,123 +34,110 @@ export default function ContactForm() {
 
       setStatus('success');
       setFormData({ name: '', email: '', message: '' });
-      setTimeout(() => setStatus('idle'), 6000);
+      setTimeout(() => setStatus('idle'), 5000);
     } catch (error) {
-      console.error('EmailJS error:', error);
-      setErrorMsg('Transmission failed. Please try again or email directly.');
+      console.error('Error:', error);
+      setErrorMsg('Failed to send. Please try again.');
       setStatus('error');
-      setTimeout(() => setStatus('idle'), 6000);
+      setTimeout(() => setStatus('idle'), 5000);
     }
   };
 
-  const inputBase =
-    'w-full px-4 py-3 bg-space-dark/60 rounded-lg text-text-light placeholder-text-muted/50 focus:outline-none transition-all duration-300 font-mono text-sm';
-
   return (
-    <FloatingCard glow="cyan" className="border border-neon-cyan/30">
-      <h3 className="text-2xl font-bold font-display neon-text mb-2">Let's Talk</h3>
-      <p className="text-text-muted text-sm font-body mb-6">Send a message into the cosmos…</p>
+    <ModernCard className="max-w-2xl">
+      <h3 className="text-2xl font-display font-bold text-text-light mb-8">
+        Send a Message
+      </h3>
 
-      <form onSubmit={handleSubmit} className="space-y-5">
+      <form onSubmit={handleSubmit} className="space-y-6">
         {/* Name */}
         <div>
-          <label className="block text-xs font-mono text-neon-cyan mb-2 uppercase tracking-wider">
-            Your Name
+          <label className="block text-sm font-mono text-text-accent mb-2">
+            Name
           </label>
           <input
-            id="contact-name"
             type="text"
             name="name"
             value={formData.name}
             onChange={handleChange}
             required
-            className={`${inputBase} border border-neon-cyan/20 focus:border-neon-cyan focus:shadow-neon-cyan`}
-            placeholder="John Doe"
+            placeholder="Your name"
+            className="w-full"
           />
         </div>
 
         {/* Email */}
         <div>
-          <label className="block text-xs font-mono text-neon-pink mb-2 uppercase tracking-wider">
-            Email Address
+          <label className="block text-sm font-mono text-text-accent mb-2">
+            Email
           </label>
           <input
-            id="contact-email"
             type="email"
             name="email"
             value={formData.email}
             onChange={handleChange}
             required
-            className={`${inputBase} border border-neon-pink/20 focus:border-neon-pink`}
-            placeholder="john@example.com"
+            placeholder="your@email.com"
+            className="w-full"
           />
         </div>
 
         {/* Message */}
         <div>
-          <label className="block text-xs font-mono text-neon-purple mb-2 uppercase tracking-wider">
+          <label className="block text-sm font-mono text-text-accent mb-2">
             Message
           </label>
           <textarea
-            id="contact-message"
             name="message"
             value={formData.message}
             onChange={handleChange}
             required
             rows="5"
-            className={`${inputBase} border border-neon-purple/20 focus:border-neon-purple resize-none`}
-            placeholder="Your message…"
+            placeholder="Your message..."
+            className="w-full resize-none"
           />
         </div>
 
         {/* Submit */}
         <motion.button
-          whileHover={{ scale: 1.02 }}
+          whileHover={{ backgroundColor: '#4fb3a3' }}
           whileTap={{ scale: 0.98 }}
           type="submit"
           disabled={status === 'loading'}
-          id="contact-submit"
-          className="w-full py-3 rounded-lg font-bold font-mono flex items-center justify-center gap-2 transition-all duration-300 disabled:opacity-60"
-          style={{
-            background: 'linear-gradient(90deg, #00f5ff, #ff006e)',
-            color: '#0a0e27',
-            boxShadow: '0 0 20px rgba(0,245,255,0.3)',
-          }}
+          className="w-full py-3 bg-accent-primary hover:bg-accent-light text-dark-bg font-semibold rounded-lg flex items-center justify-center gap-2 transition-all disabled:opacity-50"
         >
           {status === 'loading' ? (
-            <>
-              <Loader size={18} className="animate-spin" /> Transmitting…
-            </>
+            <>Sending...</>
           ) : (
             <>
-              <Send size={18} /> Launch Message
+              <Send size={18} /> Send
             </>
           )}
         </motion.button>
 
-        {/* Status messages */}
+        {/* Status */}
         {status === 'success' && (
           <motion.div
-            initial={{ opacity: 0, y: -8 }}
-            animate={{ opacity: 1, y: 0 }}
-            className="flex items-center gap-3 p-4 rounded-lg border border-neon-green/50 bg-neon-green/10 text-neon-green"
+            initial={{ opacity: 0 }}
+            animate={{ opacity: 1 }}
+            className="flex items-center gap-3 p-4 bg-accent-primary/10 border border-accent-primary rounded-lg text-accent-primary"
           >
-            <CheckCircle size={18} />
-            <span className="font-mono text-sm">Message received! I'll get back to you soon.</span>
+            <CheckCircle size={20} />
+            <span className="text-sm">Message sent! I'll get back soon.</span>
           </motion.div>
         )}
 
         {status === 'error' && (
           <motion.div
-            initial={{ opacity: 0, y: -8 }}
-            animate={{ opacity: 1, y: 0 }}
-            className="flex items-center gap-3 p-4 rounded-lg border border-neon-pink/50 bg-neon-pink/10 text-neon-pink"
+            initial={{ opacity: 0 }}
+            animate={{ opacity: 1 }}
+            className="flex items-center gap-3 p-4 bg-red-500/10 border border-red-500 rounded-lg text-red-500"
           >
-            <AlertCircle size={18} />
-            <span className="font-mono text-sm">{errorMsg}</span>
+            <AlertCircle size={20} />
+            <span className="text-sm">{errorMsg}</span>
           </motion.div>
         )}
       </form>
-    </FloatingCard>
+    </ModernCard>
   );
 }

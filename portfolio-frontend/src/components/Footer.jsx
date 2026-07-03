@@ -1,78 +1,40 @@
-import { Link } from 'react-router-dom';
 import { motion } from 'framer-motion';
 import { profile } from '@/data/profile';
 import SocialLinks from './SocialLinks';
-import { Github, Linkedin, Mail, Zap } from 'lucide-react';
-
-const quickLinks = [
-  { name: 'About', path: '/about' },
-  { name: 'Projects', path: '/projects' },
-  { name: 'Certifications', path: '/certifications' },
-  { name: 'Playground', path: '/playground' },
-  { name: 'Contact', path: '/contact' },
-];
 
 export default function Footer() {
+  const year = new Date().getFullYear();
+
   return (
-    <footer className="mt-24 border-t border-neon-purple/20 py-12 px-4 md:px-8">
-      <div
-        className="max-w-7xl mx-auto"
-        style={{
-          background: 'linear-gradient(to bottom, transparent, rgba(181,55,242,0.04))',
-        }}
-      >
-        <div className="grid gap-10 md:grid-cols-3 mb-10">
+    <footer className="border-t border-border-dark py-16 px-6 md:px-8">
+      <div className="max-w-6xl mx-auto">
+        <div className="grid md:grid-cols-3 gap-12 mb-12">
           {/* Brand */}
           <div>
-            <motion.div
-              whileHover={{ scale: 1.05 }}
-              className="text-3xl font-bold font-display neon-text mb-3 w-fit"
-            >
-              PN
-            </motion.div>
-            <p className="text-text-muted font-body text-sm leading-relaxed max-w-xs">
-              Backend-focused developer building scalable, clean solutions from the cosmos of Nepal.
-            </p>
+            <h3 className="text-2xl font-display font-bold text-text-light mb-3">PN</h3>
+            <p className="text-text-muted text-sm">{profile.title}</p>
           </div>
 
           {/* Quick Links */}
           <div>
-            <p className="text-xs font-mono text-neon-pink uppercase tracking-widest mb-4">
-              Navigation
-            </p>
-            <div className="grid grid-cols-2 gap-2">
-              {quickLinks.map((link) => (
-                <Link
-                  key={link.path}
-                  to={link.path}
-                  className="text-sm font-body text-text-muted hover:text-neon-cyan transition-colors duration-200 flex items-center gap-1.5"
-                >
-                  <Zap size={10} className="text-neon-purple" />
-                  {link.name}
-                </Link>
-              ))}
+            <p className="text-text-light text-sm font-mono font-semibold mb-4">Links</p>
+            <div className="space-y-2">
+              <p className="text-text-muted text-sm hover:text-accent-primary cursor-pointer transition-colors">Home</p>
+              <p className="text-text-muted text-sm hover:text-accent-primary cursor-pointer transition-colors">Projects</p>
+              <p className="text-text-muted text-sm hover:text-accent-primary cursor-pointer transition-colors">Contact</p>
             </div>
           </div>
 
-          {/* Connect */}
+          {/* Social */}
           <div>
-            <p className="text-xs font-mono text-neon-cyan uppercase tracking-widest mb-4">
-              Connect
-            </p>
+            <p className="text-text-light text-sm font-mono font-semibold mb-4">Social</p>
             <SocialLinks />
-            <p className="text-text-muted text-xs font-body mt-4">
-              {profile.email}
-            </p>
           </div>
         </div>
 
-        {/* Bottom bar */}
-        <div className="pt-6 border-t border-neon-purple/10 flex flex-col md:flex-row justify-between items-center gap-3">
-          <p className="text-text-muted text-xs font-mono">
-            &copy; {new Date().getFullYear()} {profile.fullName}. All rights reserved.
-          </p>
-          <p className="text-text-muted text-xs font-mono">
-            Built with React + Vite + Tailwind + Framer Motion
+        <div className="border-t border-border-dark pt-8 text-center">
+          <p className="text-text-accent text-xs font-mono">
+            © {year} Pralad Neupane • Built with React & Tailwind • Hosted on Vercel
           </p>
         </div>
       </div>

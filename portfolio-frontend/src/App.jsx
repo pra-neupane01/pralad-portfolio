@@ -1,7 +1,7 @@
 import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
 import Navbar from '@/components/Navbar';
 import Footer from '@/components/Footer';
-import CosmicBackground from '@/components/CosmicBackground';
+import OrganicBackground from '@/components/OrganicBackground';
 
 import Home from '@/pages/Home';
 import About from '@/pages/About';
@@ -14,7 +14,7 @@ import NotFound from '@/pages/NotFound';
 export default function App() {
   return (
     <Router>
-      <CosmicBackground />
+      <OrganicBackground />
       <Navbar />
       <Routes>
         <Route path="/" element={<Home />} />

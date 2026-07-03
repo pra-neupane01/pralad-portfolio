@@ -1,4 +1,4 @@
-@import url('https://fonts.googleapis.com/css2?family=Space+Mono:wght@400;700&family=Poppins:wght@300;400;500;600;700&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Playfair+Display:wght@500;600;700&family=Courier+Prime:wght@400;700&display=swap');
 
 @tailwind base;
 @tailwind components;
@@ -13,130 +13,95 @@ html {
   scroll-behavior: smooth;
 }
 
-/* Cosmic space background */
+/* Dark mode (default) */
 body {
-  @apply bg-space-black text-text-light overflow-x-hidden;
-  background: linear-gradient(180deg, #0a0e27 0%, #0f1229 50%, #0a0e27 100%);
-  background-attachment: fixed;
-  font-family: 'Poppins', sans-serif;
+  @apply bg-dark-bg text-text-light;
 }
 
-/* Floating card utility - no borders, pure shadow glow */
-.floating-card {
-  backdrop-filter: blur(8px);
-  -webkit-backdrop-filter: blur(8px);
-  @apply bg-space-dark/40 rounded-2xl transition-all duration-300;
-  box-shadow: 0 0 40px rgba(181, 55, 242, 0.2);
+/* Light mode support (optional, via class) */
+body.light-mode {
+  @apply bg-light-bg text-text-dark;
 }
 
-.floating-card:hover {
-  @apply bg-space-dark/60;
-  box-shadow: 0 0 60px rgba(181, 55, 242, 0.4), inset 0 0 30px rgba(0, 245, 255, 0.05);
+/* Modern card utility */
+.modern-card {
+  @apply rounded-2xl border border-border-dark bg-dark-secondary transition-all duration-300;
 }
 
-.floating-card.pink-glow {
-  box-shadow: 0 0 40px rgba(255, 0, 110, 0.2);
+body.light-mode .modern-card {
+  @apply border-border-color bg-light-secondary;
 }
 
-.floating-card.pink-glow:hover {
-  box-shadow: 0 0 60px rgba(255, 0, 110, 0.4), inset 0 0 30px rgba(255, 0, 110, 0.05);
+.modern-card:hover {
+  @apply border-accent-primary shadow-lg;
 }
 
-.floating-card.cyan-glow {
-  box-shadow: 0 0 40px rgba(0, 245, 255, 0.2);
+/* Accent text */
+.text-accent {
+  @apply text-accent-primary font-semibold;
 }
 
-.floating-card.cyan-glow:hover {
-  box-shadow: 0 0 60px rgba(0, 245, 255, 0.4), inset 0 0 30px rgba(0, 245, 255, 0.05);
+/* Grid utilities */
+.grid-section {
+  @apply grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8;
 }
 
-/* Neon text glow */
-.neon-text {
-  @apply text-neon-cyan font-display font-bold;
-  text-shadow: 0 0 10px rgba(0, 245, 255, 0.8), 0 0 20px rgba(0, 245, 255, 0.5);
-}
-
-.neon-text.pink {
-  @apply text-neon-pink;
-  text-shadow: 0 0 10px rgba(255, 0, 110, 0.8), 0 0 20px rgba(255, 0, 110, 0.5);
-}
-
-.neon-text.purple {
-  @apply text-neon-purple;
-  text-shadow: 0 0 10px rgba(181, 55, 242, 0.8), 0 0 20px rgba(181, 55, 242, 0.5);
-}
-
-/* Scrollbar styling - neon */
+/* Scrollbar */
 ::-webkit-scrollbar {
-  width: 8px;
+  width: 10px;
 }
 
 ::-webkit-scrollbar-track {
-  background: rgba(15, 18, 41, 0.5);
+  background: #1a1a1a;
 }
 
 ::-webkit-scrollbar-thumb {
-  background: linear-gradient(to bottom, rgba(0, 245, 255, 0.5), rgba(255, 0, 110, 0.5));
-  border-radius: 6px;
+  background: #2d9b7f;
+  border-radius: 5px;
 }
 
 ::-webkit-scrollbar-thumb:hover {
-  background: linear-gradient(to bottom, rgba(0, 245, 255, 0.8), rgba(255, 0, 110, 0.8));
+  background: #4fb3a3;
+}
+
+body.light-mode ::-webkit-scrollbar-track {
+  background: #f5f5f5;
 }
 
 /* Selection */
 ::selection {
-  background-color: rgba(255, 0, 110, 0.3);
-  color: #e0e0ff;
+  background-color: rgba(45, 155, 127, 0.3);
+  color: inherit;
 }
 
-/* Particle effect containers */
-.particle {
-  @apply absolute;
-  animation: float 20s ease-in-out infinite;
+/* Smooth transitions on all elements */
+* {
+  transition-property: color, background-color, border-color, box-shadow;
+  transition-timing-function: cubic-bezier(0.4, 0, 0.2, 1);
+  transition-duration: 200ms;
 }
 
-/* Star field background using pseudo-elements */
-.star-field::before {
-  content: '';
-  position: fixed;
-  top: 0;
-  left: 0;
-  right: 0;
-  bottom: 0;
-  background-image:
-    radial-gradient(1px 1px at 10% 20%, rgba(0,245,255,0.8) 0%, transparent 100%),
-    radial-gradient(1px 1px at 80% 15%, rgba(255,0,110,0.6) 0%, transparent 100%),
-    radial-gradient(1px 1px at 30% 70%, rgba(181,55,242,0.7) 0%, transparent 100%),
-    radial-gradient(1px 1px at 60% 50%, rgba(0,245,255,0.5) 0%, transparent 100%),
-    radial-gradient(1px 1px at 90% 80%, rgba(255,0,110,0.5) 0%, transparent 100%),
-    radial-gradient(1px 1px at 50% 35%, rgba(255,255,255,0.4) 0%, transparent 100%),
-    radial-gradient(1px 1px at 20% 90%, rgba(0,245,255,0.4) 0%, transparent 100%),
-    radial-gradient(1px 1px at 75% 60%, rgba(181,55,242,0.5) 0%, transparent 100%);
-  pointer-events: none;
-  z-index: -1;
+/* Typography */
+h1, h2, h3, h4, h5, h6 {
+  @apply font-display font-semibold;
 }
 
-/* Neon button base */
-.neon-btn {
-  @apply relative overflow-hidden font-bold transition-all duration-300;
+p {
+  @apply font-body leading-relaxed;
 }
 
-.neon-btn::before {
-  content: '';
-  @apply absolute inset-0 opacity-0 transition-opacity duration-300;
-  background: linear-gradient(45deg, transparent 30%, rgba(255,255,255,0.1) 50%, transparent 70%);
+/* Links */
+a {
+  @apply text-accent-primary hover:text-accent-light transition-colors;
 }
 
-.neon-btn:hover::before {
-  @apply opacity-100;
+/* Form inputs */
+input, textarea {
+  @apply bg-dark-secondary border border-border-dark rounded-lg px-4 py-3 text-light-bg placeholder-text-accent focus:outline-none focus:border-accent-primary focus:ring-1 focus:ring-accent-primary/30 transition-all;
 }
 
-/* Leaflet map dark override */
-.leaflet-container {
-  background: #0a0e27 !important;
-}
-
-.leaflet-tile {
-  filter: invert(90%) hue-rotate(180deg) brightness(0.7) saturate(1.5);
+body.light-mode input,
+body.light-mode textarea {
+  @apply bg-light-secondary border-border-color text-text-dark placeholder-text-muted;
+  color: #1a1a1a;
 }
