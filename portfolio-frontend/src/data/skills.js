@@ -1,34 +1,56 @@
-export const skillsData = {
-  backend: {
-    category: 'Backend',
-    icon: 'Server',
-    skills: ['Java', 'Node.js', 'Express.js'],
-    proficiency: 'Advanced',
-  },
-  frontend: {
-    category: 'Frontend',
-    icon: 'Code2',
-    skills: ['React.js', 'HTML5', 'CSS3', 'Tailwind CSS'],
-    proficiency: 'Intermediate',
-  },
-  databases: {
-    category: 'Databases',
-    icon: 'Database',
-    skills: ['PostgreSQL', 'MySQL', 'OracleSQL'],
-    proficiency: 'Intermediate',
-  },
-  languages: {
-    category: 'Programming Languages',
-    icon: 'FileCode',
-    skills: ['Java', 'JavaScript', 'Python'],
-    proficiency: 'Advanced',
-  },
-  soft: {
-    category: 'Soft Skills',
-    icon: 'Users',
-    skills: ['Problem-Solving', 'Collaboration', 'Communication', 'Time Management'],
-    proficiency: 'Expert',
-  },
-};
+// Skills data — grouped by category with honest proficiency labels
+// Proficiency levels: "Core Focus", "Comfortable", "Learning", "Project Experience"
 
-export const allSkills = Object.values(skillsData);
+export const skillCategories = [
+  {
+    id: 'backend',
+    title: 'Backend',
+    icon: 'Server',
+    skills: [
+      { name: 'Java', level: 'Core Focus' },
+      { name: 'Spring Boot', level: 'Core Focus' },
+      { name: 'REST API', level: 'Core Focus' },
+      { name: 'Spring Security', level: 'Learning' },
+      { name: 'JWT Authentication', level: 'Learning' },
+    ],
+  },
+  {
+    id: 'database',
+    title: 'Database',
+    icon: 'Database',
+    skills: [
+      { name: 'PostgreSQL', level: 'Comfortable' },
+      { name: 'MySQL', level: 'Comfortable' },
+    ],
+  },
+  {
+    id: 'frontend',
+    title: 'Frontend',
+    icon: 'Layout',
+    skills: [
+      { name: 'React.js', level: 'Project Experience' },
+      { name: 'JavaScript', level: 'Comfortable' },
+      { name: 'HTML', level: 'Comfortable' },
+      { name: 'CSS', level: 'Comfortable' },
+      { name: 'Tailwind CSS', level: 'Project Experience' },
+    ],
+  },
+  {
+    id: 'tools',
+    title: 'Tools & Deployment',
+    icon: 'Wrench',
+    skills: [
+      { name: 'Git', level: 'Comfortable' },
+      { name: 'GitHub', level: 'Comfortable' },
+      { name: 'Vercel', level: 'Project Experience' },
+    ],
+  },
+  {
+    id: 'other',
+    title: 'Other',
+    icon: 'Code',
+    skills: [
+      { name: 'Python', level: 'Learning' },
+    ],
+  },
+];

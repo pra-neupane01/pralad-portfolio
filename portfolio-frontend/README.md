@@ -1,113 +1,99 @@
 # Pralad Neupane — Portfolio Website
 
-A modern, animated glassmorphism-themed personal portfolio showcasing backend expertise and full-stack projects.
+A production-ready, terminal-inspired professional portfolio for Pralad Neupane, a Java Backend Developer. Built with React.js, Tailwind CSS, and Framer Motion.
 
-**Live:** [pralad-portfolio.vercel.app](https://pralad-portfolio.vercel.app)
+## 🚀 Live Demo
 
-## Stack
+[https://praladneupane.com.np](https://praladneupane.com.np) *(Replace with actual URL when deployed)*
 
-- **Frontend:** React 18 + Vite + Tailwind CSS + Framer Motion
-- **Hosting:** Vercel
-- **Contact:** EmailJS (serverless)
-- **Map:** React Leaflet + OpenStreetMap
+## ✨ Features
 
-## Local Development
+- **Terminal-Inspired Design**: Custom dark theme (black + `#00FF41` green) tailored for a developer aesthetic.
+- **10 Pages**: Comprehensive navigation including Home, About, Skills, Projects, Education, Experience, Services, Contact, Resume, and 404.
+- **Responsive & Accessible**: Fully responsive on mobile, tablet, and desktop with a mobile slide-out menu.
+- **Dark/Light Mode**: Persisted theme toggle (defaults to dark mode).
+- **Smooth Animations**: Page transitions, typing effects, and hover interactions powered by Framer Motion.
+- **Contact Form**: Frontend validation built-in (ready for EmailJS/Formspree integration).
+- **SEO Optimized**: Pre-configured meta tags, Open Graph, and semantic HTML structure.
 
-### Prerequisites
+## 🛠️ Tech Stack
 
-- Node.js 20.x LTS
-- npm 10.x
-- Git
+- **Framework**: [React.js](https://react.dev/) (Vite)
+- **Routing**: [React Router v6](https://reactrouter.com/)
+- **Styling**: [Tailwind CSS](https://tailwindcss.com/)
+- **Animations**: [Framer Motion](https://www.framer.com/motion/)
+- **Icons**: [Lucide React](https://lucide.dev/) & [React Icons](https://react-icons.github.io/react-icons/)
+- **Deployment**: Configured for [Vercel](https://vercel.com/)
 
-### Setup
+## 📂 Project Structure
 
-1. **Clone repo:**
+```text
+src/
+├── components/
+│   ├── common/         # Navbar, Footer, Buttons, ThemeToggle, etc.
+│   ├── contact/        # Contact form component
+│   ├── home/           # Hero section, Terminal card
+│   ├── projects/       # Project cards
+│   └── skills/         # Skill cards
+├── data/               # Local JSON-like data for the site content
+│   ├── education.js
+│   ├── experience.js
+│   ├── profile.js
+│   ├── projects.js     # Verified from GitHub
+│   ├── services.js
+│   ├── skills.js
+│   └── socials.js
+├── layouts/            # MainLayout wrapper for page transitions
+├── pages/              # 10 route pages
+├── routes/             # AppRoutes mapping
+├── utils/              # Constants (site metadata)
+├── App.jsx             # App entry
+├── index.css           # Terminal theme CSS utilities
+└── main.jsx            # React DOM render
+```
 
+## 💻 Local Development
+
+1. **Clone the repository:**
    ```bash
-   git clone https://github.com/pra-neupane01/pralad-portfolio.git
-   cd pralad-portfolio
+   git clone https://github.com/pra-neupane01/portfolio-pralad.git
+   cd portfolio-pralad/portfolio-frontend
    ```
 
 2. **Install dependencies:**
-
    ```bash
    npm install
    ```
 
-3. **Create `.env.local`** (copy from `.env.example` and fill in values):
-
-   ```env
-   VITE_EMAILJS_SERVICE_ID=your_service_id
-   VITE_EMAILJS_TEMPLATE_ID=your_template_id
-   VITE_EMAILJS_PUBLIC_KEY=your_public_key
-   ```
-
-4. **Run dev server:**
-
+3. **Start the development server:**
    ```bash
    npm run dev
    ```
+   Open `http://localhost:5173` in your browser.
 
-   Open [http://localhost:5173](http://localhost:5173)
+## 📦 Build & Deployment
 
-5. **Build for production:**
+This project is optimized for deployment on Vercel.
 
+1. **Test the production build locally:**
    ```bash
    npm run build
    npm run preview
    ```
 
-## EmailJS Setup
+2. **Deploying to Vercel:**
+   - Connect your GitHub repository to Vercel.
+   - Vercel will automatically detect Vite and use `npm run build`.
+   - The included `vercel.json` ensures React Router SPA routing works correctly.
 
-1. Go to https://www.emailjs.com
-2. Sign up (free tier)
-3. Create a Service (Gmail recommended)
-4. Create Email Template with placeholders: `{{name}}`, `{{email}}`, `{{message}}`
-5. Copy Service ID, Template ID, and Public Key → `.env.local`
+## 📝 Customization Guide
 
-## Deployment
+Before pushing to production, update the following:
 
-Automatically deployed to Vercel on every push to `main` branch.
+1. **Resume File**: Place your actual `resume.pdf` inside the `public/` folder (replacing the placeholder).
+2. **Email Form**: Integrate the `ContactForm.jsx` with an email service like [Formspree](https://formspree.io/) or [EmailJS](https://www.emailjs.com/).
+3. **Custom Domain (.com.np)**: Once registered, add the domain to Vercel settings and update the `SITE.url` in `src/utils/constants.js`. Update `og:url` and `canonical` in `index.html`.
+4. **Profile Photo**: If you wish to use a photo in the sidebar, update the placeholder in `src/pages/About.jsx`.
 
-### Manual Deploy
-
-```bash
-npm run build
-vercel
-```
-
-## Project Structure
-
-```
-src/
-├── components/     # Reusable React components
-├── pages/          # Route pages
-├── data/           # Profile, projects, skills data
-├── utils/          # Helpers and constants
-├── hooks/          # Custom React hooks
-└── index.css       # Global styles
-```
-
-## Features
-
-- Glassmorphism design with animated gradient background
-- Fully responsive (mobile-first)
-- Falling Blocks mini-game on Playground page
-- Contact form with EmailJS
-- Location map with React Leaflet
-- Smooth scroll animations (Framer Motion)
-- Resume download
-- Social links (GitHub, LinkedIn, etc.)
-
-## Assets to Add
-
-Place these files in `public/`:
-
-- `profile-pic.jpg` — your profile photo
-- `resume.pdf` — downloadable resume
-- `favicon.ico` — site favicon
-- `og-image.png` — Open Graph social share image
-
-## License
-
-MIT © Pralad Neupane
+---
+*Built with ❤️ in Itahari, Nepal.*

@@ -1,12 +1,12 @@
-@import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Playfair+Display:wght@500;600;700&family=Courier+Prime:wght@400;700&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=JetBrains+Mono:wght@400;500;700&family=Space+Grotesk:wght@400;500;600;700&display=swap');
 
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
 
+/* ========== Base Styles ========== */
 * {
   @apply antialiased;
-  -webkit-font-smoothing: subpixel-antialiased;
 }
 
 html {
@@ -14,94 +14,147 @@ html {
 }
 
 /* Dark mode (default) */
-body {
-  @apply bg-dark-bg text-text-light;
+html.dark {
+  background-color: #0a0a0a;
 }
 
-/* Light mode support (optional, via class) */
-body.light-mode {
-  @apply bg-light-bg text-text-dark;
+html.dark body {
+  @apply bg-terminal-bg text-terminal-text;
+  overflow-x: hidden;
 }
 
-/* Modern card utility */
-.modern-card {
-  @apply rounded-2xl border border-border-dark bg-dark-secondary transition-all duration-300;
+/* Light mode */
+html:not(.dark) {
+  background-color: #f5f5f0;
 }
 
-body.light-mode .modern-card {
-  @apply border-border-color bg-light-secondary;
+html:not(.dark) body {
+  @apply bg-light-bg text-light-text;
+  overflow-x: hidden;
 }
 
-.modern-card:hover {
-  @apply border-accent-primary shadow-lg;
+/* ========== Grid Background ========== */
+.grid-bg {
+  background-image:
+    linear-gradient(rgba(0, 255, 65, 0.03) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(0, 255, 65, 0.03) 1px, transparent 1px);
+  background-size: 50px 50px;
 }
 
-/* Accent text */
-.text-accent {
-  @apply text-accent-primary font-semibold;
+html:not(.dark) .grid-bg {
+  background-image:
+    linear-gradient(rgba(0, 100, 30, 0.04) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(0, 100, 30, 0.04) 1px, transparent 1px);
+  background-size: 50px 50px;
 }
 
-/* Grid utilities */
-.grid-section {
-  @apply grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8;
+/* ========== Terminal Card Styles ========== */
+.terminal-card {
+  @apply bg-terminal-surface border border-terminal-border rounded-lg transition-all duration-300;
 }
 
-/* Scrollbar */
+.terminal-card:hover {
+  @apply border-terminal-green/30;
+  box-shadow: 0 0 20px rgba(0, 255, 65, 0.05);
+}
+
+html:not(.dark) .terminal-card {
+  @apply bg-light-surface border-light-border;
+}
+
+html:not(.dark) .terminal-card:hover {
+  @apply border-terminal-greenDark/40;
+  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.08);
+}
+
+/* ========== Glass Panel ========== */
+.glass-panel {
+  @apply bg-terminal-surface/80 backdrop-blur-xl border border-terminal-border;
+}
+
+html:not(.dark) .glass-panel {
+  @apply bg-light-surface/90 backdrop-blur-xl border-light-border;
+}
+
+/* ========== Green Glow Effect ========== */
+.green-glow {
+  box-shadow: 0 0 15px rgba(0, 255, 65, 0.1), 0 0 30px rgba(0, 255, 65, 0.05);
+}
+
+.green-glow-text {
+  text-shadow: 0 0 10px rgba(0, 255, 65, 0.3);
+}
+
+/* ========== Scrollbar ========== */
 ::-webkit-scrollbar {
-  width: 10px;
+  width: 6px;
 }
 
 ::-webkit-scrollbar-track {
-  background: #1a1a1a;
+  background: #0a0a0a;
+}
+
+html:not(.dark) ::-webkit-scrollbar-track {
+  background: #f5f5f0;
 }
 
 ::-webkit-scrollbar-thumb {
-  background: #2d9b7f;
-  border-radius: 5px;
+  background: rgba(0, 255, 65, 0.2);
+  border-radius: 3px;
 }
 
 ::-webkit-scrollbar-thumb:hover {
-  background: #4fb3a3;
+  background: rgba(0, 255, 65, 0.4);
 }
 
-body.light-mode ::-webkit-scrollbar-track {
-  background: #f5f5f5;
+html:not(.dark) ::-webkit-scrollbar-thumb {
+  background: rgba(0, 150, 50, 0.3);
 }
 
-/* Selection */
+/* ========== Text Selection ========== */
 ::selection {
-  background-color: rgba(45, 155, 127, 0.3);
-  color: inherit;
+  background-color: rgba(0, 255, 65, 0.2);
+  color: #fff;
 }
 
-/* Smooth transitions on all elements */
-* {
-  transition-property: color, background-color, border-color, box-shadow;
-  transition-timing-function: cubic-bezier(0.4, 0, 0.2, 1);
-  transition-duration: 200ms;
+html:not(.dark) ::selection {
+  background-color: rgba(0, 180, 50, 0.2);
+  color: #000;
 }
 
-/* Typography */
-h1, h2, h3, h4, h5, h6 {
-  @apply font-display font-semibold;
+/* ========== Form Inputs (Dark) ========== */
+html.dark input,
+html.dark textarea,
+html.dark select {
+  @apply bg-terminal-surface border border-terminal-border rounded-lg px-4 py-3 text-terminal-text placeholder-terminal-textDim;
+  @apply focus:outline-none focus:border-terminal-green/50 focus:ring-1 focus:ring-terminal-green/30 transition-all;
 }
 
-p {
-  @apply font-body leading-relaxed;
+/* Form Inputs (Light) */
+html:not(.dark) input,
+html:not(.dark) textarea,
+html:not(.dark) select {
+  @apply bg-light-surface border border-light-border rounded-lg px-4 py-3 text-light-text placeholder-light-textMuted;
+  @apply focus:outline-none focus:border-terminal-greenDark/50 focus:ring-1 focus:ring-terminal-greenDark/30 transition-all;
 }
 
-/* Links */
-a {
-  @apply text-accent-primary hover:text-accent-light transition-colors;
+/* ========== Terminal Cursor ========== */
+.terminal-cursor {
+  @apply inline-block w-2.5 h-5 bg-terminal-green animate-blink ml-0.5;
+  vertical-align: text-bottom;
 }
 
-/* Form inputs */
-input, textarea {
-  @apply bg-dark-secondary border border-border-dark rounded-lg px-4 py-3 text-light-bg placeholder-text-accent focus:outline-none focus:border-accent-primary focus:ring-1 focus:ring-accent-primary/30 transition-all;
+/* ========== Tech Badge ========== */
+.tech-badge {
+  @apply inline-flex items-center px-2.5 py-1 text-xs font-mono rounded-md;
+  @apply bg-terminal-green/10 text-terminal-green border border-terminal-green/20;
 }
 
-body.light-mode input,
-body.light-mode textarea {
-  @apply bg-light-secondary border-border-color text-text-dark placeholder-text-muted;
-  color: #1a1a1a;
+html:not(.dark) .tech-badge {
+  @apply bg-terminal-greenDark/10 text-terminal-greenDark border-terminal-greenDark/20;
+}
+
+/* ========== Page Transition ========== */
+.page-transition {
+  @apply min-h-screen;
 }

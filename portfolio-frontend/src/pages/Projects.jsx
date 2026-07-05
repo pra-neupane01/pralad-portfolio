@@ -1,20 +1,20 @@
-import { motion } from 'framer-motion';
-import { projectsData } from '@/data/projects';
-import SectionTitle from '@/components/SectionTitle';
-import ProjectCard from '@/components/ProjectCard';
+import SectionHeader from '../components/common/SectionHeader';
+import ProjectCard from '../components/projects/ProjectCard';
+import { projectsData } from '../data/projects';
 
 export default function Projects() {
   return (
-    <main className="min-h-screen pt-32 pb-20 px-6 md:px-8">
-      <div className="max-w-7xl mx-auto">
-        <SectionTitle title="Selected Projects" subtitle="Production-grade solutions" />
+    <div className="py-12 md:py-20">
+      <SectionHeader 
+        title="Projects" 
+        subtitle="A collection of my academic, personal, and freelance development projects."
+      />
 
-        <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-8">
-          {projectsData.map((project, index) => (
-            <ProjectCard key={project.id} project={project} index={index} />
-          ))}
-        </div>
+      <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-6">
+        {projectsData.map((project, index) => (
+          <ProjectCard key={project.id} project={project} index={index} />
+        ))}
       </div>
-    </main>
+    </div>
   );
 }

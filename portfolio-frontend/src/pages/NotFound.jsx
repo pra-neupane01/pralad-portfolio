@@ -1,49 +1,47 @@
-import { Link } from 'react-router-dom';
 import { motion } from 'framer-motion';
-import { Home, Satellite } from 'lucide-react';
+import { Terminal } from 'lucide-react';
+import Button from '../components/common/Button';
 
 export default function NotFound() {
   return (
-    <main className="min-h-screen flex items-center justify-center px-4">
-      <motion.div
-        initial={{ opacity: 0, scale: 0.8 }}
+    <div className="min-h-[70vh] flex items-center justify-center py-20">
+      <motion.div 
+        initial={{ opacity: 0, scale: 0.9 }}
         animate={{ opacity: 1, scale: 1 }}
-        transition={{ duration: 0.8, type: 'spring' }}
-        className="text-center max-w-md"
+        transition={{ duration: 0.5 }}
+        className="terminal-card max-w-xl w-full mx-auto overflow-hidden"
       >
-        {/* Floating 404 */}
-        <motion.div
-          animate={{ y: [0, -20, 0] }}
-          transition={{ duration: 4, repeat: Infinity, ease: 'easeInOut' }}
-        >
-          <p className="text-[8rem] font-bold font-display leading-none mb-4 neon-text"
-            style={{ textShadow: '0 0 30px rgba(0,245,255,0.8), 0 0 80px rgba(0,245,255,0.4)' }}
-          >
-            404
-          </p>
-        </motion.div>
-
-        <div className="mb-3 flex justify-center">
-          <Satellite size={40} className="text-neon-pink animate-spin-slow" />
+        {/* Terminal Title Bar */}
+        <div className="bg-terminal-border/50 px-4 py-3 flex items-center gap-2 border-b border-terminal-border/50">
+          <div className="flex gap-1.5">
+            <div className="w-3 h-3 rounded-full bg-red-500/80"></div>
+            <div className="w-3 h-3 rounded-full bg-yellow-500/80"></div>
+            <div className="w-3 h-3 rounded-full bg-green-500/80"></div>
+          </div>
+          <div className="mx-auto text-xs font-mono text-terminal-textDim">
+            error_404.sh
+          </div>
         </div>
 
-        <h1 className="text-2xl font-bold font-display neon-text pink mb-3">
-          Lost in Space
-        </h1>
-        <p className="text-text-muted font-body mb-8">
-          This sector of the cosmos doesn't exist. Let's get you back to safety.
-        </p>
+        {/* Terminal Content */}
+        <div className="p-8 md:p-12 text-center font-mono">
+          <div className="flex justify-center mb-6">
+            <Terminal size={64} className="text-terminal-green opacity-50" />
+          </div>
+          
+          <h1 className="text-6xl font-bold text-terminal-green mb-4">404</h1>
+          <p className="text-xl text-terminal-text mb-2">
+            <span className="text-terminal-textDim">$</span> cd /current/path
+          </p>
+          <p className="text-red-500 mb-8 text-sm">
+            bash: cd: /current/path: No such file or directory
+          </p>
 
-        <motion.div whileHover={{ scale: 1.05 }} whileTap={{ scale: 0.95 }}>
-          <Link
-            to="/"
-            className="inline-flex items-center gap-2 px-8 py-3 font-bold font-mono rounded-lg text-space-black"
-            style={{ background: 'linear-gradient(90deg, #00f5ff, #ff006e)' }}
-          >
-            <Home size={18} /> Return Home
-          </Link>
-        </motion.div>
+          <Button href="/">
+            Return to Home
+          </Button>
+        </div>
       </motion.div>
-    </main>
+    </div>
   );
 }

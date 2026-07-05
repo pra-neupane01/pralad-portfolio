@@ -1,7 +1,7 @@
 {
   "name": "pralad-portfolio",
   "private": true,
-  "version": "1.0.0",
+  "version": "2.0.0",
   "type": "module",
   "scripts": {
     "dev": "vite",
@@ -15,9 +15,7 @@
     "react-router-dom": "^6.20.0",
     "framer-motion": "^10.16.4",
     "lucide-react": "^0.292.0",
-    "react-leaflet": "^4.2.1",
-    "leaflet": "^1.9.4",
-    "emailjs-com": "^3.2.0"
+    "react-icons": "^5.3.0"
   },
   "devDependencies": {
     "@vitejs/plugin-react": "^4.2.0",
@@ -26,8 +24,6 @@
     "postcss": "^8.4.32",
     "autoprefixer": "^10.4.16",
     "@tailwindcss/forms": "^0.5.7",
-    "@tailwindcss/typography": "^0.5.10",
-    "eslint": "^8.55.0",
-    "prettier": "^3.1.1"
+    "eslint": "^8.55.0"
   }
 }

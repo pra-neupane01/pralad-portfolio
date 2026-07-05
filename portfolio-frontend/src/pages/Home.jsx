@@ -1,158 +1,62 @@
-import { useState, useEffect } from 'react';
-import { Link } from 'react-router-dom';
-import { motion } from 'framer-motion';
-import { ArrowRight, Download } from 'lucide-react';
-import { profile } from '@/data/profile';
-import SocialLinks from '@/components/SocialLinks';
-import ModernCard from '@/components/ModernCard';
-
-const containerVariants = {
-  hidden: { opacity: 0 },
-  visible: {
-    opacity: 1,
-    transition: {
-      staggerChildren: 0.1,
-      delayChildren: 0.2,
-    },
-  },
-};
-
-const itemVariants = {
-  hidden: { opacity: 0, y: 20 },
-  visible: {
-    opacity: 1,
-    y: 0,
-    transition: { duration: 0.6 },
-  },
-};
+import Hero from '../components/home/Hero';
+import SectionHeader from '../components/common/SectionHeader';
+import ProjectCard from '../components/projects/ProjectCard';
+import { projectsData } from '../data/projects';
+import { skillCategories } from '../data/skills';
+import SkillCard from '../components/skills/SkillCard';
+import Button from '../components/common/Button';
 
 export default function Home() {
-  const [displayedText, setDisplayedText] = useState('');
-  const fullText = "Backend Engineer";
-
-  useEffect(() => {
-    let index = 0;
-    const interval = setInterval(() => {
-      if (index < fullText.length) {
-        setDisplayedText(fullText.substring(0, index + 1));
-        index++;
-      } else {
-        clearInterval(interval);
-      }
-    }, 100);
-    return () => clearInterval(interval);
-  }, []);
+  // Get top 3 projects for the home page
+  const featuredProjects = projectsData.slice(0, 3);
+  // Get top 2 skill categories for home page
+  const featuredSkills = skillCategories.slice(0, 2);
 
   return (
-    <main className="min-h-screen pt-40 pb-20 px-6 md:px-8">
-      <motion.div
-        variants={containerVariants}
-        initial="hidden"
-        animate="visible"
-        className="max-w-6xl mx-auto"
-      >
-        {/* Hero */}
-        <div className="grid md:grid-cols-2 gap-20 items-center mb-section">
-          <motion.div variants={itemVariants} className="space-y-8">
-            {/* Name */}
-            <div>
-              <h1 className="text-display-xl font-display font-bold text-text-light mb-6">
-                {profile.fullName}
-              </h1>
-              <p className="text-3xl font-mono text-accent-primary mb-4">
-                {displayedText}
-                <motion.span
-                  animate={{ opacity: [1, 0] }}
-                  transition={{ duration: 0.8, repeat: Infinity }}
-                  className="inline-block w-0.5 h-8 ml-2 bg-text-light"
-                />
-              </p>
-            </div>
+    <div>
+      <Hero />
 
-            {/* Intro */}
-            <p className="text-lg text-text-muted leading-relaxed max-w-lg">
-              {profile.careerObjective}
-            </p>
-
-            {/* Status */}
-            <div className="space-y-2 text-sm">
-              <p className="text-text-light">
-                <span className="text-accent-primary">→</span> Currently interning at{' '}
-                <span className="font-semibold">{profile.currentStatus.internship.company}</span>
-              </p>
-              <p className="text-text-light">
-                <span className="text-accent-primary">→</span> Studying at{' '}
-                <span className="font-semibold">{profile.currentStatus.education.degree}</span>
-              </p>
-            </div>
-
-            {/* CTAs */}
-            <div className="flex flex-wrap gap-4 pt-6">
-              <motion.a
-                whileHover={{ x: -4 }}
-                href="/resume.pdf"
-                download
-                className="px-6 py-3 bg-accent-primary hover:bg-accent-light text-dark-bg font-semibold rounded-lg flex items-center gap-2 transition-all"
-              >
-                <Download size={18} /> Resume
-              </motion.a>
-              <motion.div
-                whileHover={{ x: 4 }}
-              >
-                <Link
-                  to="/projects"
-                  className="px-6 py-3 modern-card border border-accent-primary text-accent-primary font-semibold rounded-lg flex items-center gap-2"
-                >
-                  Work <ArrowRight size={18} />
-                </Link>
-              </motion.div>
-            </div>
-
-            {/* Social */}
-            <motion.div variants={itemVariants}>
-              <SocialLinks />
-            </motion.div>
-          </motion.div>
-
-          {/* Profile Pic */}
-          <motion.div
-            variants={itemVariants}
-            className="flex justify-center md:justify-end"
-          >
-            <motion.div
-              animate={{ y: [0, -30, 0] }}
-              transition={{ duration: 6, repeat: Infinity, ease: 'easeInOut' }}
-              className="w-72 h-72 md:w-96 md:h-96 rounded-2xl overflow-hidden border-2 border-accent-primary/30"
-            >
-              <img
-                src="/profile-pic.jpg"
-                alt="Pralad"
-                className="w-full h-full object-cover"
-                onError={(e) => {
-                  e.target.src =
-                    `data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 200 200"><rect fill="%231a1a1a" width="200" height="200"/><text x="50%25" y="50%25" dominant-baseline="middle" text-anchor="middle" fill="%232d9b7f" font-size="56" font-family="serif" font-weight="bold">PN</text></svg>`;
-                }}
-              />
-            </motion.div>
-          </motion.div>
+      {/* Featured Projects Section */}
+      <section id="projects" className="py-20 border-t border-terminal-border dark:border-terminal-border">
+        <div className="flex flex-col md:flex-row md:items-end justify-between mb-12">
+          <SectionHeader 
+            title="Featured Projects" 
+            subtitle="Some of my recent backend and full-stack work." 
+          />
+          <div className="mb-12 md:mb-0">
+            <Button variant="outline" href="/projects">
+              View All Projects
+            </Button>
+          </div>
         </div>
 
-        {/* Stats */}
-        <div className="grid md:grid-cols-3 gap-8">
-          <ModernCard className="text-center">
-            <p className="text-4xl font-display font-bold text-accent-primary mb-2">5+</p>
-            <p className="text-text-muted text-sm">Projects</p>
-          </ModernCard>
-          <ModernCard className="text-center">
-            <p className="text-4xl font-display font-bold text-accent-primary mb-2">PERN</p>
-            <p className="text-text-muted text-sm">Full-Stack</p>
-          </ModernCard>
-          <ModernCard className="text-center">
-            <p className="text-4xl font-display font-bold text-accent-primary mb-2">Java</p>
-            <p className="text-text-muted text-sm">Backend</p>
-          </ModernCard>
+        <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-6">
+          {featuredProjects.map((project, index) => (
+            <ProjectCard key={project.id} project={project} index={index} />
+          ))}
         </div>
-      </motion.div>
-    </main>
+      </section>
+
+      {/* Core Skills Snapshot */}
+      <section className="py-20 border-t border-terminal-border dark:border-terminal-border">
+        <div className="flex flex-col md:flex-row md:items-end justify-between mb-12">
+          <SectionHeader 
+            title="Core Skills" 
+            subtitle="My primary technical focus areas." 
+          />
+          <div className="mb-12 md:mb-0">
+            <Button variant="outline" href="/skills">
+              View All Skills
+            </Button>
+          </div>
+        </div>
+
+        <div className="grid md:grid-cols-2 gap-6 max-w-4xl">
+          {featuredSkills.map((category, index) => (
+            <SkillCard key={category.id} category={category} index={index} />
+          ))}
+        </div>
+      </section>
+    </div>
   );
 }
