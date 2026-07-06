@@ -74,7 +74,7 @@ export default function Navbar() {
                     {isActive && (
                       <motion.div
                         layoutId="activeTab"
-                        className="absolute bottom-0 left-1/2 -translate-x-1/2 w-4/5 h-0.5 bg-terminal-green rounded-full"
+                        className="absolute bottom-0 inset-x-0 mx-auto w-4/5 h-0.5 bg-terminal-green rounded-full"
                         transition={{ type: 'spring', bounce: 0.2, duration: 0.6 }}
                       />
                     )}
