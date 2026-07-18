@@ -8,20 +8,20 @@ import { RESUME_PATH } from '../utils/constants';
 export default function About() {
   return (
     <div className="py-12 md:py-20 max-w-4xl mx-auto">
-      <SectionHeader 
-        title="About Me" 
+      <SectionHeader
+        title="About Me"
         subtitle="My background, education, and career goals."
       />
 
       <div className="terminal-card p-6 md:p-10 mb-12">
         <div className="flex flex-col md:flex-row gap-10 items-start">
-          
+
           {/* Text Content */}
           <div className="flex-1 space-y-6">
             <div className="flex items-center gap-2 text-terminal-green font-mono mb-2">
               <span className="text-terminal-textDim">$</span> cat about.txt
             </div>
-            
+
             <div className="text-terminal-text dark:text-terminal-text leading-relaxed whitespace-pre-wrap">
               {profile.aboutSummary}
             </div>
@@ -47,8 +47,18 @@ export default function About() {
           {/* Details Sidebar */}
           <div className="w-full md:w-64 space-y-6 bg-terminal-surfaceLight dark:bg-terminal-surfaceLight p-6 rounded-lg border border-terminal-border dark:border-terminal-border">
             <div className="flex justify-center mb-6">
-              <div className="w-32 h-32 rounded-full border-2 border-terminal-green/50 p-1 flex items-center justify-center bg-terminal-bg/50">
-                <User size={64} className="text-terminal-green/50" />
+              <div className="w-32 h-32 rounded-full border-2 border-terminal-green/50 p-1 flex items-center justify-center bg-terminal-bg/50 overflow-hidden">
+                <img
+                  src="/profile.jpg.png"
+                  alt="Profile"
+                  className="w-full h-full object-cover rounded-full"
+                  onError={(e) => {
+                    e.target.onerror = null;
+                    e.target.style.display = 'none';
+                    e.target.nextSibling.style.display = 'block';
+                  }}
+                />
+                <User size={64} className="text-terminal-green/50 hidden" />
               </div>
             </div>
 
@@ -72,7 +82,7 @@ export default function About() {
               </div>
             </div>
           </div>
-          
+
         </div>
       </div>
     </div>

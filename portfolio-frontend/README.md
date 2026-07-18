@@ -4,7 +4,7 @@ A production-ready, terminal-inspired professional portfolio for Pralad Neupane,
 
 ## 🚀 Live Demo
 
-[https://praladneupane.com.np](https://praladneupane.com.np) *(Replace with actual URL when deployed)*
+[https://praladneupane.com.np](https://praladneupane.com.np)
 
 ## ✨ Features
 
@@ -56,8 +56,8 @@ src/
 
 1. **Clone the repository:**
    ```bash
-   git clone https://github.com/pra-neupane01/portfolio-pralad.git
-   cd portfolio-pralad/portfolio-frontend
+   git clone https://github.com/pra-neupane01/pralad-portfolio.git
+   cd pralad-portfolio/portfolio-frontend
    ```
 
 2. **Install dependencies:**
