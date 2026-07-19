@@ -7,7 +7,6 @@ import About from '../pages/About';
 import Skills from '../pages/Skills';
 import Projects from '../pages/Projects';
 import Education from '../pages/Education';
-import Experience from '../pages/Experience';
 import Services from '../pages/Services';
 import Contact from '../pages/Contact';
 import NotFound from '../pages/NotFound';
@@ -21,7 +20,6 @@ export default function AppRoutes() {
         <Route path="skills" element={<Skills />} />
         <Route path="projects" element={<Projects />} />
         <Route path="education" element={<Education />} />
-        <Route path="experience" element={<Experience />} />
         <Route path="services" element={<Services />} />
         <Route path="contact" element={<Contact />} />
         <Route path="*" element={<NotFound />} />

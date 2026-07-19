@@ -21,7 +21,6 @@ export const NAV_ITEMS = [
   { name: 'Skills', path: '/skills' },
   { name: 'Projects', path: '/projects' },
   { name: 'Education', path: '/education' },
-  { name: 'Experience', path: '/experience' },
   { name: 'Services', path: '/services' },
   { name: 'Contact', path: '/contact' },
 ];

@@ -1,50 +1,67 @@
 import { motion } from 'framer-motion';
-import * as Icons from 'lucide-react';
+import { 
+  FaJava, FaReact, FaHtml5, FaCss3Alt, FaDocker, FaGitAlt, FaGithub
+} from 'react-icons/fa';
+import { 
+  SiSpringboot, SiSpringsecurity, SiJsonwebtokens, SiHibernate, 
+  SiSpring, SiApachemaven, SiPostgresql, SiTailwindcss, 
+  SiPostman, SiSwagger, SiIntellijidea, SiVercel 
+} from 'react-icons/si';
+import { TbApi } from 'react-icons/tb';
+import { GrMysql } from 'react-icons/gr';
+import { IoLogoJavascript } from 'react-icons/io5';
+import { Code } from 'lucide-react';
 
-export default function SkillCard({ category, index }) {
-  const Icon = Icons[category.icon] || Icons.Code;
+const iconMap = {
+  FaJava: FaJava,
+  SiSpringboot: SiSpringboot,
+  SiSpringsecurity: SiSpringsecurity,
+  TbApi: TbApi,
+  SiJsonwebtokens: SiJsonwebtokens,
+  SiHibernate: SiHibernate,
+  SiSpring: SiSpring,
+  SiApachemaven: SiApachemaven,
+  SiPostgresql: SiPostgresql,
+  GrMysql: GrMysql,
+  FaReact: FaReact,
+  IoLogoJavascript: IoLogoJavascript,
+  FaHtml5: FaHtml5,
+  FaCss3Alt: FaCss3Alt,
+  SiTailwindcss: SiTailwindcss,
+  FaDocker: FaDocker,
+  FaGitAlt: FaGitAlt,
+  FaGithub: FaGithub,
+  SiPostman: SiPostman,
+  SiSwagger: SiSwagger,
+  SiIntellijidea: SiIntellijidea,
+  SiVercel: SiVercel,
+};
+
+export default function SkillCard({ skill, index }) {
+  const Icon = iconMap[skill.icon] || Code;
 
   return (
     <motion.div
       initial={{ opacity: 0, y: 20 }}
       whileInView={{ opacity: 1, y: 0 }}
       viewport={{ once: true }}
-      transition={{ duration: 0.5, delay: index * 0.1 }}
-      className="terminal-card p-6 h-full flex flex-col group"
+      transition={{ duration: 0.4, delay: (index % 10) * 0.05 }}
+      whileHover={{ y: -5 }}
+      className="terminal-card p-5 h-full flex flex-col group transition-all duration-300 hover:border-terminal-green/50 hover:shadow-[0_0_15px_rgba(34,197,94,0.1)]"
     >
-      <div className="flex items-center gap-4 mb-6 border-b border-terminal-border dark:border-terminal-border pb-4">
-        <div className="p-3 bg-terminal-surfaceLight dark:bg-terminal-surfaceLight text-terminal-green rounded-lg group-hover:scale-110 transition-transform">
-          <Icon size={24} />
+      <div className="flex justify-between items-start mb-4">
+        <div className="p-2.5 bg-terminal-surfaceLight dark:bg-terminal-surfaceLight text-terminal-text group-hover:text-terminal-green rounded-lg transition-colors duration-300">
+          <Icon size={24} title={skill.name} aria-label={skill.name} />
         </div>
-        <h3 className="text-xl font-display font-semibold text-terminal-text dark:text-terminal-text">
-          {category.title}
-        </h3>
       </div>
-
-      <div className="space-y-4">
-        {category.skills.map((skill, i) => (
-          <div key={skill.name} className="flex flex-col gap-1.5">
-            <div className="flex justify-between items-end">
-              <span className="font-mono text-sm text-terminal-text dark:text-terminal-text">
-                <span className="text-terminal-textDim mr-2">&gt;</span>
-                {skill.name}
-              </span>
-              <span className="text-xs text-terminal-textMuted dark:text-terminal-textMuted bg-terminal-surfaceLight dark:bg-terminal-surfaceLight px-2 py-0.5 rounded">
-                {skill.level}
-              </span>
-            </div>
-            {/* Optional: Add a visual indicator instead of a progress bar */}
-            <div className="h-0.5 w-full bg-terminal-surfaceLight dark:bg-terminal-surfaceLight rounded-full overflow-hidden">
-              <motion.div 
-                initial={{ width: 0 }}
-                whileInView={{ width: skill.level === 'Core Focus' ? '100%' : skill.level === 'Comfortable' ? '75%' : skill.level === 'Project Experience' ? '60%' : '40%' }}
-                viewport={{ once: true }}
-                transition={{ duration: 1, delay: i * 0.1 + 0.3 }}
-                className="h-full bg-terminal-green/30"
-              />
-            </div>
-          </div>
-        ))}
+      
+      <div className="mt-auto space-y-1">
+        <h3 className="font-mono text-sm font-semibold text-terminal-text dark:text-terminal-text group-hover:text-terminal-green transition-colors">
+          {skill.name}
+        </h3>
+        <p className="text-[11px] font-mono text-terminal-textDim dark:text-terminal-textDim uppercase tracking-wider">
+          {skill.label}
+        </p>
       </div>
     </motion.div>
   );

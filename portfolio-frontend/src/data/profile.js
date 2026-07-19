@@ -37,7 +37,7 @@ I am building a solid foundation in clean architecture, secure authentication, a
 While I am still early in my career, I am committed to continuous learning and actively developing real-world backend projects to strengthen my skills and build a professional-grade portfolio.`,
 
   careerObjective:
-    'I aim to become a skilled Java backend developer capable of building efficient, scalable, and reliable software solutions. With a strong foundation in Object-Oriented Programming and hands-on experience through academic and personal projects, I am eager to apply my knowledge in real-world applications.',
+    'My goal is to grow as a professional Java backend developer by building secure, scalable and maintainable applications. I have developed practical experience with Core Java, Spring Boot, REST APIs, Spring Security, JWT authentication, relational databases and Docker through academic and personal projects. I am now focused on strengthening my backend architecture, system design and deployment skills while applying my knowledge to real-world software solutions.',
 
   // Resume file path — Place resume.pdf inside the public/ folder
   resumePath: '/resume.pdf',

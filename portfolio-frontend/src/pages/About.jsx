@@ -78,7 +78,10 @@ export default function About() {
               <div className="flex flex-wrap gap-1 mt-1">
                 <span className="text-[10px] font-mono px-1.5 py-0.5 bg-terminal-green/10 text-terminal-green rounded border border-terminal-green/20">Java</span>
                 <span className="text-[10px] font-mono px-1.5 py-0.5 bg-terminal-green/10 text-terminal-green rounded border border-terminal-green/20">Spring Boot</span>
-                <span className="text-[10px] font-mono px-1.5 py-0.5 bg-terminal-green/10 text-terminal-green rounded border border-terminal-green/20">APIs</span>
+                <span className="text-[10px] font-mono px-1.5 py-0.5 bg-terminal-green/10 text-terminal-green rounded border border-terminal-green/20">Spring Security</span>
+                <span className="text-[10px] font-mono px-1.5 py-0.5 bg-terminal-green/10 text-terminal-green rounded border border-terminal-green/20">REST APIs</span>
+                <span className="text-[10px] font-mono px-1.5 py-0.5 bg-terminal-green/10 text-terminal-green rounded border border-terminal-green/20">PostgreSQL</span>
+                <span className="text-[10px] font-mono px-1.5 py-0.5 bg-terminal-green/10 text-terminal-green rounded border border-terminal-green/20">Docker</span>
               </div>
             </div>
           </div>

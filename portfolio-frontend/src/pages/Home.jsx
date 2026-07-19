@@ -9,8 +9,8 @@ import Button from '../components/common/Button';
 export default function Home() {
   // Get top 3 projects for the home page
   const featuredProjects = projectsData.slice(0, 3);
-  // Get top 2 skill categories for home page
-  const featuredSkills = skillCategories.slice(0, 2);
+  // Get top 8 skills for home page
+  const featuredSkills = skillCategories.flatMap(c => c.skills).slice(0, 8);
 
   return (
     <div>
@@ -51,9 +51,9 @@ export default function Home() {
           </div>
         </div>
 
-        <div className="grid md:grid-cols-2 gap-6 max-w-4xl">
-          {featuredSkills.map((category, index) => (
-            <SkillCard key={category.id} category={category} index={index} />
+        <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-4 max-w-4xl">
+          {featuredSkills.map((skill, index) => (
+            <SkillCard key={skill.name} skill={skill} index={index} />
           ))}
         </div>
       </section>
