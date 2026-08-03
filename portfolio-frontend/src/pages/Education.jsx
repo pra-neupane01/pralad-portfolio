@@ -1,17 +1,20 @@
 import { motion } from 'framer-motion';
-import { GraduationCap, ExternalLink } from 'lucide-react';
+import { GraduationCap, ExternalLink, Award, ShieldCheck } from 'lucide-react';
 import SectionHeader from '../components/common/SectionHeader';
+import CertificationCard from '../components/education/CertificationCard';
 import { educationData } from '../data/education';
+import { certificationsData } from '../data/certifications';
 
 export default function Education() {
   return (
-    <div className="py-12 md:py-20 max-w-4xl mx-auto">
+    <div className="py-12 md:py-20 max-w-5xl mx-auto">
+      {/* ===== Education Timeline ===== */}
       <SectionHeader 
         title="Education" 
         subtitle="My academic background and qualifications."
       />
 
-      <div className="space-y-8 relative before:absolute before:inset-0 before:ml-5 before:-translate-x-px md:before:mx-auto md:before:translate-x-0 before:h-full before:w-0.5 before:bg-gradient-to-b before:from-terminal-green/50 before:via-terminal-green/10 before:to-transparent">
+      <div className="max-w-4xl mx-auto space-y-8 relative before:absolute before:inset-0 before:ml-5 before:-translate-x-px md:before:mx-auto md:before:translate-x-0 before:h-full before:w-0.5 before:bg-gradient-to-b before:from-terminal-green/50 before:via-terminal-green/10 before:to-transparent">
         {educationData.map((item, index) => (
           <motion.div
             key={item.id}
@@ -74,6 +77,41 @@ export default function Education() {
             </div>
           </motion.div>
         ))}
+      </div>
+
+      {/* ===== Certifications Showcase ===== */}
+      <div className="mt-24">
+        <SectionHeader
+          title="Certifications"
+          subtitle="Professional certifications and credentials I've earned."
+        />
+
+        {certificationsData.length > 0 ? (
+          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-5">
+            {certificationsData.map((cert, index) => (
+              <CertificationCard key={cert.id} cert={cert} index={index} />
+            ))}
+          </div>
+        ) : (
+          /* Empty state — shown while no certifications are added */
+          <motion.div
+            initial={{ opacity: 0, y: 20 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true }}
+            transition={{ duration: 0.5 }}
+            className="terminal-card p-10 text-center max-w-lg mx-auto"
+          >
+            <div className="w-16 h-16 mx-auto mb-5 rounded-full bg-terminal-surfaceLight border border-terminal-border flex items-center justify-center text-terminal-textDim">
+              <ShieldCheck size={28} />
+            </div>
+            <h3 className="text-lg font-display font-semibold text-terminal-text mb-2">
+              Certifications Coming Soon
+            </h3>
+            <p className="text-sm text-terminal-textMuted leading-relaxed">
+              Professional certifications and credentials will be showcased here as they are earned.
+            </p>
+          </motion.div>
+        )}
       </div>
     </div>
   );
