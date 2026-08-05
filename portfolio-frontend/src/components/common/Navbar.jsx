@@ -84,7 +84,7 @@ export default function Navbar() {
             <ThemeToggle />
             <button
               onClick={() => setIsOpen(!isOpen)}
-              className="lg:hidden text-terminal-text dark:text-terminal-text p-1.5 rounded-lg hover:bg-terminal-surfaceLight dark:hover:bg-terminal-surfaceLight transition-colors"
+              className={styles.menuButton}
               aria-label={isOpen ? 'Close menu' : 'Open menu'}
             >
               {isOpen ? <X size={22} /> : <Menu size={22} />}
@@ -101,7 +101,7 @@ export default function Navbar() {
             animate={{ opacity: 1, height: 'auto' }}
             exit={{ opacity: 0, height: 0 }}
             transition={{ duration: 0.3 }}
-            className="lg:hidden mx-4 mt-2 overflow-hidden glass-panel rounded-xl"
+            className={`${styles.glassPanel} rounded-xl lg:hidden mx-4 mt-2 overflow-hidden`}
           >
             <div className="py-3 space-y-0.5">
               {NAV_ITEMS.map((item, index) => (
