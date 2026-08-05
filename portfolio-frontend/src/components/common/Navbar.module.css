@@ -19,7 +19,7 @@
 }
 
 .glassPanel {
-  @apply glass-panel shadow-lg border-terminal-green/10;
+  @apply bg-black/30 backdrop-blur-md border border-terminal-green/10 rounded-lg;
 }
 
 .bgTransparent {

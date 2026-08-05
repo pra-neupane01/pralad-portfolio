@@ -1,4 +1,5 @@
 import { useState, useEffect } from 'react';
+import styles from './Navbar.module.css';
 import { NavLink, useLocation } from 'react-router-dom';
 import { Menu, X } from 'lucide-react';
 import { motion, AnimatePresence } from 'framer-motion';
@@ -26,17 +27,11 @@ export default function Navbar() {
       initial={{ y: -100 }}
       animate={{ y: 0 }}
       transition={{ duration: 0.6, ease: [0.16, 1, 0.3, 1] }}
-      className={`fixed top-0 left-0 right-0 z-50 transition-all duration-300 ${
-        scrolled ? 'py-2' : 'py-4'
-      }`}
+      className={`${styles.navbar} ${scrolled ? styles.navbarScrolled : styles.navbarUnscrolled}`}
     >
-      <div className="max-w-7xl mx-auto px-4 md:px-6">
+      <div className={styles.navContainer}>
         <div
-          className={`flex justify-between items-center px-5 py-3 rounded-xl transition-all duration-300 ${
-            scrolled
-              ? 'glass-panel shadow-lg border-terminal-green/10'
-              : 'bg-transparent'
-          }`}
+          className={`${styles.navInner} ${scrolled ? styles.glassPanel : styles.bgTransparent}`}
         >
           {/* Logo */}
           <NavLink to="/" aria-label="Home">

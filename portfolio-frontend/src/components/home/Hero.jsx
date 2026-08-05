@@ -5,6 +5,7 @@ import { socialLinks } from '@/data/socials';
 import { RESUME_PATH } from '@/utils/constants';
 import Button from '../common/Button';
 import TerminalCard from './TerminalCard';
+import ProfilePhoto from './ProfilePhoto';
 
 export default function Hero() {
   return (
@@ -102,18 +103,24 @@ export default function Hero() {
           </motion.div>
         </div>
 
-        {/* Terminal/Image Content */}
-        <motion.div
-          initial={{ opacity: 0, scale: 0.9 }}
-          animate={{ opacity: 1, scale: 1 }}
-          transition={{ duration: 0.7, delay: 0.2 }}
-          className="order-1 lg:order-2 relative w-full max-w-lg mx-auto"
-        >
-          <div className="absolute -inset-4 bg-gradient-to-tr from-terminal-green/20 to-transparent blur-2xl rounded-full opacity-50 z-0"></div>
-          <div className="relative z-10">
-            <TerminalCard />
-          </div>
-        </motion.div>
+        {/* Right Side: Profile Photo + Terminal Card */}
+        <div className="order-1 lg:order-2 relative w-full max-w-lg mx-auto flex flex-col items-center gap-8">
+          {/* Circular Profile Photo */}
+          <ProfilePhoto src="/profile.jpg.png" alt={profile.fullName} size="lg" />
+
+          {/* Terminal Card below photo */}
+          <motion.div
+            initial={{ opacity: 0, scale: 0.9 }}
+            animate={{ opacity: 1, scale: 1 }}
+            transition={{ duration: 0.7, delay: 0.4 }}
+            className="relative w-full"
+          >
+            <div className="absolute -inset-4 bg-gradient-to-tr from-terminal-green/20 to-transparent blur-2xl rounded-full opacity-50 z-0"></div>
+            <div className="relative z-10">
+              <TerminalCard />
+            </div>
+          </motion.div>
+        </div>
       </div>
     </section>
   );
