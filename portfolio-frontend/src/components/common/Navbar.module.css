@@ -1,0 +1,31 @@
+.navbar {
+  @apply fixed top-0 left-0 right-0 z-50 transition-all duration-300;
+}
+
+.navbarScrolled {
+  @apply py-2;
+}
+
+.navbarUnscrolled {
+  @apply py-4;
+}
+
+.navContainer {
+  @apply max-w-7xl mx-auto px-4 md:px-6;
+}
+
+.navInner {
+  @apply flex justify-between items-center px-5 py-3 rounded-xl transition-all duration-300;
+}
+
+.glassPanel {
+  @apply glass-panel shadow-lg border-terminal-green/10;
+}
+
+.bgTransparent {
+  @apply bg-transparent;
+}
+
+.menuButton {
+  @apply lg:hidden text-terminal-text dark:text-terminal-text p-1.5 rounded-lg hover:bg-terminal-surfaceLight dark:hover:bg-terminal-surfaceLight transition-colors;
+}
