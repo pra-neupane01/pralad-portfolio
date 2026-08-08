@@ -21,7 +21,6 @@ export default function ContactForm() {
   const handleSubmit = async (e) => {
     e.preventDefault();
     
-    // Basic validation
     if (!formData.name || !formData.email || !formData.message) {
       setStatus('error');
       setErrorMessage('Please fill in all required fields.');
@@ -30,58 +29,54 @@ export default function ContactForm() {
 
     setStatus('loading');
 
-    // Simulate API call for now
-    // TODO: Integrate with Formspree, EmailJS, or custom backend
     try {
-      await new Promise((resolve) => setTimeout(resolve, 1500));
+      await new Promise((resolve) => setTimeout(resolve, 1200));
       setStatus('success');
       setFormData({ name: '', email: '', subject: '', message: '' });
-      
-      // Reset success message after 5 seconds
       setTimeout(() => setStatus('idle'), 5000);
     } catch (error) {
       setStatus('error');
-      setErrorMessage('Something went wrong. Please try again or email me directly.');
+      setErrorMessage('Something went wrong. Please try again or email directly.');
     }
   };
 
   return (
-    <div className="terminal-card p-6 md:p-8">
-      <div className="mb-8">
-        <h3 className="text-xl font-display font-semibold text-terminal-text dark:text-terminal-text mb-2">
+    <div className="obsidian-card p-6 md:p-8">
+      <div className="mb-6">
+        <h3 className="text-xl font-display font-bold text-slate-100 mb-1">
           Send a Message
         </h3>
-        <p className="text-sm text-terminal-textMuted dark:text-terminal-textMuted">
-          I'm currently open for new opportunities. Whether you have a question or just want to say hi, I'll try my best to get back to you!
+        <p className="text-xs text-slate-400">
+          Have an inquiry, project proposal, or collaboration idea? Send me a quick note!
         </p>
       </div>
 
       {status === 'success' ? (
-        <div className="p-6 bg-terminal-green/10 border border-terminal-green/30 rounded-lg flex flex-col items-center text-center">
-          <CheckCircle className="text-terminal-green w-12 h-12 mb-3" />
-          <h4 className="text-terminal-green font-mono font-semibold mb-2">Message Sent Successfully!</h4>
-          <p className="text-terminal-textMuted text-sm">Thank you for reaching out. I'll get back to you as soon as possible.</p>
+        <div className="p-6 bg-emerald-500/10 border border-emerald-500/30 rounded-xl flex flex-col items-center text-center">
+          <CheckCircle className="text-emerald-400 w-10 h-10 mb-3 shadow-emerald-glow" />
+          <h4 className="text-slate-100 font-sans font-bold mb-1">Message Received</h4>
+          <p className="text-slate-400 text-xs">Thank you for reaching out. I'll get back to you shortly.</p>
           <Button 
-            variant="outline" 
-            className="mt-6"
+            variant="secondary" 
+            className="mt-5 text-xs py-2"
             onClick={() => setStatus('idle')}
           >
-            Send Another Message
+            Send Another
           </Button>
         </div>
       ) : (
-        <form onSubmit={handleSubmit} className="space-y-5">
+        <form onSubmit={handleSubmit} className="space-y-4">
           {status === 'error' && (
-            <div className="p-3 bg-red-500/10 border border-red-500/30 rounded-lg flex items-start gap-3">
-              <AlertCircle className="text-red-500 w-5 h-5 shrink-0 mt-0.5" />
-              <p className="text-red-500/90 text-sm">{errorMessage}</p>
+            <div className="p-3 bg-rose-500/10 border border-rose-500/30 rounded-xl flex items-start gap-2.5">
+              <AlertCircle className="text-rose-400 w-4 h-4 shrink-0 mt-0.5" />
+              <p className="text-rose-300 text-xs">{errorMessage}</p>
             </div>
           )}
 
-          <div className="grid md:grid-cols-2 gap-5">
-            <div className="space-y-1.5">
-              <label htmlFor="name" className="text-xs font-mono text-terminal-textMuted dark:text-terminal-textMuted">
-                NAME <span className="text-terminal-green">*</span>
+          <div className="grid md:grid-cols-2 gap-4">
+            <div className="space-y-1">
+              <label htmlFor="name" className="text-xs font-mono text-slate-400 uppercase tracking-wider">
+                Name <span className="text-emerald-400">*</span>
               </label>
               <input
                 type="text"
@@ -90,14 +85,14 @@ export default function ContactForm() {
                 value={formData.name}
                 onChange={handleChange}
                 placeholder="John Doe"
-                className="w-full"
+                className="w-full text-sm"
                 required
               />
             </div>
             
-            <div className="space-y-1.5">
-              <label htmlFor="email" className="text-xs font-mono text-terminal-textMuted dark:text-terminal-textMuted">
-                EMAIL <span className="text-terminal-green">*</span>
+            <div className="space-y-1">
+              <label htmlFor="email" className="text-xs font-mono text-slate-400 uppercase tracking-wider">
+                Email <span className="text-emerald-400">*</span>
               </label>
               <input
                 type="email"
@@ -106,15 +101,15 @@ export default function ContactForm() {
                 value={formData.email}
                 onChange={handleChange}
                 placeholder="john@example.com"
-                className="w-full"
+                className="w-full text-sm"
                 required
               />
             </div>
           </div>
 
-          <div className="space-y-1.5">
-            <label htmlFor="subject" className="text-xs font-mono text-terminal-textMuted dark:text-terminal-textMuted">
-              SUBJECT
+          <div className="space-y-1">
+            <label htmlFor="subject" className="text-xs font-mono text-slate-400 uppercase tracking-wider">
+              Subject
             </label>
             <input
               type="text"
@@ -122,41 +117,41 @@ export default function ContactForm() {
               name="subject"
               value={formData.subject}
               onChange={handleChange}
-              placeholder="Project Inquiry"
-              className="w-full"
+              placeholder="Backend Role Inquiry"
+              className="w-full text-sm"
             />
           </div>
 
-          <div className="space-y-1.5">
-            <label htmlFor="message" className="text-xs font-mono text-terminal-textMuted dark:text-terminal-textMuted">
-              MESSAGE <span className="text-terminal-green">*</span>
+          <div className="space-y-1">
+            <label htmlFor="message" className="text-xs font-mono text-slate-400 uppercase tracking-wider">
+              Message <span className="text-emerald-400">*</span>
             </label>
             <textarea
               id="message"
               name="message"
               value={formData.message}
               onChange={handleChange}
-              placeholder="Hello, I'd like to talk about..."
-              rows={5}
-              className="w-full resize-none"
+              placeholder="Hi Pralad, I'd like to discuss..."
+              rows={4}
+              className="w-full text-sm resize-none"
               required
             />
           </div>
 
           <Button 
             type="submit" 
-            variant="solid" 
-            className="w-full"
+            variant="primary" 
+            className="w-full py-3"
             disabled={status === 'loading'}
           >
             {status === 'loading' ? (
               <span className="flex items-center gap-2">
-                <span className="animate-spin w-4 h-4 border-2 border-terminal-bg border-t-transparent rounded-full"></span>
+                <span className="animate-spin w-4 h-4 border-2 border-slate-950 border-t-transparent rounded-full"></span>
                 Sending...
               </span>
             ) : (
               <span className="flex items-center gap-2">
-                <Send size={16} /> Send Message
+                <Send size={15} /> Send Message
               </span>
             )}
           </Button>
@@ -165,3 +160,4 @@ export default function ContactForm() {
     </div>
   );
 }
+

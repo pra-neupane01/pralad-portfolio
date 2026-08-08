@@ -5,27 +5,28 @@ import { projectsData } from '../data/projects';
 import { skillCategories } from '../data/skills';
 import SkillCard from '../components/skills/SkillCard';
 import Button from '../components/common/Button';
+import { ArrowRight } from 'lucide-react';
 
 export default function Home() {
-  // Get top 3 projects for the home page
+  // Top 3 featured projects for homepage
   const featuredProjects = projectsData.slice(0, 3);
-  // Get top 8 skills for home page
+  // Core skills subset for homepage snapshot
   const featuredSkills = skillCategories.flatMap(c => c.skills).slice(0, 8);
 
   return (
-    <div>
+    <div className="space-y-20 pb-16">
       <Hero />
 
       {/* Featured Projects Section */}
-      <section id="projects" className="py-20 border-t border-terminal-border dark:border-terminal-border">
-        <div className="flex flex-col md:flex-row md:items-end justify-between mb-12">
+      <section id="projects" className="pt-12 border-t border-white/[0.08]">
+        <div className="flex flex-col sm:flex-row sm:items-end justify-between mb-8 gap-4">
           <SectionHeader 
             title="Featured Projects" 
-            subtitle="Some of my recent backend and full-stack work." 
+            subtitle="Backend systems, full-stack web platforms, and software solutions." 
           />
-          <div className="mb-12 md:mb-0">
-            <Button variant="outline" href="/projects">
-              View All Projects
+          <div className="shrink-0 mb-8 sm:mb-0">
+            <Button variant="secondary" href="/projects" icon={ArrowRight}>
+              All Projects
             </Button>
           </div>
         </div>
@@ -37,21 +38,21 @@ export default function Home() {
         </div>
       </section>
 
-      {/* Core Skills Snapshot */}
-      <section className="py-20 border-t border-terminal-border dark:border-terminal-border">
-        <div className="flex flex-col md:flex-row md:items-end justify-between mb-12">
+      {/* Core Technical Focus Snapshot */}
+      <section className="pt-12 border-t border-white/[0.08]">
+        <div className="flex flex-col sm:flex-row sm:items-end justify-between mb-8 gap-4">
           <SectionHeader 
-            title="Core Skills" 
-            subtitle="My primary technical focus areas." 
+            title="Technical Skills" 
+            subtitle="Primary languages, frameworks, databases, and DevOps tools." 
           />
-          <div className="mb-12 md:mb-0">
-            <Button variant="outline" href="/skills">
+          <div className="shrink-0 mb-8 sm:mb-0">
+            <Button variant="secondary" href="/skills" icon={ArrowRight}>
               View All Skills
             </Button>
           </div>
         </div>
 
-        <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-4 max-w-4xl">
+        <div className="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-4 gap-3.5">
           {featuredSkills.map((skill, index) => (
             <SkillCard key={skill.name} skill={skill} index={index} />
           ))}
@@ -60,3 +61,4 @@ export default function Home() {
     </div>
   );
 }
+

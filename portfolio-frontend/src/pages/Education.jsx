@@ -1,5 +1,5 @@
 import { motion } from 'framer-motion';
-import { GraduationCap, ExternalLink, Award, ShieldCheck } from 'lucide-react';
+import { GraduationCap, ExternalLink, ShieldCheck, MapPin } from 'lucide-react';
 import SectionHeader from '../components/common/SectionHeader';
 import CertificationCard from '../components/education/CertificationCard';
 import { educationData } from '../data/education';
@@ -7,83 +7,97 @@ import { certificationsData } from '../data/certifications';
 
 export default function Education() {
   return (
-    <div className="py-12 md:py-20 max-w-5xl mx-auto">
-      {/* ===== Education Timeline ===== */}
-      <SectionHeader 
-        title="Education" 
-        subtitle="My academic background and qualifications."
-      />
+    <div className="py-12 md:py-20 max-w-5xl mx-auto space-y-16">
+      {/* ===== Education Section ===== */}
+      <div>
+        <SectionHeader 
+          title="Education" 
+          subtitle="Academic foundation, stream specializations, and qualifications."
+        />
 
-      <div className="max-w-4xl mx-auto space-y-8 relative before:absolute before:inset-0 before:ml-5 before:-translate-x-px md:before:mx-auto md:before:translate-x-0 before:h-full before:w-0.5 before:bg-gradient-to-b before:from-terminal-green/50 before:via-terminal-green/10 before:to-transparent">
-        {educationData.map((item, index) => (
-          <motion.div
-            key={item.id}
-            initial={{ opacity: 0, y: 20 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            viewport={{ once: true }}
-            transition={{ duration: 0.5, delay: index * 0.2 }}
-            className="relative flex items-center justify-between md:justify-normal md:odd:flex-row-reverse group is-active"
-          >
-            {/* Timeline dot */}
-            <div className="flex items-center justify-center w-10 h-10 rounded-full border-4 border-terminal-bg bg-terminal-surfaceLight text-terminal-green group-hover:bg-terminal-green group-hover:text-terminal-bg transition-colors shrink-0 md:order-1 md:group-odd:-translate-x-1/2 md:group-even:translate-x-1/2 shadow-green-glow">
-              <GraduationCap size={18} />
-            </div>
-            
-            {/* Content card */}
-            <div className="w-[calc(100%-4rem)] md:w-[calc(50%-2.5rem)] p-6 rounded-lg terminal-card">
-              <div className="flex flex-wrap items-center justify-between gap-2 mb-2">
-                <span className="text-xs font-mono px-2 py-1 bg-terminal-green/10 text-terminal-green rounded border border-terminal-green/20">
-                  {item.period}
-                </span>
-                <span className="text-xs font-mono text-terminal-textMuted uppercase tracking-wider">
-                  {item.status}
-                </span>
-              </div>
-              
-              <h3 className="text-xl font-display font-semibold text-terminal-text mb-1">
-                {item.degree}
-              </h3>
-              
-              <p className="text-terminal-textMuted mb-1 text-sm font-medium">
-                {item.institution}
-              </p>
-              
-              <p className="text-terminal-textDim text-sm italic mb-4">
-                Partnered with {item.partner}
-              </p>
-              
-              <p className="text-sm text-terminal-textMuted leading-relaxed mb-4">
-                {item.description}
-              </p>
+        <div className="space-y-6">
+          {educationData.map((item, index) => (
+            <motion.div
+              key={item.id}
+              initial={{ opacity: 0, y: 20 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              viewport={{ once: true }}
+              transition={{ duration: 0.4, delay: index * 0.15 }}
+              className="obsidian-card p-6 md:p-8 flex flex-col md:flex-row md:items-center justify-between gap-6 group relative overflow-hidden"
+            >
+              <div className="flex items-start gap-4">
+                <div className="p-3 bg-emerald-500/10 text-emerald-400 rounded-xl group-hover:bg-emerald-500/20 group-hover:scale-105 transition-all shrink-0">
+                  <GraduationCap size={24} />
+                </div>
 
-              <div className="flex flex-wrap gap-3 pt-4 border-t border-terminal-border">
-                <a 
-                  href={item.links.institution}
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  className="inline-flex items-center gap-1.5 text-xs text-terminal-text hover:text-terminal-green transition-colors"
-                >
-                  <ExternalLink size={12} /> View College
-                </a>
-                <a 
-                  href={item.links.partner}
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  className="inline-flex items-center gap-1.5 text-xs text-terminal-text hover:text-terminal-green transition-colors"
-                >
-                  <ExternalLink size={12} /> View University
-                </a>
+                <div className="space-y-1.5">
+                  <div className="flex flex-wrap items-center gap-2.5">
+                    <h3 className="text-xl font-display font-bold text-slate-100 group-hover:text-emerald-400 transition-colors">
+                      {item.degree}
+                    </h3>
+                    <span className="text-[11px] font-mono px-2.5 py-0.5 bg-emerald-500/10 text-emerald-400 border border-emerald-500/20 rounded-md">
+                      {item.period}
+                    </span>
+                    <span className="text-[10px] font-mono px-2 py-0.5 bg-white/[0.04] text-slate-400 border border-white/[0.08] rounded-md uppercase">
+                      {item.status}
+                    </span>
+                  </div>
+
+                  <p className="text-slate-300 font-sans font-semibold text-sm">
+                    {item.institution}
+                  </p>
+
+                  {item.partner && (
+                    <p className="text-slate-400 text-xs font-mono">
+                      Partnered with <span className="text-slate-200">{item.partner}</span>
+                    </p>
+                  )}
+
+                  <div className="flex items-center gap-1.5 text-xs text-slate-400 pt-1">
+                    <MapPin size={13} className="text-emerald-400" />
+                    <span>{item.location}</span>
+                  </div>
+
+                  <p className="text-slate-400 text-xs leading-relaxed max-w-2xl pt-2 font-body">
+                    {item.description}
+                  </p>
+
+                  {(item.links?.institution || item.links?.partner) && (
+                    <div className="flex flex-wrap gap-4 pt-3">
+                      {item.links?.institution && (
+                        <a 
+                          href={item.links.institution}
+                          target="_blank"
+                          rel="noopener noreferrer"
+                          className="inline-flex items-center gap-1 text-xs text-emerald-400 hover:text-emerald-300 transition-colors font-mono"
+                        >
+                          <ExternalLink size={12} /> College Site
+                        </a>
+                      )}
+                      {item.links?.partner && (
+                        <a 
+                          href={item.links.partner}
+                          target="_blank"
+                          rel="noopener noreferrer"
+                          className="inline-flex items-center gap-1 text-xs text-emerald-400 hover:text-emerald-300 transition-colors font-mono"
+                        >
+                          <ExternalLink size={12} /> University Partner
+                        </a>
+                      )}
+                    </div>
+                  )}
+                </div>
               </div>
-            </div>
-          </motion.div>
-        ))}
+            </motion.div>
+          ))}
+        </div>
       </div>
 
-      {/* ===== Certifications Showcase ===== */}
-      <div className="mt-24">
+      {/* ===== Certifications Section ===== */}
+      <div>
         <SectionHeader
           title="Certifications"
-          subtitle="Professional certifications and credentials I've earned."
+          subtitle="Verified technical credentials and achievements."
         />
 
         {certificationsData.length > 0 ? (
@@ -93,22 +107,21 @@ export default function Education() {
             ))}
           </div>
         ) : (
-          /* Empty state — shown while no certifications are added */
           <motion.div
             initial={{ opacity: 0, y: 20 }}
             whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true }}
             transition={{ duration: 0.5 }}
-            className="terminal-card p-10 text-center max-w-lg mx-auto"
+            className="obsidian-card p-10 text-center max-w-lg mx-auto"
           >
-            <div className="w-16 h-16 mx-auto mb-5 rounded-full bg-terminal-surfaceLight border border-terminal-border flex items-center justify-center text-terminal-textDim">
+            <div className="w-14 h-14 mx-auto mb-4 rounded-xl bg-emerald-500/10 text-emerald-400 flex items-center justify-center">
               <ShieldCheck size={28} />
             </div>
-            <h3 className="text-lg font-display font-semibold text-terminal-text mb-2">
-              Certifications Coming Soon
+            <h3 className="text-base font-display font-bold text-slate-100 mb-1">
+              Certifications
             </h3>
-            <p className="text-sm text-terminal-textMuted leading-relaxed">
-              Professional certifications and credentials will be showcased here as they are earned.
+            <p className="text-xs text-slate-400">
+              Professional credentials updated as completed.
             </p>
           </motion.div>
         )}
@@ -116,3 +129,4 @@ export default function Education() {
     </div>
   );
 }
+

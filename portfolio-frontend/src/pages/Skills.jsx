@@ -4,22 +4,22 @@ import { skillCategories } from '../data/skills';
 
 export default function Skills() {
   return (
-    <div className="py-12 md:py-20 max-w-5xl mx-auto">
+    <div className="py-12 md:py-20 max-w-5xl mx-auto space-y-12">
       <SectionHeader 
         title="Skills & Technologies" 
-        subtitle="Tools and technologies I use to build secure, scalable and maintainable applications."
+        subtitle="Languages, frameworks, databases, and DevOps tools engineered for production applications."
       />
 
-      <div className="space-y-16">
+      <div className="space-y-12">
         {skillCategories.map((category) => (
-          <div key={category.id}>
-            <div className="flex items-center gap-3 mb-6">
-              <span className="text-terminal-green font-mono text-xl">&gt;</span>
-              <h2 className="text-2xl font-display font-semibold text-terminal-text dark:text-terminal-text">
+          <div key={category.id} className="space-y-4">
+            <div className="flex items-center gap-2.5">
+              <div className="w-2 h-2 rounded-full bg-emerald-400"></div>
+              <h3 className="text-xl font-display font-bold text-slate-100">
                 {category.title}
-              </h2>
+              </h3>
             </div>
-            <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-4">
+            <div className="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-4 gap-3.5">
               {category.skills.map((skill, index) => (
                 <SkillCard key={skill.name} skill={skill} index={index} />
               ))}
@@ -30,3 +30,4 @@ export default function Skills() {
     </div>
   );
 }
+

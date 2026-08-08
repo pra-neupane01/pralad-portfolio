@@ -6,49 +6,49 @@ import { socialLinks } from '../data/socials';
 
 export default function Contact() {
   return (
-    <div className="py-12 md:py-20 max-w-6xl mx-auto">
+    <div className="py-12 md:py-20 max-w-5xl mx-auto space-y-10">
       <SectionHeader 
-        title="Contact" 
-        subtitle="Let's build something great together."
+        title="Contact Me" 
+        subtitle="Get in touch for engineering roles, technical inquiries, or project discussions."
       />
 
-      <div className="grid lg:grid-cols-5 gap-10">
-        {/* Contact Info Sidebar */}
+      <div className="grid lg:grid-cols-5 gap-8">
+        {/* Contact Info Sidebar — 2 cols */}
         <div className="lg:col-span-2 space-y-6">
-          <div className="terminal-card p-6 md:p-8">
-            <h3 className="text-xl font-display font-semibold text-terminal-text mb-6">
-              Get In Touch
+          <div className="obsidian-card p-6 md:p-8 space-y-6">
+            <h3 className="text-xl font-display font-bold text-slate-100">
+              Direct Contact
             </h3>
             
-            <div className="space-y-6">
-              <div className="flex items-start gap-4">
-                <div className="p-3 bg-terminal-surfaceLight text-terminal-green rounded-lg">
-                  <Mail size={20} />
+            <div className="space-y-5">
+              <div className="flex items-start gap-3.5">
+                <div className="p-2.5 bg-emerald-500/10 text-emerald-400 rounded-xl shrink-0">
+                  <Mail size={18} />
                 </div>
                 <div>
-                  <p className="text-xs font-mono text-terminal-textMuted mb-1 uppercase tracking-wider">Email</p>
-                  <a href={`mailto:${profile.email}`} className="text-terminal-text hover:text-terminal-green transition-colors break-all">
+                  <p className="text-[10px] font-mono text-slate-500 uppercase tracking-widest mb-0.5">Email</p>
+                  <a href={`mailto:${profile.email}`} className="text-sm font-sans font-semibold text-slate-200 hover:text-emerald-400 transition-colors break-all">
                     {profile.email}
                   </a>
                 </div>
               </div>
 
-              <div className="flex items-start gap-4">
-                <div className="p-3 bg-terminal-surfaceLight text-terminal-green rounded-lg">
-                  <MapPin size={20} />
+              <div className="flex items-start gap-3.5">
+                <div className="p-2.5 bg-emerald-500/10 text-emerald-400 rounded-xl shrink-0">
+                  <MapPin size={18} />
                 </div>
                 <div>
-                  <p className="text-xs font-mono text-terminal-textMuted mb-1 uppercase tracking-wider">Location</p>
-                  <p className="text-terminal-text">
+                  <p className="text-[10px] font-mono text-slate-500 uppercase tracking-widest mb-0.5">Location</p>
+                  <p className="text-sm font-sans font-semibold text-slate-200">
                     {profile.location}
                   </p>
                 </div>
               </div>
             </div>
 
-            <div className="mt-10 pt-8 border-t border-terminal-border">
-              <p className="text-xs font-mono text-terminal-textMuted mb-4 uppercase tracking-wider">Social Profiles</p>
-              <div className="flex flex-wrap gap-3">
+            <div className="pt-6 border-t border-white/[0.08]">
+              <p className="text-[10px] font-mono text-slate-500 uppercase tracking-widest mb-3">Professional Links</p>
+              <div className="flex flex-wrap gap-2.5">
                 {socialLinks.map((link) => {
                   if (link.name === 'Email') return null;
                   const Icon = link.icon;
@@ -58,9 +58,9 @@ export default function Contact() {
                       href={link.url}
                       target="_blank"
                       rel="noopener noreferrer"
-                      className="flex items-center gap-2 px-3 py-2 bg-terminal-surfaceLight border border-terminal-border rounded-lg text-sm text-terminal-textMuted hover:text-terminal-green hover:border-terminal-green/30 transition-all"
+                      className="flex items-center gap-2 px-3 py-2 bg-[#060911] border border-white/[0.08] rounded-xl text-xs font-medium text-slate-300 hover:text-emerald-400 hover:border-emerald-500/40 transition-all"
                     >
-                      <Icon size={16} />
+                      <Icon size={14} />
                       <span>{link.name}</span>
                     </a>
                   );
@@ -70,7 +70,7 @@ export default function Contact() {
           </div>
         </div>
 
-        {/* Contact Form */}
+        {/* Contact Form — 3 cols */}
         <div className="lg:col-span-3">
           <ContactForm />
         </div>
@@ -78,3 +78,4 @@ export default function Contact() {
     </div>
   );
 }
+

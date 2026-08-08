@@ -4,10 +4,10 @@ import { projectsData } from '../data/projects';
 
 export default function Projects() {
   return (
-    <div className="py-12 md:py-20">
+    <div className="py-12 md:py-20 max-w-6xl mx-auto space-y-8">
       <SectionHeader 
-        title="Projects" 
-        subtitle="A collection of my academic, personal, and freelance development projects."
+        title="Featured Projects" 
+        subtitle="Backend REST services, full-stack applications, and desktop management systems."
       />
 
       <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-6">
@@ -18,3 +18,4 @@ export default function Projects() {
     </div>
   );
 }
+
