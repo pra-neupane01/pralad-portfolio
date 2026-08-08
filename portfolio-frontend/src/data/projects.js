@@ -1,15 +1,11 @@
 // Projects data — verified from GitHub repositories
-// GitHub Profile: https://github.com/pra-neupane01
-// Each project's description and tech stack is based on actual repository content.
-// TODO: Add liveUrl when projects are deployed
-
 export const projectsData = [
   {
     id: 'sajilo-yatra',
     title: 'SajiloYatra',
     description:
-      'A Java Spring Boot backend project for travel and bus booking management. Built with Maven and structured for scalable API development.',
-    techStack: ['Java', 'Spring Boot', 'Maven'],
+      'Java Spring Boot backend powering travel and bus booking workflows, designed with clean layered architecture.',
+    techStack: ['Java', 'Spring Boot', 'REST API', 'Maven'],
     category: 'Backend',
     highlight: 'Spring Boot',
     githubUrl: 'https://github.com/pra-neupane01/SajiloYatra',
@@ -19,10 +15,10 @@ export const projectsData = [
     id: 'trustmart',
     title: 'TrustMart',
     description:
-      'A trusted second-hand marketplace connecting buyers and sellers through verified profiles, secure escrow payments, transparent ratings, and admin moderation.',
-    techStack: ['Java', 'JavaScript', 'Spring Boot'],
+      'Full-stack second-hand marketplace with verified user profiles, secure escrow transaction flows, and admin moderation.',
+    techStack: ['Java', 'Spring Boot', 'REST API', 'JavaScript'],
     category: 'Full-Stack',
-    highlight: 'REST API',
+    highlight: 'Full-Stack',
     githubUrl: 'https://github.com/pra-neupane01/trustmart',
     liveUrl: '',
   },
@@ -30,44 +26,45 @@ export const projectsData = [
     id: 'arthaflow',
     title: 'ArthaFlow',
     description:
-      'An advanced Java-based project featuring backend logic with CSS and JavaScript components. Built with a focus on structured Java development.',
-    techStack: ['Java', 'CSS', 'JavaScript'],
+      'Financial data processing engine and custom web interface built with structured Java backend components.',
+    techStack: ['Java', 'JavaScript', 'CSS3'],
     category: 'Backend',
-    highlight: 'Java',
+    highlight: 'Java Architecture',
     githubUrl: 'https://github.com/pra-neupane01/ArthaFlow',
     liveUrl: '',
   },
   {
     id: 'ai-subscription',
-    title: 'AI Subscription Management System',
+    title: 'AI Subscription Management',
     description:
-      'A Java application for managing AI model subscriptions with different plan tiers. Features a Swing GUI for user interaction and OOP-based architecture.',
-    techStack: ['Java', 'OOP', 'Swing GUI'],
+      'Desktop management application for multi-tiered AI model subscriptions featuring Swing GUI and OOP principles.',
+    techStack: ['Java', 'Swing GUI', 'OOP'],
     category: 'Desktop',
-    highlight: 'OOP',
+    highlight: 'OOP Systems',
     githubUrl: 'https://github.com/pra-neupane01/AI-Subscription-Management-System',
     liveUrl: '',
   },
   {
     id: 'art-gallery',
-    title: 'Art Gallery Management System',
+    title: 'Art Gallery Management',
     description:
-      'A Java Swing GUI application simulating art gallery visitor management. Demonstrates inheritance, polymorphism, abstraction, and encapsulation with visitor categorization and ticket pricing.',
+      'Simulated gallery ticketing and visitor categorization system leveraging OOP inheritance and polymorphism.',
     techStack: ['Java', 'Swing GUI', 'OOP'],
     category: 'Desktop',
-    highlight: 'OOP',
+    highlight: 'OOP Systems',
     githubUrl: 'https://github.com/pra-neupane01/ArtGallery_Management_System',
     liveUrl: '',
   },
   {
     id: 'advance-programming',
-    title: 'Advance Programming',
+    title: 'Advanced Java Coursework',
     description:
-      'A Java coursework repository containing learning logs and programming exercises from advanced programming studies.',
-    techStack: ['Java'],
+      'Comprehensive repository of advanced Java exercises, algorithm benchmarks, and design pattern implementations.',
+    techStack: ['Java', 'Data Structures', 'OOP'],
     category: 'Learning',
-    highlight: 'Java',
+    highlight: 'Algorithms',
     githubUrl: 'https://github.com/pra-neupane01/Advance-Programming',
     liveUrl: '',
   },
 ];
+

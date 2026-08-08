@@ -10,10 +10,24 @@ export const educationData = [
     period: '2025 – Present',
     status: 'Pursuing',
     description:
-      'Undergraduate IT program focused on software development, object-oriented programming, data structures, and full-stack architecture. Partnered with London Metropolitan University for international-standard curriculum.',
+      'Focusing on backend architecture, object-oriented systems, data structures, and full-stack software development.',
     links: {
       institution: 'https://iic.edu.np/',
       partner: 'https://www.londonmet.ac.uk/courses/global-partnerships/innovate-nepal-group-ing/',
     },
   },
+  {
+    id: 2,
+    degree: '+2 Higher Secondary (Science)',
+    institution: 'Bright Future Secondary School',
+    location: 'Salakpur, Morang, Nepal',
+    period: '2022 – 2024',
+    status: 'Completed',
+    description:
+      'Completed Higher Secondary education with specialization in Physics, Chemistry, and Mathematics.',
+    links: {
+      institution: '',
+    },
+  },
 ];
+
