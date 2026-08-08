@@ -2,48 +2,49 @@ import { motion } from 'framer-motion';
 
 export default function ProfilePhoto({ src = '/profile.jpg.png', alt = 'Profile Photo', size = 'lg' }) {
   const sizeClasses = {
-    sm: 'w-32 h-32',
-    md: 'w-48 h-48',
+    sm: 'w-28 h-28',
+    md: 'w-44 h-44',
     lg: 'w-64 h-64 md:w-72 md:h-72 lg:w-80 lg:h-80',
   };
 
   return (
     <motion.div
-      initial={{ opacity: 0, scale: 0.8 }}
+      initial={{ opacity: 0, scale: 0.85 }}
       animate={{ opacity: 1, scale: 1 }}
-      transition={{ duration: 0.8, delay: 0.3, ease: [0.16, 1, 0.3, 1] }}
+      transition={{ duration: 0.8, delay: 0.2, ease: [0.16, 1, 0.3, 1] }}
       className="relative flex items-center justify-center"
     >
-      {/* Outer glow ring */}
-      <div className="absolute inset-0 rounded-full bg-gradient-to-tr from-terminal-green/30 via-purple-500/20 to-terminal-green/10 blur-xl scale-110 animate-pulse" />
+      {/* Outer ambient glow */}
+      <div className="absolute inset-0 rounded-full bg-gradient-to-tr from-emerald-500/30 via-teal-500/20 to-cyan-500/30 blur-2xl scale-110 animate-pulse" />
 
       {/* Gradient border ring */}
-      <div className={`relative ${sizeClasses[size]} rounded-full p-[3px] bg-gradient-to-tr from-terminal-green via-purple-500/60 to-terminal-green/40`}>
-        {/* Inner dark ring */}
-        <div className="w-full h-full rounded-full p-[3px] bg-terminal-bg">
+      <div className={`relative ${sizeClasses[size]} rounded-full p-[3px] bg-gradient-to-tr from-emerald-400 via-teal-500 to-cyan-400 shadow-emerald-glow`}>
+        {/* Inner obsidian dark ring */}
+        <div className="w-full h-full rounded-full p-[3px] bg-[#090d16]">
           {/* Photo container */}
-          <div className="w-full h-full rounded-full overflow-hidden bg-terminal-surface">
+          <div className="w-full h-full rounded-full overflow-hidden bg-[#0e1422]">
             <img
               src={src}
               alt={alt}
-              className="w-full h-full object-cover rounded-full"
+              className="w-full h-full object-cover rounded-full transition-transform duration-500 hover:scale-105"
               loading="eager"
             />
           </div>
         </div>
       </div>
 
-      {/* Decorative floating dots */}
+      {/* Decorative accent dots */}
       <motion.div
-        animate={{ y: [-5, 5, -5] }}
+        animate={{ y: [-4, 4, -4] }}
         transition={{ duration: 4, repeat: Infinity, ease: 'easeInOut' }}
-        className="absolute -top-2 -right-2 w-3 h-3 rounded-full bg-terminal-green/60 blur-[1px]"
+        className="absolute -top-1 -right-1 w-3 h-3 rounded-full bg-emerald-400 shadow-emerald-glow"
       />
       <motion.div
-        animate={{ y: [5, -5, 5] }}
-        transition={{ duration: 3, repeat: Infinity, ease: 'easeInOut' }}
-        className="absolute -bottom-3 -left-3 w-2 h-2 rounded-full bg-purple-400/50 blur-[1px]"
+        animate={{ y: [4, -4, 4] }}
+        transition={{ duration: 3.5, repeat: Infinity, ease: 'easeInOut' }}
+        className="absolute -bottom-2 -left-2 w-2.5 h-2.5 rounded-full bg-cyan-400 shadow-cyan-glow"
       />
     </motion.div>
   );
 }
+

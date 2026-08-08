@@ -12,17 +12,17 @@ export default function Button({
   ...props
 }) {
   const baseStyles =
-    'inline-flex items-center justify-center gap-2 px-5 py-2.5 text-sm font-mono font-medium rounded-lg transition-all duration-300';
+    'inline-flex items-center justify-center gap-2 px-6 py-3 text-sm font-sans font-semibold rounded-xl transition-all duration-300 shadow-sm';
 
   const variants = {
     primary:
-      'bg-terminal-green/10 text-terminal-green border border-terminal-green/30 hover:bg-terminal-green/20 hover:border-terminal-green/50',
+      'bg-gradient-to-r from-emerald-500 to-teal-600 text-slate-950 font-bold hover:shadow-[0_0_20px_rgba(16,185,129,0.4)] hover:brightness-110 border border-emerald-400/30',
     secondary:
-      'bg-terminal-surface text-terminal-text border border-terminal-border hover:border-terminal-green/30 hover:text-terminal-green',
+      'bg-[#0e1422] text-slate-200 border border-white/10 hover:border-emerald-500/40 hover:text-emerald-400 hover:bg-[#121a2d]',
     outline:
-      'bg-transparent text-terminal-green border border-terminal-green/40 hover:bg-terminal-green/10',
+      'bg-emerald-500/10 text-emerald-400 border border-emerald-500/30 hover:bg-emerald-500/20 hover:border-emerald-400 hover:shadow-emerald-glow',
     solid:
-      'bg-terminal-green text-terminal-bg border border-terminal-green hover:bg-terminal-greenDim font-semibold',
+      'bg-gradient-to-r from-emerald-500 to-teal-500 text-slate-950 font-bold hover:shadow-[0_0_25px_rgba(16,185,129,0.45)]',
   };
 
   const combinedStyles = `${baseStyles} ${variants[variant] || variants.primary} ${className}`;
@@ -30,7 +30,7 @@ export default function Button({
   const content = (
     <>
       {Icon && <Icon size={16} />}
-      {children}
+      <span>{children}</span>
     </>
   );
 
@@ -63,3 +63,4 @@ export default function Button({
     </motion.button>
   );
 }
+

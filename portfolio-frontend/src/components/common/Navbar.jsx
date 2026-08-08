@@ -1,10 +1,9 @@
 import { useState, useEffect } from 'react';
 import styles from './Navbar.module.css';
 import { NavLink, useLocation } from 'react-router-dom';
-import { Menu, X } from 'lucide-react';
+import { Menu, X, ArrowUpRight } from 'lucide-react';
 import { motion, AnimatePresence } from 'framer-motion';
-import { NAV_ITEMS } from '@/utils/constants';
-import ThemeToggle from './ThemeToggle';
+import { NAV_ITEMS, RESUME_PATH } from '@/utils/constants';
 
 export default function Navbar() {
   const [isOpen, setIsOpen] = useState(false);
@@ -17,7 +16,6 @@ export default function Navbar() {
     return () => window.removeEventListener('scroll', handleScroll);
   }, []);
 
-  // Close mobile menu on route change
   useEffect(() => {
     setIsOpen(false);
   }, [location.pathname]);
@@ -31,21 +29,26 @@ export default function Navbar() {
     >
       <div className={styles.navContainer}>
         <div
-          className={`${styles.navInner} ${scrolled ? styles.glassPanel : styles.bgTransparent}`}
+          className={`${styles.navInner} ${scrolled ? 'bg-[#090d16]/85 backdrop-blur-xl border border-white/[0.08] shadow-glass' : 'bg-transparent'}`}
         >
           {/* Logo */}
           <NavLink to="/" aria-label="Home">
             <motion.div
               whileHover={{ scale: 1.05 }}
               whileTap={{ scale: 0.95 }}
-              className="flex items-center gap-1"
+              className="flex items-center gap-2 group"
             >
-              <span className="text-xl font-mono font-bold text-terminal-green">
+              <div className="w-8 h-8 rounded-lg bg-gradient-to-tr from-emerald-500 to-teal-400 flex items-center justify-center font-mono font-extrabold text-slate-950 text-sm shadow-emerald-glow">
                 PN
-              </span>
-              <span className="text-terminal-green animate-blink font-mono text-xl">
-                &gt;_
-              </span>
+              </div>
+              <div className="flex flex-col">
+                <span className="text-sm font-display font-bold text-slate-100 group-hover:text-emerald-400 transition-colors">
+                  Pralad Neupane
+                </span>
+                <span className="text-[10px] font-mono text-slate-400 tracking-wider">
+                  Java Dev
+                </span>
+              </div>
             </motion.div>
           </NavLink>
 
@@ -56,10 +59,10 @@ export default function Navbar() {
                 key={item.path}
                 to={item.path}
                 className={({ isActive }) =>
-                  `relative px-3 py-2 text-sm font-medium font-mono transition-all duration-300 rounded-lg ${
+                  `relative px-3.5 py-1.5 text-xs font-sans font-medium transition-all duration-300 rounded-lg ${
                     isActive
-                      ? 'text-terminal-green dark:text-terminal-green'
-                      : 'text-terminal-textMuted dark:text-terminal-textMuted hover:text-terminal-text dark:hover:text-terminal-text'
+                      ? 'text-emerald-400 font-semibold'
+                      : 'text-slate-400 hover:text-slate-200 hover:bg-white/[0.04]'
                   }`
                 }
               >
@@ -69,7 +72,7 @@ export default function Navbar() {
                     {isActive && (
                       <motion.div
                         layoutId="activeTab"
-                        className="absolute bottom-0 inset-x-0 mx-auto w-4/5 h-0.5 bg-terminal-green rounded-full"
+                        className="absolute bottom-0 inset-x-0 mx-auto w-3/4 h-0.5 bg-emerald-400 rounded-full shadow-emerald-glow"
                         transition={{ type: 'spring', bounce: 0.2, duration: 0.6 }}
                       />
                     )}
@@ -79,15 +82,25 @@ export default function Navbar() {
             ))}
           </div>
 
-          {/* Right side: Theme toggle + Mobile menu button */}
+          {/* Right side: Resume CTA + Mobile menu button */}
           <div className="flex items-center gap-3">
-            <ThemeToggle />
+            <a
+              href={RESUME_PATH}
+              target="_blank"
+              rel="noopener noreferrer"
+              download
+              className="hidden sm:inline-flex items-center gap-1 px-3 py-1.5 text-xs font-mono font-medium text-emerald-400 bg-emerald-500/10 border border-emerald-500/30 rounded-lg hover:bg-emerald-500/20 hover:border-emerald-400 transition-all shadow-sm"
+            >
+              <span>Resume</span>
+              <ArrowUpRight size={14} />
+            </a>
+
             <button
               onClick={() => setIsOpen(!isOpen)}
-              className={styles.menuButton}
+              className="lg:hidden p-2 text-slate-300 hover:text-white rounded-lg bg-white/[0.05] border border-white/[0.08]"
               aria-label={isOpen ? 'Close menu' : 'Open menu'}
             >
-              {isOpen ? <X size={22} /> : <Menu size={22} />}
+              {isOpen ? <X size={20} /> : <Menu size={20} />}
             </button>
           </div>
         </div>
@@ -101,32 +114,44 @@ export default function Navbar() {
             animate={{ opacity: 1, height: 'auto' }}
             exit={{ opacity: 0, height: 0 }}
             transition={{ duration: 0.3 }}
-            className={`${styles.glassPanel} rounded-xl lg:hidden mx-4 mt-2 overflow-hidden`}
+            className="bg-[#0e1422]/95 backdrop-blur-2xl border border-white/[0.08] rounded-xl lg:hidden mx-4 mt-2 overflow-hidden shadow-2xl"
           >
-            <div className="py-3 space-y-0.5">
+            <div className="p-4 space-y-1">
               {NAV_ITEMS.map((item, index) => (
                 <motion.div
                   key={item.path}
                   initial={{ opacity: 0, x: -20 }}
                   animate={{ opacity: 1, x: 0 }}
-                  transition={{ delay: index * 0.05 }}
+                  transition={{ delay: index * 0.04 }}
                 >
                   <NavLink
                     to={item.path}
                     onClick={() => setIsOpen(false)}
                     className={({ isActive }) =>
-                      `block px-5 py-3 text-sm font-mono font-medium transition-all rounded-lg mx-2 ${
+                      `block px-4 py-2.5 text-sm font-sans font-medium transition-all rounded-lg ${
                         isActive
-                          ? 'text-terminal-green bg-terminal-green/5'
-                          : 'text-terminal-textMuted hover:text-terminal-text hover:bg-terminal-surfaceLight/50'
+                          ? 'text-emerald-400 bg-emerald-500/10 font-semibold border border-emerald-500/20'
+                          : 'text-slate-300 hover:text-white hover:bg-white/[0.05]'
                       }`
                     }
                   >
-                    <span className="text-terminal-green/50 mr-2">&gt;</span>
                     {item.name}
                   </NavLink>
                 </motion.div>
               ))}
+
+              <div className="pt-3 border-t border-white/[0.08]">
+                <a
+                  href={RESUME_PATH}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  download
+                  className="flex items-center justify-center gap-2 w-full py-2.5 text-xs font-mono font-semibold text-slate-950 bg-emerald-400 rounded-lg hover:bg-emerald-300 transition-all shadow-emerald-glow"
+                >
+                  <span>Download Resume</span>
+                  <ArrowUpRight size={14} />
+                </a>
+              </div>
             </div>
           </motion.div>
         )}
@@ -134,3 +159,4 @@ export default function Navbar() {
     </motion.nav>
   );
 }
+

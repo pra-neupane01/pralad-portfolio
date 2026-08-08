@@ -42,27 +42,26 @@ export default function SkillCard({ skill, index }) {
 
   return (
     <motion.div
-      initial={{ opacity: 0, y: 20 }}
+      initial={{ opacity: 0, y: 15 }}
       whileInView={{ opacity: 1, y: 0 }}
       viewport={{ once: true }}
-      transition={{ duration: 0.4, delay: (index % 10) * 0.05 }}
-      whileHover={{ y: -5 }}
-      className="terminal-card p-5 h-full flex flex-col group transition-all duration-300 hover:border-terminal-green/50 hover:shadow-[0_0_15px_rgba(34,197,94,0.1)]"
+      transition={{ duration: 0.3, delay: (index % 10) * 0.04 }}
+      whileHover={{ y: -4 }}
+      className="obsidian-card p-4 flex items-center gap-3.5 group cursor-default"
     >
-      <div className="flex justify-between items-start mb-4">
-        <div className="p-2.5 bg-terminal-surfaceLight dark:bg-terminal-surfaceLight text-terminal-text group-hover:text-terminal-green rounded-lg transition-colors duration-300">
-          <Icon size={24} title={skill.name} aria-label={skill.name} />
-        </div>
+      <div className="p-2.5 rounded-xl bg-emerald-500/10 text-emerald-400 group-hover:bg-emerald-500/20 group-hover:text-emerald-300 transition-all duration-300 shadow-sm shrink-0">
+        <Icon size={22} title={skill.name} aria-label={skill.name} />
       </div>
       
-      <div className="mt-auto space-y-1">
-        <h3 className="font-mono text-sm font-semibold text-terminal-text dark:text-terminal-text group-hover:text-terminal-green transition-colors">
+      <div className="overflow-hidden">
+        <h3 className="font-sans text-xs sm:text-sm font-bold text-slate-200 group-hover:text-emerald-400 transition-colors truncate">
           {skill.name}
         </h3>
-        <p className="text-[11px] font-mono text-terminal-textDim dark:text-terminal-textDim uppercase tracking-wider">
+        <p className="text-[10px] font-mono text-slate-500 uppercase tracking-wider truncate">
           {skill.label}
         </p>
       </div>
     </motion.div>
   );
 }
+
