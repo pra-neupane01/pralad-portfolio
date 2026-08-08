@@ -8,42 +8,60 @@ export default {
   theme: {
     extend: {
       colors: {
+        obsidian: {
+          950: '#060911',
+          900: '#090d16',
+          850: '#0e1422',
+          800: '#121a2d',
+          700: '#1a243b',
+          border: 'rgba(255, 255, 255, 0.08)',
+          borderHover: 'rgba(16, 185, 129, 0.3)',
+        },
+        emerald: {
+          accent: '#10b981',
+          glow: 'rgba(16, 185, 129, 0.15)',
+        },
+        cyan: {
+          accent: '#06b6d4',
+        },
         terminal: {
-          bg: '#0a0a0a',
-          surface: '#111111',
-          surfaceLight: '#1a1a1a',
-          border: '#1e1e1e',
-          borderLight: '#2a2a2a',
-          green: '#00FF41',
-          greenDim: '#00cc33',
-          greenDark: '#00991a',
-          greenGlow: 'rgba(0, 255, 65, 0.15)',
-          text: '#e0e0e0',
-          textMuted: '#888888',
-          textDim: '#555555',
+          bg: '#090d16',
+          surface: '#0e1422',
+          surfaceLight: '#121a2d',
+          border: 'rgba(255, 255, 255, 0.08)',
+          borderLight: 'rgba(255, 255, 255, 0.12)',
+          green: '#10b981',
+          greenDim: '#059669',
+          greenDark: '#047857',
+          greenGlow: 'rgba(16, 185, 129, 0.15)',
+          text: '#f3f4f6',
+          textMuted: '#9ca3af',
+          textDim: '#6b7280',
         },
         light: {
-          bg: '#f5f5f0',
+          bg: '#f8fafc',
           surface: '#ffffff',
-          surfaceAlt: '#eaeae5',
-          border: '#d4d4cc',
-          text: '#1a1a1a',
-          textMuted: '#555555',
+          surfaceAlt: '#f1f5f9',
+          border: '#e2e8f0',
+          text: '#0f172a',
+          textMuted: '#475569',
         }
       },
       fontFamily: {
-        'display': ['Space Grotesk', 'sans-serif'],
+        'display': ['Space Grotesk', 'Plus Jakarta Sans', 'sans-serif'],
+        'sans': ['Plus Jakarta Sans', 'Inter', 'sans-serif'],
         'body': ['Inter', 'sans-serif'],
         'mono': ['JetBrains Mono', 'monospace'],
       },
+      boxShadow: {
+        'emerald-glow': '0 0 25px -5px rgba(16, 185, 129, 0.25)',
+        'cyan-glow': '0 0 25px -5px rgba(6, 182, 212, 0.25)',
+        'glass': '0 8px 32px 0 rgba(0, 0, 0, 0.37)',
+      },
       animation: {
         'blink': 'blink 1s step-end infinite',
-        'glow-pulse': 'glow-pulse 3s ease-in-out infinite',
-        'scan': 'scan 8s linear infinite',
+        'glow-pulse': 'glow-pulse 4s ease-in-out infinite',
         'float': 'float 6s ease-in-out infinite',
-        'fade-in': 'fade-in 0.5s ease-out',
-        'slide-up': 'slide-up 0.5s ease-out',
-        'typing': 'typing 3.5s steps(30, end)',
       },
       keyframes: {
         'blink': {
@@ -51,35 +69,13 @@ export default {
           '50%': { opacity: 0 },
         },
         'glow-pulse': {
-          '0%, 100%': { boxShadow: '0 0 5px rgba(0, 255, 65, 0.1)' },
-          '50%': { boxShadow: '0 0 20px rgba(0, 255, 65, 0.2)' },
-        },
-        'scan': {
-          '0%': { transform: 'translateY(-100%)' },
-          '100%': { transform: 'translateY(100%)' },
+          '0%, 100%': { boxShadow: '0 0 15px rgba(16, 185, 129, 0.15)' },
+          '50%': { boxShadow: '0 0 30px rgba(16, 185, 129, 0.3)' },
         },
         'float': {
           '0%, 100%': { transform: 'translateY(0)' },
           '50%': { transform: 'translateY(-10px)' },
         },
-        'fade-in': {
-          '0%': { opacity: 0 },
-          '100%': { opacity: 1 },
-        },
-        'slide-up': {
-          '0%': { opacity: 0, transform: 'translateY(20px)' },
-          '100%': { opacity: 1, transform: 'translateY(0)' },
-        },
-        'typing': {
-          '0%': { width: 0 },
-          '100%': { width: '100%' },
-        },
-      },
-      backgroundImage: {
-        'grid-pattern': 'linear-gradient(rgba(0, 255, 65, 0.03) 1px, transparent 1px), linear-gradient(90deg, rgba(0, 255, 65, 0.03) 1px, transparent 1px)',
-      },
-      backgroundSize: {
-        'grid': '50px 50px',
       },
     },
   },
@@ -87,3 +83,4 @@ export default {
     require('@tailwindcss/forms'),
   ],
 };
+
