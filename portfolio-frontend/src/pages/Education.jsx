@@ -1,17 +1,20 @@
 import { motion } from 'framer-motion';
-import { GraduationCap, ExternalLink, ShieldCheck, MapPin } from 'lucide-react';
+import { GraduationCap, ExternalLink, ShieldCheck, MapPin, Trophy } from 'lucide-react';
 import SectionHeader from '../components/common/SectionHeader';
 import CertificationCard from '../components/education/CertificationCard';
+import AwardCard from '../components/education/AwardCard';
 import { educationData } from '../data/education';
 import { certificationsData } from '../data/certifications';
+import { awardsData } from '../data/awards';
 
 export default function Education() {
   return (
-    <div className="py-12 md:py-20 max-w-5xl mx-auto space-y-16">
+    <div className="py-12 md:py-20 max-w-5xl mx-auto space-y-20">
+
       {/* ===== Education Section ===== */}
       <div>
-        <SectionHeader 
-          title="Education" 
+        <SectionHeader
+          title="Education"
           subtitle="Academic foundation, stream specializations, and qualifications."
         />
 
@@ -65,7 +68,7 @@ export default function Education() {
                   {(item.links?.institution || item.links?.partner) && (
                     <div className="flex flex-wrap gap-4 pt-3">
                       {item.links?.institution && (
-                        <a 
+                        <a
                           href={item.links.institution}
                           target="_blank"
                           rel="noopener noreferrer"
@@ -75,7 +78,7 @@ export default function Education() {
                         </a>
                       )}
                       {item.links?.partner && (
-                        <a 
+                        <a
                           href={item.links.partner}
                           target="_blank"
                           rel="noopener noreferrer"
@@ -97,7 +100,7 @@ export default function Education() {
       <div>
         <SectionHeader
           title="Certifications"
-          subtitle="Verified technical credentials and achievements."
+          subtitle="Verified technical credentials and professional development."
         />
 
         {certificationsData.length > 0 ? (
@@ -126,7 +129,41 @@ export default function Education() {
           </motion.div>
         )}
       </div>
+
+      {/* ===== Awards & Recognition Section ===== */}
+      <div>
+        <SectionHeader
+          title="Awards & Recognition"
+          subtitle="Hackathon wins, institutional honors, and academic achievements."
+        />
+
+        {awardsData.length > 0 ? (
+          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+            {awardsData.map((award, index) => (
+              <AwardCard key={award.id} award={award} index={index} />
+            ))}
+          </div>
+        ) : (
+          <motion.div
+            initial={{ opacity: 0, y: 20 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true }}
+            transition={{ duration: 0.5 }}
+            className="obsidian-card p-10 text-center max-w-lg mx-auto"
+          >
+            <div className="w-14 h-14 mx-auto mb-4 rounded-xl bg-amber-500/10 text-amber-400 flex items-center justify-center">
+              <Trophy size={28} />
+            </div>
+            <h3 className="text-base font-display font-bold text-slate-100 mb-1">
+              Awards & Recognition
+            </h3>
+            <p className="text-xs text-slate-400">
+              Achievements and honors updated as received.
+            </p>
+          </motion.div>
+        )}
+      </div>
+
     </div>
   );
 }
-
