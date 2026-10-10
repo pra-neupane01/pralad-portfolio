@@ -1,15 +1,56 @@
-// Projects data — verified from GitHub repositories
+// Projects data — verified from CV and GitHub repositories
 export const projectsData = [
+  {
+    id: 'queen-bee-detector',
+    title: 'Queen Bee Detector',
+    description:
+      'Built an acoustic monitoring pipeline to detect queen-bee presence and hive anomalies through raw audio analysis of honeybee acoustics. Preprocessed acoustic signals into log-mel spectrograms and MFCC features using Librosa; trained CNN classification models to identify stress and health states.',
+    techStack: ['Python', 'TensorFlow', 'CNN', 'Librosa', 'MFCC', 'Log-Mel Spectrogram'],
+    category: 'AI/ML',
+    highlight: 'Deep Learning',
+    githubUrl: 'https://github.com/pra-neupane01',
+    liveUrl: '',
+    featured: true,
+    period: 'Feb 2025 – Present',
+  },
   {
     id: 'sajilo-yatra',
     title: 'SajiloYatra',
     description:
-      'Java Spring Boot backend powering travel and bus booking workflows, designed with clean layered architecture.',
-    techStack: ['Java', 'Spring Boot', 'REST API', 'Maven'],
+      'Developed a REST API for bus scheduling, trip search, seat selection, bookings, payments, e-tickets, refunds, and staff operations. Implemented JWT auth, OAuth2, eSewa payment integration, PDF ticket generation, email notifications, dynamic seat pricing, and reporting using a modular feature-based architecture.',
+    techStack: ['Spring Boot', 'Java', 'PostgreSQL', 'JWT', 'OAuth2', 'eSewa API'],
     category: 'Backend',
     highlight: 'Spring Boot',
     githubUrl: 'https://github.com/pra-neupane01/SajiloYatra',
     liveUrl: '',
+    featured: true,
+    period: '2025',
+  },
+  {
+    id: 'esports-tournament',
+    title: 'Esports Tournament Management',
+    description:
+      'Full-stack esports tournament management platform for teams, player rosters, registrations, scheduling, scoring, leaderboards, and tournament lifecycle management. Implemented JWT security, WebSocket/STOMP notifications, result verification, reporting, certificate generation, and automated testing.',
+    techStack: ['Spring Boot', 'React', 'Java', 'PostgreSQL', 'WebSocket', 'JWT'],
+    category: 'Full-Stack',
+    highlight: 'Full-Stack',
+    githubUrl: 'https://github.com/pra-neupane01',
+    liveUrl: '',
+    featured: true,
+    period: '2026',
+  },
+  {
+    id: 'hamropasal',
+    title: 'HamroPasal',
+    description:
+      'Full-stack retail management platform for products, inventory, POS sales, customers, suppliers, and analytics. Implemented JWT security, inventory tracking, low-stock alerts, sales reporting, search/filtering, pagination, CSV exports, and Docker deployment.',
+    techStack: ['Spring Boot', 'React', 'PostgreSQL', 'Docker', 'JWT'],
+    category: 'Full-Stack',
+    highlight: 'Retail Platform',
+    githubUrl: 'https://github.com/pra-neupane01',
+    liveUrl: '',
+    featured: false,
+    period: '2026',
   },
   {
     id: 'trustmart',
@@ -21,6 +62,8 @@ export const projectsData = [
     highlight: 'Full-Stack',
     githubUrl: 'https://github.com/pra-neupane01/trustmart',
     liveUrl: '',
+    featured: false,
+    period: '2025',
   },
   {
     id: 'arthaflow',
@@ -32,39 +75,7 @@ export const projectsData = [
     highlight: 'Java Architecture',
     githubUrl: 'https://github.com/pra-neupane01/ArthaFlow',
     liveUrl: '',
-  },
-  {
-    id: 'ai-subscription',
-    title: 'AI Subscription Management',
-    description:
-      'Desktop management application for multi-tiered AI model subscriptions featuring Swing GUI and OOP principles.',
-    techStack: ['Java', 'Swing GUI', 'OOP'],
-    category: 'Desktop',
-    highlight: 'OOP Systems',
-    githubUrl: 'https://github.com/pra-neupane01/AI-Subscription-Management-System',
-    liveUrl: '',
-  },
-  {
-    id: 'art-gallery',
-    title: 'Art Gallery Management',
-    description:
-      'Simulated gallery ticketing and visitor categorization system leveraging OOP inheritance and polymorphism.',
-    techStack: ['Java', 'Swing GUI', 'OOP'],
-    category: 'Desktop',
-    highlight: 'OOP Systems',
-    githubUrl: 'https://github.com/pra-neupane01/ArtGallery_Management_System',
-    liveUrl: '',
-  },
-  {
-    id: 'advance-programming',
-    title: 'Advanced Java Coursework',
-    description:
-      'Comprehensive repository of advanced Java exercises, algorithm benchmarks, and design pattern implementations.',
-    techStack: ['Java', 'Data Structures', 'OOP'],
-    category: 'Learning',
-    highlight: 'Algorithms',
-    githubUrl: 'https://github.com/pra-neupane01/Advance-Programming',
-    liveUrl: '',
+    featured: false,
+    period: '2025',
   },
 ];
-

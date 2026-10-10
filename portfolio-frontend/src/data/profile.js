@@ -1,12 +1,13 @@
 // Profile data for the portfolio
-// TODO: Update email, phone, and other personal details as needed
+// Updated to reflect AI/ML, Python, and Research focus
 
 export const profile = {
   fullName: 'Pralad Neupane',
-  title: 'Java Backend Developer',
-  headerTitle: 'Pralad Neupane | Java Backend Developer',
-  subtitle: 'Spring Boot · REST APIs · PostgreSQL',
-  introLine: 'Building high-performance backend APIs, secure microservices, and robust database architectures with Java & Spring Boot.',
+  title: 'AI/ML Researcher & Full-Stack Developer',
+  headerTitle: 'Pralad Neupane | AI/ML & Software Development',
+  subtitle: 'Python · TensorFlow · Spring Boot · Research',
+  introLine:
+    'Computing student passionate about AI/ML research, deep learning systems, and building scalable full-stack applications with Python and Java.',
   location: 'Itahari, Nepal',
 
   email: 'praladneupane01@gmail.com',
@@ -26,11 +27,10 @@ export const profile = {
     location: 'Itahari, Nepal',
   },
 
-  aboutSummary: `I am a Java Backend Developer and undergraduate IT student specializing in Spring Boot, RESTful APIs, and relational database systems like PostgreSQL and MySQL. Dedicated to clean architecture, robust security, and writing scalable backend logic for modern web applications.`,
+  aboutSummary: `Computing student with a strong interest in AI/ML and software development. I have built a deep learning audio classification project in TensorFlow, along with several full-stack applications using Java, Spring Boot, Python, and React. I enjoy turning ideas into working systems, testing them honestly, and writing clean code. I am looking for a research team where I can learn research methods, read papers, run experiments, and contribute to practical, responsible AI.`,
 
   careerObjective:
-    'Focused on engineering secure, scalable backend applications using Java, Spring Boot, and cloud-native practices. Eager to solve complex architectural challenges and build production-grade APIs.',
+    'Focused on AI/ML research, deep learning, and building production-grade software. Eager to contribute to responsible AI systems, explore networking and distributed computing, and grow through rigorous research and engineering practice.',
 
   resumePath: '/resume.pdf',
 };
-
