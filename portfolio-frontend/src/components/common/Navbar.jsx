@@ -46,7 +46,7 @@ export default function Navbar() {
                   Pralad Neupane
                 </span>
                 <span className="text-[10px] font-mono text-slate-400 tracking-wider">
-                  AI/ML · Research
+                  AI/ML · Learner
                 </span>
               </div>
             </motion.div>

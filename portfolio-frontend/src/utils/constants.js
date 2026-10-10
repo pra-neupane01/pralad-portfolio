@@ -2,9 +2,9 @@
 
 export const SITE = {
   name: 'Pralad Neupane',
-  title: 'Pralad Neupane | AI/ML Researcher & Developer',
+  title: 'Pralad Neupane | AI/ML Learner & Backend Enthusiast',
   description:
-    'Portfolio of Pralad Neupane — Computing student, AI/ML researcher, and full-stack developer specializing in deep learning, Python, Spring Boot, and scalable web applications.',
+    'Portfolio of Pralad Neupane — Computing student, AI/ML learner, and backend enthusiast building projects with Python, TensorFlow, Java, and Spring Boot.',
   url: 'https://praladneupane.com.np',
   author: 'Pralad Neupane',
 };
@@ -23,12 +23,12 @@ export const NAV_ITEMS = [
   { name: 'Contact', path: '/contact' },
 ];
 
-// Terminal typing lines for the hero section — AI/ML & Python focus
+// Terminal typing lines for the hero section — AI/ML & Backend Learner focus
 export const TERMINAL_LINES = [
-  '> AI/ML Researcher & Developer',
+  '> AI/ML Learner & Backend Enthusiast',
   '> Python · TensorFlow · CNNs',
-  '> Spring Boot · REST APIs',
-  '> Deep Learning · Audio AI',
+  '> Java · Spring Boot · REST APIs',
+  '> Deep Learning & Audio AI Learner',
   '> Full-Stack · React · PostgreSQL',
-  '> Computer Networks & Systems',
+  '> Networking & Systems Explorer',
 ];

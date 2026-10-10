@@ -1,28 +1,31 @@
 Pralad Neupane
-Backend Developer | Java, Spring Boot, REST APIs
+AI/ML Learner & Backend Enthusiast | Python, TensorFlow, Java, Spring Boot
 SundarHaraicha 11, Morang, Nepal
 
 Profile
-Backend developer focused on scalable APIs, reliable systems, and practical web applications.
+Computing student, AI/ML learner, and backend enthusiast focused on learning deep learning fundamentals, REST APIs, reliable backend architecture, and practical software applications.
 
 Current
-Education: Itahari International College
+Education: Itahari International College (BSc Hons Computing)
 
 Core Skills
-Java, Spring Boot, REST APIs, PostgreSQL, MySQL, Node.js, Express, Git, React
+Python, TensorFlow, Keras, Scikit-learn, Java, Spring Boot, REST APIs, PostgreSQL, MySQL, Node.js, Express, Git, React
 
 Selected Projects
+Deep Learning Audio Classification
+Audio classification model built with TensorFlow and Librosa for audio feature extraction and sound identification.
+
 SajiloYatra
-Travel bus booking and management system built around route discovery, bookings, and travel operations.
+Travel bus booking and management system built around route discovery, bookings, e-tickets, and travel operations.
 
 ArthaFlow
-Advanced Java-based project focused on structured application logic and backend workflows.
+Java-based project focused on structured application logic and backend workflows.
 
 Restaurant-App
 Node.js and Express food ordering backend with PostgreSQL for menus, orders, and customer data.
 
 pralad-portfolio
-Personal portfolio website for presenting work, certifications, and collaboration channels.
+Personal portfolio website presenting projects, skills, certifications, and contact channels.
 
 Links
 GitHub: https://github.com/pra-neupane01

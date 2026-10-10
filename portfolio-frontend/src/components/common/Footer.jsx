@@ -1,6 +1,6 @@
 import { Link } from 'react-router-dom';
 import { socialLinks } from '@/data/socials';
-import { NAV_ITEMS } from '@/utils/constants';
+import { NAV_ITEMS, RESUME_PATH } from '@/utils/constants';
 
 export default function Footer() {
   const year = new Date().getFullYear();
@@ -20,7 +20,7 @@ export default function Footer() {
               </span>
             </div>
             <p className="text-xs text-slate-400 leading-relaxed max-w-xs">
-              Java Backend Developer focused on Spring Boot, REST APIs, and scalable backend architecture.
+              Computing student, AI/ML learner &amp; backend enthusiast focused on Python, Java, Spring Boot, and scalable systems.
             </p>
           </div>
 
@@ -39,6 +39,15 @@ export default function Footer() {
                   <span className="text-slate-600">›</span> {item.name}
                 </Link>
               ))}
+              <a
+                href={RESUME_PATH}
+                target="_blank"
+                rel="noopener noreferrer"
+                download
+                className="text-xs text-emerald-400 hover:text-emerald-300 font-mono transition-colors py-1 flex items-center gap-1.5"
+              >
+                <span className="text-slate-600">›</span> Resume 📥
+              </a>
             </div>
           </div>
 

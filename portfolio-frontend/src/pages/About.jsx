@@ -11,7 +11,7 @@ export default function About() {
     <div className="py-12 md:py-20 max-w-5xl mx-auto space-y-12">
       <SectionHeader
         title="About Me"
-        subtitle="AI/ML researcher, software engineer, and computing student."
+        subtitle="AI/ML learner, backend enthusiast, and computing student."
       />
 
       <div className="grid lg:grid-cols-12 gap-10 lg:gap-12 items-center">
