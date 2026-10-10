@@ -1,4 +1,5 @@
 import { useState } from 'react';
+import { Link } from 'react-router-dom';
 import { motion, AnimatePresence } from 'framer-motion';
 import {
   Trophy,
@@ -97,11 +98,14 @@ export default function AwardCard({ award, index }) {
               <Trophy size={14} className="shrink-0" />
               <span className="font-semibold uppercase tracking-wider">{award.issuer}</span>
             </div>
-            <h3
-              onClick={() => setIsModalOpen(true)}
-              className="text-lg font-display font-semibold text-terminal-text hover:text-terminal-green transition-colors cursor-pointer leading-snug"
-            >
-              {award.title}
+            <h3 className="text-lg font-display font-semibold text-terminal-text hover:text-terminal-green transition-colors leading-snug">
+              {award.slug ? (
+                <Link to={`/education/${award.slug}`} className="hover:underline">
+                  {award.title}
+                </Link>
+              ) : (
+                <span onClick={() => setIsModalOpen(true)} className="cursor-pointer">{award.title}</span>
+              )}
             </h3>
           </div>
 
@@ -140,25 +144,28 @@ export default function AwardCard({ award, index }) {
 
         {/* Footer */}
         <div className="px-6 pb-6 pt-3 flex items-center justify-between border-t border-terminal-border/40 gap-2 mt-auto">
+          {award.slug ? (
+            <Link
+              to={`/education/${award.slug}`}
+              className="inline-flex items-center gap-1.5 text-xs font-mono text-amber-400 hover:text-amber-300 font-semibold"
+            >
+              <ExternalLink size={13} /> View Page
+            </Link>
+          ) : (
+            <button
+              onClick={() => setIsModalOpen(true)}
+              className="inline-flex items-center gap-1.5 text-xs font-mono text-terminal-textMuted hover:text-terminal-green transition-colors"
+            >
+              <Maximize2 size={13} /> View Certificate
+            </button>
+          )}
+
           <button
             onClick={() => setIsModalOpen(true)}
             className="inline-flex items-center gap-1.5 text-xs font-mono text-terminal-textMuted hover:text-terminal-green transition-colors"
           >
-            <Maximize2 size={13} /> View Certificate
+            <Maximize2 size={13} /> Full Image
           </button>
-
-          {imageUrl && (
-            <a
-              href={imageUrl}
-              target="_blank"
-              rel="noopener noreferrer"
-              download
-              className="inline-flex items-center gap-1.5 text-xs font-mono text-terminal-green hover:underline group/link"
-            >
-              <Download size={12} />
-              Download
-            </a>
-          )}
         </div>
       </motion.div>
 

@@ -1,4 +1,5 @@
 import { useState } from 'react';
+import { Link } from 'react-router-dom';
 import { motion, AnimatePresence } from 'framer-motion';
 import { 
   Award, 
@@ -93,11 +94,14 @@ export default function CertificationCard({ cert, index }) {
                 <Award size={14} className="shrink-0" />
                 <span className="font-semibold uppercase tracking-wider">{cert.issuer}</span>
               </div>
-              <h3 
-                onClick={() => setIsPreviewOpen(true)}
-                className="text-lg font-display font-semibold text-terminal-text hover:text-terminal-green transition-colors cursor-pointer leading-snug"
-              >
-                {cert.title}
+              <h3 className="text-lg font-display font-semibold text-terminal-text hover:text-terminal-green transition-colors leading-snug">
+                {cert.slug ? (
+                  <Link to={`/education/${cert.slug}`} className="hover:underline">
+                    {cert.title}
+                  </Link>
+                ) : (
+                  <span onClick={() => setIsPreviewOpen(true)} className="cursor-pointer">{cert.title}</span>
+                )}
               </h3>
             </div>
 
@@ -142,25 +146,28 @@ export default function CertificationCard({ cert, index }) {
 
         {/* Footer Actions */}
         <div className="px-6 pb-6 pt-3 flex items-center justify-between border-t border-terminal-border/40 gap-2 mt-auto">
+          {cert.slug ? (
+            <Link
+              to={`/education/${cert.slug}`}
+              className="inline-flex items-center gap-1.5 text-xs font-mono text-emerald-400 hover:text-emerald-300 font-semibold"
+            >
+              <ExternalLink size={13} /> View Page
+            </Link>
+          ) : (
+            <button
+              onClick={() => setIsPreviewOpen(true)}
+              className="inline-flex items-center gap-1.5 text-xs font-mono text-terminal-textMuted hover:text-terminal-green transition-colors"
+            >
+              <Maximize2 size={13} /> Preview
+            </button>
+          )}
+
           <button
             onClick={() => setIsPreviewOpen(true)}
             className="inline-flex items-center gap-1.5 text-xs font-mono text-terminal-textMuted hover:text-terminal-green transition-colors"
           >
-            <Maximize2 size={13} /> View Full Image
+            <Maximize2 size={13} /> Full Image
           </button>
-
-          {cert.credentialUrl && (
-            <a
-              href={cert.credentialUrl}
-              target="_blank"
-              rel="noopener noreferrer"
-              className="inline-flex items-center gap-1.5 text-xs font-mono text-terminal-green hover:underline group/link"
-            >
-              <Sparkles size={12} className="text-terminal-green/70" />
-              Verify
-              <ExternalLink size={11} className="opacity-0 group-hover/link:opacity-100 transition-opacity" />
-            </a>
-          )}
         </div>
       </motion.div>
 

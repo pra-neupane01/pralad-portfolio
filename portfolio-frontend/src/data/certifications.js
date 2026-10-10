@@ -1,6 +1,7 @@
 export const certificationsData = [
   {
     id: 1,
+    slug: 'java-oop',
     title: 'Java Object-Oriented Programming',
     issuer: 'LinkedIn Learning',
     date: 'Aug 13, 2025',
@@ -10,9 +11,12 @@ export const certificationsData = [
     skills: ['Java', 'Object-Oriented Programming (OOP)'],
     description:
       'Completed a comprehensive course on Java Object-Oriented Programming, covering core OOP concepts and their practical implementation in Java.',
+    type: 'certification',
+    category: 'Programming',
   },
   {
     id: 2,
+    slug: 'spring-framework',
     title: 'Spring Framework in Depth',
     issuer: 'LinkedIn Learning',
     date: 'Jun 01, 2026',
@@ -22,9 +26,12 @@ export const certificationsData = [
     skills: ['Spring Framework'],
     description:
       'Completed an in-depth course on the Spring Framework, developing a deeper understanding of Spring fundamentals and its core features for building Java applications.',
+    type: 'certification',
+    category: 'Framework',
   },
   {
     id: 3,
+    slug: 'java-junit',
     title: 'Java: Testing with JUnit',
     issuer: 'LinkedIn Learning',
     date: 'Jul 30, 2026',
@@ -34,9 +41,12 @@ export const certificationsData = [
     skills: ['Java', 'JUnit', 'Software Testing'],
     description:
       'Completed a course on Java testing with JUnit, covering unit testing fundamentals, writing effective tests, and applying software testing practices in Java applications.',
+    type: 'certification',
+    category: 'Testing',
   },
   {
     id: 4,
+    slug: 'spring-ai',
     title: 'Spring AI Basics',
     issuer: 'Simplilearn SkillUp',
     date: 'Aug 03, 2026',
@@ -46,5 +56,7 @@ export const certificationsData = [
     skills: ['Spring AI'],
     description:
       'Completed the Spring AI Basics course, gaining foundational knowledge of integrating AI capabilities into Java applications using the Spring AI framework.',
+    type: 'certification',
+    category: 'AI / ML',
   },
 ];

@@ -7,6 +7,7 @@ import About from '../pages/About';
 import Skills from '../pages/Skills';
 import Projects from '../pages/Projects';
 import Education from '../pages/Education';
+import CredentialDetail from '../pages/CredentialDetail';
 import Services from '../pages/Services';
 import Contact from '../pages/Contact';
 import NotFound from '../pages/NotFound';
@@ -20,6 +21,7 @@ export default function AppRoutes() {
         <Route path="skills" element={<Skills />} />
         <Route path="projects" element={<Projects />} />
         <Route path="education" element={<Education />} />
+        <Route path="education/:slug" element={<CredentialDetail />} />
         <Route path="services" element={<Services />} />
         <Route path="contact" element={<Contact />} />
         <Route path="*" element={<NotFound />} />
