@@ -1,12 +1,10 @@
 // Site-wide constants and configuration
-// TODO: Update these values for your production deployment
 
 export const SITE = {
   name: 'Pralad Neupane',
-  title: 'Pralad Neupane | Java Backend Developer',
+  title: 'Pralad Neupane | AI/ML Researcher & Developer',
   description:
-    'Portfolio of Pralad Neupane, a Java Backend Developer and undergraduate IT student focused on Spring Boot, REST APIs, databases, and modern web technologies.',
-  // TODO: Update with your custom domain when available
+    'Portfolio of Pralad Neupane — Computing student, AI/ML researcher, and full-stack developer specializing in deep learning, Python, Spring Boot, and scalable web applications.',
   url: 'https://praladneupane.com.np',
   author: 'Pralad Neupane',
 };
@@ -20,16 +18,17 @@ export const NAV_ITEMS = [
   { name: 'About', path: '/about' },
   { name: 'Skills', path: '/skills' },
   { name: 'Projects', path: '/projects' },
-  { name: 'Education', path: '/education' },
+  { name: 'Credentials', path: '/education' },
   { name: 'Services', path: '/services' },
   { name: 'Contact', path: '/contact' },
 ];
 
-// Terminal typing lines for the hero section
+// Terminal typing lines for the hero section — AI/ML & Python focus
 export const TERMINAL_LINES = [
-  '> Java Backend Developer',
-  '> Spring Boot REST APIs',
-  '> PostgreSQL / MySQL',
-  '> Clean Architecture',
-  '> Secure Authentication',
+  '> AI/ML Researcher & Developer',
+  '> Python · TensorFlow · CNNs',
+  '> Spring Boot · REST APIs',
+  '> Deep Learning · Audio AI',
+  '> Full-Stack · React · PostgreSQL',
+  '> Computer Networks & Systems',
 ];

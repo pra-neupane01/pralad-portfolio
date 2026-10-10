@@ -19,7 +19,7 @@ export default function Hero() {
           >
             <div className="inline-flex items-center gap-2.5 px-3.5 py-1.5 rounded-full bg-emerald-500/10 border border-emerald-500/20 text-emerald-400 text-xs font-mono">
               <span className="w-2 h-2 rounded-full bg-emerald-400 animate-pulse shadow-emerald-glow"></span>
-              <span>Available for Backend Engineering Roles</span>
+              <span>Open to AI/ML Research &amp; Collaboration</span>
             </div>
           </motion.div>
 
@@ -36,7 +36,7 @@ export default function Hero() {
               </span>
             </h1>
             <p className="text-xl sm:text-2xl font-mono text-emerald-400/90 font-medium">
-              Java Backend Developer
+              AI/ML Researcher & Developer
             </p>
           </motion.div>
 

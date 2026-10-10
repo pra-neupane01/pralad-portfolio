@@ -43,14 +43,14 @@ export default function TerminalCard() {
           <div className="w-3 h-3 rounded-full bg-emerald-500/80"></div>
         </div>
         <div className="mx-auto text-xs font-mono text-slate-400">
-          backend.java — {profile.fullName.toLowerCase().replace(' ', '')}@dev
+          ai_research.py — {profile.fullName.toLowerCase().replace(' ', '')}@dev
         </div>
       </div>
 
       {/* Terminal Content */}
       <div className="p-6 font-mono text-sm leading-relaxed flex-grow flex flex-col">
         <div className="text-slate-500 text-xs mb-4">
-          // Java Backend Architecture & Microservices Environment
+          // AI/ML Research · Python · Deep Learning · Spring Boot
         </div>
         
         <div className="text-emerald-400 mb-2 font-semibold">
