@@ -45,8 +45,7 @@ export default function AwardCard({ award, index }) {
 
   const config = categoryConfig[award.category] || categoryConfig.Hackathon;
   const CategoryIcon = config.icon;
-  const pdfUrl = resolveUrl(award.image);
-  const isPdf = pdfUrl.endsWith('.pdf');
+  const imageUrl = resolveUrl(award.image);
 
   return (
     <>
@@ -86,7 +85,7 @@ export default function AwardCard({ award, index }) {
               <Maximize2 size={22} />
             </div>
             <span className="text-xs font-mono font-medium tracking-wide text-terminal-green">
-              {isPdf ? 'View Certificate' : 'View Award'}
+              View Certificate
             </span>
           </div>
         </div>
@@ -148,9 +147,9 @@ export default function AwardCard({ award, index }) {
             <Maximize2 size={13} /> View Certificate
           </button>
 
-          {pdfUrl && (
+          {imageUrl && (
             <a
-              href={pdfUrl}
+              href={imageUrl}
               target="_blank"
               rel="noopener noreferrer"
               download
@@ -210,25 +209,14 @@ export default function AwardCard({ award, index }) {
                 </button>
               </div>
 
-              {/* Modal Body: PDF Embed */}
+              {/* Modal Body: Certificate Image */}
               <div className="flex-1 overflow-auto p-4 sm:p-6 bg-terminal-bg/80 flex items-center justify-center min-h-[400px]">
-                {pdfUrl ? (
-                  <div className="w-full h-full flex flex-col items-center justify-center gap-4">
-                    {isPdf ? (
-                      <iframe
-                        src={pdfUrl}
-                        className="w-full rounded-lg border border-terminal-border shadow-2xl"
-                        style={{ height: '65vh', minHeight: '350px' }}
-                        title={award.title}
-                      />
-                    ) : (
-                      <img
-                        src={pdfUrl}
-                        alt={award.title}
-                        className="max-w-full max-h-[65vh] w-auto h-auto object-contain rounded-lg border border-terminal-border shadow-2xl"
-                      />
-                    )}
-                  </div>
+                {imageUrl ? (
+                  <img
+                    src={imageUrl}
+                    alt={award.title}
+                    className="max-w-full max-h-[65vh] w-auto h-auto object-contain rounded-lg border border-terminal-border shadow-2xl"
+                  />
                 ) : (
                   <div className="text-center p-8 max-w-md">
                     <Trophy size={48} className="mx-auto mb-3 text-terminal-textDim" />
@@ -249,18 +237,18 @@ export default function AwardCard({ award, index }) {
                 </div>
 
                 <div className="flex items-center gap-3 ml-auto">
-                  {pdfUrl && (
+                  {imageUrl && (
                     <>
                       <a
-                        href={pdfUrl}
+                        href={imageUrl}
                         target="_blank"
                         rel="noopener noreferrer"
                         className="inline-flex items-center gap-1.5 text-xs font-mono px-3 py-1.5 rounded bg-terminal-bg border border-terminal-border text-terminal-text hover:text-terminal-green hover:border-terminal-green/50 transition-colors"
                       >
-                        <ExternalLink size={13} /> Open PDF
+                        <ExternalLink size={13} /> Open Image
                       </a>
                       <a
-                        href={pdfUrl}
+                        href={imageUrl}
                         target="_blank"
                         rel="noopener noreferrer"
                         download
