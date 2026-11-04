@@ -7,11 +7,21 @@ import ScrollToTop from '../components/common/ScrollToTop';
 
 export default function MainLayout() {
   const location = useLocation();
+  const isHome = location.pathname === '/';
 
   // Scroll to top on route change
   useEffect(() => {
     window.scrollTo({ top: 0, left: 0, behavior: 'instant' });
   }, [location.pathname]);
+
+  if (isHome) {
+    return (
+      <div className="min-h-screen bg-[#F4EBDD] text-[#29251F] font-dmsans selection:bg-[#C81016]/20 selection:text-[#C81016] relative overflow-x-hidden">
+        <Outlet />
+        <ScrollToTop />
+      </div>
+    );
+  }
 
   return (
     <div className="flex flex-col min-h-screen relative">

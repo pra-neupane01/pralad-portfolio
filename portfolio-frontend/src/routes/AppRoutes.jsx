@@ -21,6 +21,7 @@ export default function AppRoutes() {
         <Route path="skills" element={<Skills />} />
         <Route path="projects" element={<Projects />} />
         <Route path="education" element={<Education />} />
+        <Route path="journey" element={<Education />} />
         <Route path="education/:slug" element={<CredentialDetail />} />
         <Route path="services" element={<Services />} />
         <Route path="contact" element={<Contact />} />
