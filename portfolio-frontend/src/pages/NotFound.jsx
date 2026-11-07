@@ -1,47 +1,48 @@
-import { motion } from 'framer-motion';
-import { Terminal } from 'lucide-react';
-import Button from '../components/common/Button';
+import { Link } from 'react-router-dom';
+import { Home, ArrowLeft } from 'lucide-react';
 
 export default function NotFound() {
   return (
-    <div className="min-h-[70vh] flex items-center justify-center py-20">
-      <motion.div 
-        initial={{ opacity: 0, scale: 0.9 }}
-        animate={{ opacity: 1, scale: 1 }}
-        transition={{ duration: 0.5 }}
-        className="terminal-card max-w-xl w-full mx-auto overflow-hidden"
-      >
-        {/* Terminal Title Bar */}
-        <div className="bg-terminal-border/50 px-4 py-3 flex items-center gap-2 border-b border-terminal-border/50">
-          <div className="flex gap-1.5">
-            <div className="w-3 h-3 rounded-full bg-red-500/80"></div>
-            <div className="w-3 h-3 rounded-full bg-yellow-500/80"></div>
-            <div className="w-3 h-3 rounded-full bg-green-500/80"></div>
-          </div>
-          <div className="mx-auto text-xs font-mono text-terminal-textDim">
-            error_404.sh
-          </div>
-        </div>
+    <div
+      className="card"
+      style={{
+        padding: '60px 24px',
+        textAlign: 'center',
+        margin: '32px auto',
+        maxWidth: '560px',
+      }}
+    >
+      <div style={{ fontSize: '4rem', fontWeight: 900, color: 'var(--color-primary)', lineHeight: 1 }}>
+        404
+      </div>
+      <h1 style={{ fontSize: 'var(--font-size-2xl)', fontWeight: 700, margin: '16px 0 8px', color: 'var(--color-text)' }}>
+        This page isn't available
+      </h1>
+      <p style={{ color: 'var(--color-text-secondary)', fontSize: 'var(--font-size-base)', margin: '0 0 24px' }}>
+        The link you followed may be broken, or the page may have been removed.
+      </p>
 
-        {/* Terminal Content */}
-        <div className="p-8 md:p-12 text-center font-mono">
-          <div className="flex justify-center mb-6">
-            <Terminal size={64} className="text-terminal-green opacity-50" />
-          </div>
-          
-          <h1 className="text-6xl font-bold text-terminal-green mb-4">404</h1>
-          <p className="text-xl text-terminal-text mb-2">
-            <span className="text-terminal-textDim">$</span> cd /current/path
-          </p>
-          <p className="text-red-500 mb-8 text-sm">
-            bash: cd: /current/path: No such file or directory
-          </p>
-
-          <Button href="/">
-            Return to Home
-          </Button>
-        </div>
-      </motion.div>
+      <div style={{ display: 'flex', gap: '12px', justifyContent: 'center' }}>
+        <Link
+          to="/"
+          style={{
+            display: 'inline-flex',
+            alignItems: 'center',
+            gap: '8px',
+            padding: '10px 20px',
+            background: 'var(--color-primary)',
+            color: '#fff',
+            borderRadius: 'var(--radius-md)',
+            fontWeight: 600,
+            textDecoration: 'none',
+            fontSize: 'var(--font-size-sm)',
+            minHeight: '44px',
+          }}
+          className="btn-press"
+        >
+          <Home size={18} /> Return to Feed
+        </Link>
+      </div>
     </div>
   );
 }

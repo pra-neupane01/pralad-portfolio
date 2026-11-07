@@ -1,6 +1,7 @@
 import { useState, useMemo } from 'react';
 import PostCard from '../components/feed/PostCard';
 import { projectsData } from '../data/projects';
+import { useScrollReveal } from '../hooks/useScrollReveal';
 
 const categories = ['All', ...new Set(projectsData.map((p) => p.category))];
 
@@ -12,9 +13,11 @@ export default function ProjectsTab() {
     return projectsData.filter((p) => p.category === activeCategory);
   }, [activeCategory]);
 
+  useScrollReveal([filtered]);
+
   return (
     <div>
-      {/* Filter chips */}
+      {/* Filter chips with touch targets */}
       <div
         style={{
           display: 'flex',
@@ -28,17 +31,18 @@ export default function ProjectsTab() {
             key={cat}
             onClick={() => setActiveCategory(cat)}
             style={{
-              padding: '6px 16px',
-              borderRadius: '20px',
+              padding: '8px 18px',
+              borderRadius: '24px',
               border: 'none',
               fontWeight: 600,
               fontSize: 'var(--font-size-sm)',
               cursor: 'pointer',
-              fontFamily: 'var(--font-family)',
+              minHeight: '44px',
               background: activeCategory === cat ? 'var(--color-primary)' : 'var(--color-comment)',
               color: activeCategory === cat ? '#fff' : 'var(--color-text)',
               transition: 'background var(--transition-fast), color var(--transition-fast)',
             }}
+            className="btn-press"
           >
             {cat}
           </button>

@@ -1,15 +1,49 @@
+import { useState, useEffect } from 'react';
 import { MapPin, Briefcase, GraduationCap, ExternalLink, Github, Linkedin, Instagram, Mail as MailIcon } from 'lucide-react';
 import { profile } from '../../data/profile';
 import { educationData } from '../../data/education';
 
 export default function IntroCard() {
-  const edu = educationData[0]; // Current education
+  const edu = educationData[0];
+
+  // Animated counters for stats
+  const [stats, setStats] = useState({ projects: 0, repos: 0, certs: 0 });
+
+  useEffect(() => {
+    // If reduced motion, jump to end values
+    if (window.matchMedia('(prefers-reduced-motion: reduce)').matches) {
+      setStats({ projects: 6, repos: 12, certs: 4 });
+      return;
+    }
+
+    let start = 0;
+    const end = { projects: 6, repos: 12, certs: 4 };
+    const duration = 1200;
+    const stepTime = 40;
+    const steps = duration / stepTime;
+
+    const timer = setInterval(() => {
+      start++;
+      const progress = start / steps;
+      setStats({
+        projects: Math.min(end.projects, Math.round(end.projects * progress)),
+        repos: Math.min(end.repos, Math.round(end.repos * progress)),
+        certs: Math.min(end.certs, Math.round(end.certs * progress)),
+      });
+
+      if (start >= steps) {
+        clearInterval(timer);
+      }
+    }, stepTime);
+
+    return () => clearInterval(timer);
+  }, []);
 
   return (
-    <div className="card" style={{ padding: '16px' }}>
+    <div className="card reveal-init" style={{ padding: '18px' }}>
       <h2
         style={{
-          fontSize: 'var(--font-size-xl)',
+          fontSize: 'var(--font-size-lg)',
           fontWeight: 700,
           color: 'var(--color-text)',
           margin: '0 0 12px',
@@ -22,7 +56,7 @@ export default function IntroCard() {
         style={{
           fontSize: 'var(--font-size-sm)',
           color: 'var(--color-text-secondary)',
-          margin: '0 0 14px',
+          margin: '0 0 16px',
           lineHeight: 1.5,
           textAlign: 'center',
         }}
@@ -30,7 +64,40 @@ export default function IntroCard() {
         {profile.introLine}
       </p>
 
-      <div style={{ borderTop: '1px solid var(--color-border-light)', paddingTop: '12px' }}>
+      {/* Animated Quick Stats Counters */}
+      <div
+        style={{
+          display: 'grid',
+          gridTemplateColumns: 'repeat(3, 1fr)',
+          gap: '8px',
+          padding: '12px 0',
+          borderTop: '1px solid var(--color-border-light)',
+          borderBottom: '1px solid var(--color-border-light)',
+          marginBottom: '16px',
+          textAlign: 'center',
+        }}
+      >
+        <div>
+          <div style={{ fontSize: 'var(--font-size-xl)', fontWeight: 800, color: 'var(--color-primary)' }}>
+            {stats.projects}+
+          </div>
+          <div style={{ fontSize: '11px', color: 'var(--color-text-tertiary)', fontWeight: 600 }}>Projects</div>
+        </div>
+        <div>
+          <div style={{ fontSize: 'var(--font-size-xl)', fontWeight: 800, color: 'var(--color-primary)' }}>
+            {stats.repos}+
+          </div>
+          <div style={{ fontSize: '11px', color: 'var(--color-text-tertiary)', fontWeight: 600 }}>Repositories</div>
+        </div>
+        <div>
+          <div style={{ fontSize: 'var(--font-size-xl)', fontWeight: 800, color: 'var(--color-primary)' }}>
+            {stats.certs}
+          </div>
+          <div style={{ fontSize: '11px', color: 'var(--color-text-tertiary)', fontWeight: 600 }}>Credentials</div>
+        </div>
+      </div>
+
+      <div style={{ display: 'flex', flexDirection: 'column', gap: '12px' }}>
         {/* Role */}
         <InfoRow icon={Briefcase} text={profile.title} />
 
@@ -49,8 +116,8 @@ export default function IntroCard() {
       <div
         style={{
           borderTop: '1px solid var(--color-border-light)',
-          paddingTop: '12px',
-          marginTop: '12px',
+          paddingTop: '14px',
+          marginTop: '14px',
           display: 'flex',
           flexDirection: 'column',
           gap: '6px',
@@ -62,7 +129,7 @@ export default function IntroCard() {
         <SocialLink icon={MailIcon} href={`mailto:${profile.social.email}`} label="Email" />
       </div>
 
-      {/* View Resume */}
+      {/* View Resume Button */}
       <a
         href={profile.resumePath || '/resume.pdf'}
         target="_blank"
@@ -70,16 +137,18 @@ export default function IntroCard() {
         style={{
           display: 'block',
           textAlign: 'center',
-          padding: '8px',
-          marginTop: '12px',
+          padding: '10px',
+          marginTop: '14px',
           background: 'var(--color-comment)',
           borderRadius: 'var(--radius-md)',
           fontWeight: 600,
           fontSize: 'var(--font-size-sm)',
           color: 'var(--color-text)',
           textDecoration: 'none',
+          minHeight: '44px',
           transition: 'background var(--transition-fast)',
         }}
+        className="btn-press hover:bg-[var(--color-card-hover)]"
       >
         View Resume
       </a>
@@ -93,8 +162,7 @@ function InfoRow({ icon: Icon, text, subtext }) {
       style={{
         display: 'flex',
         alignItems: 'flex-start',
-        gap: '10px',
-        marginBottom: '10px',
+        gap: '12px',
         fontSize: 'var(--font-size-sm)',
         color: 'var(--color-text-secondary)',
       }}
@@ -103,7 +171,7 @@ function InfoRow({ icon: Icon, text, subtext }) {
       <div>
         <span>{text}</span>
         {subtext && (
-          <span style={{ display: 'block', fontSize: 'var(--font-size-xs)', color: 'var(--color-text-tertiary)' }}>
+          <span style={{ display: 'block', fontSize: 'var(--font-size-xs)', color: 'var(--color-text-tertiary)', marginTop: '2px' }}>
             {subtext}
           </span>
         )}
@@ -122,12 +190,13 @@ function SocialLink({ icon: Icon, href, label }) {
         display: 'flex',
         alignItems: 'center',
         gap: '10px',
-        padding: '6px 8px',
+        padding: '8px 10px',
         borderRadius: 'var(--radius-sm)',
         color: 'var(--color-primary)',
         fontSize: 'var(--font-size-sm)',
         fontWeight: 500,
         textDecoration: 'none',
+        minHeight: '44px', // Touch target
         transition: 'background var(--transition-fast)',
       }}
       className="hover:bg-[var(--color-card-hover)]"

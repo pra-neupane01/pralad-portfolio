@@ -3,7 +3,10 @@
   <head>
     <meta charset="UTF-8" />
     <link rel="icon" type="image/x-icon" href="/favicon.ico" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover" />
+    <meta name="theme-color" content="#1877F2" media="(prefers-color-scheme: light)" />
+    <meta name="theme-color" content="#18191A" media="(prefers-color-scheme: dark)" />
+    <link rel="manifest" href="/manifest.webmanifest" />
 
     <!-- SEO -->
     <title>Pralad Neupane | Java Backend Developer</title>
@@ -23,6 +26,9 @@
     <meta name="twitter:title" content="Pralad Neupane | Java Backend Developer" />
     <meta name="twitter:description" content="Java Backend Developer focused on Spring Boot, REST APIs, and modern web technologies." />
     <meta name="twitter:image" content="/og-image.png" />
+
+    <!-- Preload Critical Profile Image for LCP -->
+    <link rel="preload" as="image" href="/pralad-profile.jpeg" fetchpriority="high" />
 
     <!-- JSON-LD Person Schema -->
     <script type="application/ld+json">

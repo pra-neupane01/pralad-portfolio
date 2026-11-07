@@ -1,8 +1,11 @@
 import { useState } from 'react';
-import { Send, MapPin, Mail as MailIcon, Github, Linkedin } from 'lucide-react';
+import { Send, MapPin, Mail as MailIcon, Github, Linkedin, MessageSquare } from 'lucide-react';
 import { profile } from '../data/profile';
+import { useToast } from '../context/ToastContext';
+import { useScrollReveal } from '../hooks/useScrollReveal';
 
 export default function ContactTab() {
+  const { showToast } = useToast();
   const [formData, setFormData] = useState({ name: '', email: '', message: '' });
   const [sent, setSent] = useState(false);
 
@@ -12,26 +15,32 @@ export default function ContactTab() {
     const mailto = `mailto:${profile.email}?subject=Message from ${encodeURIComponent(name)}&body=${encodeURIComponent(`From: ${name} (${email})\n\n${message}`)}`;
     window.open(mailto, '_blank');
     setSent(true);
+    showToast('Opening email client...');
     setTimeout(() => {
       setSent(false);
       setFormData({ name: '', email: '', message: '' });
     }, 3000);
   };
 
+  useScrollReveal([]);
+
   return (
     <div style={{ display: 'grid', gridTemplateColumns: '1fr', gap: '16px' }} className="md:grid-cols-2">
-      {/* Contact Form */}
-      <div className="card" style={{ padding: '20px' }}>
-        <h2
-          style={{
-            fontSize: 'var(--font-size-xl)',
-            fontWeight: 700,
-            margin: '0 0 16px',
-            color: 'var(--color-text)',
-          }}
-        >
-          Send a Message
-        </h2>
+      {/* Contact Form Card */}
+      <div className="card reveal-init" style={{ padding: '24px' }}>
+        <div style={{ display: 'flex', alignItems: 'center', gap: '8px', marginBottom: '16px' }}>
+          <MessageSquare size={22} style={{ color: 'var(--color-primary)' }} />
+          <h2
+            style={{
+              fontSize: 'var(--font-size-xl)',
+              fontWeight: 700,
+              margin: 0,
+              color: 'var(--color-text)',
+            }}
+          >
+            Send a Direct Message
+          </h2>
+        </div>
 
         {sent ? (
           <div
@@ -43,32 +52,33 @@ export default function ContactTab() {
               fontSize: 'var(--font-size-lg)',
             }}
           >
-            ✓ Opening your email client...
+            ✓ Opening your default email client...
           </div>
         ) : (
-          <form onSubmit={handleSubmit} style={{ display: 'flex', flexDirection: 'column', gap: '12px' }}>
+          <form onSubmit={handleSubmit} style={{ display: 'flex', flexDirection: 'column', gap: '14px' }}>
             <div>
               <label
                 htmlFor="contact-name"
-                style={{ display: 'block', fontWeight: 600, fontSize: 'var(--font-size-sm)', marginBottom: '4px', color: 'var(--color-text-secondary)' }}
+                style={{ display: 'block', fontWeight: 600, fontSize: 'var(--font-size-sm)', marginBottom: '6px', color: 'var(--color-text-secondary)' }}
               >
-                Name
+                Your Name
               </label>
               <input
                 id="contact-name"
                 type="text"
-                placeholder="Your name"
+                placeholder="e.g. John Doe"
                 required
                 value={formData.name}
                 onChange={(e) => setFormData({ ...formData, name: e.target.value })}
+                style={{ minHeight: '44px' }}
               />
             </div>
             <div>
               <label
                 htmlFor="contact-email"
-                style={{ display: 'block', fontWeight: 600, fontSize: 'var(--font-size-sm)', marginBottom: '4px', color: 'var(--color-text-secondary)' }}
+                style={{ display: 'block', fontWeight: 600, fontSize: 'var(--font-size-sm)', marginBottom: '6px', color: 'var(--color-text-secondary)' }}
               >
-                Email
+                Your Email
               </label>
               <input
                 id="contact-email"
@@ -77,18 +87,19 @@ export default function ContactTab() {
                 required
                 value={formData.email}
                 onChange={(e) => setFormData({ ...formData, email: e.target.value })}
+                style={{ minHeight: '44px' }}
               />
             </div>
             <div>
               <label
                 htmlFor="contact-message"
-                style={{ display: 'block', fontWeight: 600, fontSize: 'var(--font-size-sm)', marginBottom: '4px', color: 'var(--color-text-secondary)' }}
+                style={{ display: 'block', fontWeight: 600, fontSize: 'var(--font-size-sm)', marginBottom: '6px', color: 'var(--color-text-secondary)' }}
               >
                 Message
               </label>
               <textarea
                 id="contact-message"
-                placeholder="Type your message here..."
+                placeholder="Write your thoughts or project inquiries here..."
                 required
                 rows={5}
                 value={formData.message}
@@ -112,8 +123,9 @@ export default function ContactTab() {
                 justifyContent: 'center',
                 gap: '8px',
                 transition: 'background var(--transition-fast)',
-                fontFamily: 'var(--font-family)',
+                minHeight: '44px',
               }}
+              className="btn-press"
             >
               <Send size={18} /> Send Message
             </button>
@@ -121,17 +133,17 @@ export default function ContactTab() {
         )}
       </div>
 
-      {/* Contact Info Card */}
-      <div className="card" style={{ padding: '20px' }}>
+      {/* Contact Info & Location Card */}
+      <div className="card reveal-init" style={{ padding: '24px' }}>
         <h2
           style={{
             fontSize: 'var(--font-size-xl)',
             fontWeight: 700,
-            margin: '0 0 16px',
+            margin: '0 0 18px',
             color: 'var(--color-text)',
           }}
         >
-          Contact Info
+          Contact Details
         </h2>
 
         <div style={{ display: 'flex', flexDirection: 'column', gap: '16px' }}>
@@ -156,25 +168,30 @@ export default function ContactTab() {
           <ContactItem
             icon={Linkedin}
             label="LinkedIn"
-            value="Pralad Neupane"
+            value="linkedin.com/in/pralad-neupane"
             href={profile.social.linkedin}
             external
           />
         </div>
 
-        {/* Map placeholder */}
+        {/* Location Banner */}
         <div
           style={{
-            marginTop: '20px',
-            padding: '40px 16px',
+            marginTop: '24px',
+            padding: '24px 16px',
             background: 'var(--color-comment)',
             borderRadius: 'var(--radius-md)',
             textAlign: 'center',
             color: 'var(--color-text-secondary)',
             fontSize: 'var(--font-size-sm)',
+            border: '1px solid var(--color-border-light)',
           }}
         >
-          📍 Itahari, Nepal
+          <div style={{ fontSize: '1.5rem', marginBottom: '6px' }}>📍</div>
+          <div style={{ fontWeight: 600, color: 'var(--color-text)' }}>Itahari, Nepal</div>
+          <div style={{ fontSize: 'var(--font-size-xs)', color: 'var(--color-text-tertiary)', marginTop: '4px' }}>
+            Open to remote backend roles and collaborative software engineering projects.
+          </div>
         </div>
       </div>
     </div>
@@ -183,11 +200,11 @@ export default function ContactTab() {
 
 function ContactItem({ icon: Icon, label, value, href, external }) {
   const content = (
-    <div style={{ display: 'flex', alignItems: 'center', gap: '12px' }}>
+    <div style={{ display: 'flex', alignItems: 'center', gap: '14px' }}>
       <div
         style={{
-          width: '40px',
-          height: '40px',
+          width: '42px',
+          height: '42px',
           borderRadius: 'var(--radius-full)',
           background: 'var(--color-primary-light)',
           display: 'flex',
@@ -196,13 +213,13 @@ function ContactItem({ icon: Icon, label, value, href, external }) {
           flexShrink: 0,
         }}
       >
-        <Icon size={18} style={{ color: 'var(--color-primary)' }} />
+        <Icon size={19} style={{ color: 'var(--color-primary)' }} />
       </div>
       <div>
         <div style={{ fontSize: 'var(--font-size-xs)', color: 'var(--color-text-tertiary)', fontWeight: 600 }}>
           {label}
         </div>
-        <div style={{ fontSize: 'var(--font-size-sm)', color: href ? 'var(--color-primary)' : 'var(--color-text)' }}>
+        <div style={{ fontSize: 'var(--font-size-sm)', color: href ? 'var(--color-primary)' : 'var(--color-text)', marginTop: '2px' }}>
           {value}
         </div>
       </div>
@@ -216,6 +233,7 @@ function ContactItem({ icon: Icon, label, value, href, external }) {
         target={external ? '_blank' : undefined}
         rel={external ? 'noopener noreferrer' : undefined}
         style={{ textDecoration: 'none' }}
+        className="btn-press"
       >
         {content}
       </a>

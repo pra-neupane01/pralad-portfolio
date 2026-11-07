@@ -3,6 +3,7 @@ import PostCard from '../components/feed/PostCard';
 import { projectsData } from '../data/projects';
 import { awardsData } from '../data/awards';
 import { certificationsData } from '../data/certifications';
+import { useScrollReveal } from '../hooks/useScrollReveal';
 
 export default function PostsFeed() {
   const [searchFilter] = useState(() => {
@@ -11,9 +12,46 @@ export default function PostsFeed() {
     return match ? decodeURIComponent(match[1]).toLowerCase() : '';
   });
 
-  // Merge all content into a unified "feed" sorted by date
+  // Merge content into feed sorted by date, including realistic Java backend code snippet post
   const allPosts = useMemo(() => {
     const posts = [];
+
+    // Realistic Spring Boot REST Controller Code Snippet Post
+    posts.push({
+      id: 'snippet-spring-security',
+      type: 'code-snippet',
+      title: '⚡ Clean Spring Boot REST Controller & Global Exception Handling',
+      description:
+        'A quick peek into my standard backend structure in Spring Boot: feature-oriented packaging, immutable DTO records, clean RESTful mapping with validation, and centralized exception handling with ProblemDetail.',
+      techStack: ['Java 21', 'Spring Boot 3', 'REST API', 'Jakarta Validation'],
+      category: 'Backend Architecture',
+      highlight: 'Backend Code',
+      date: '2026',
+      period: '2026',
+      codeFileName: 'BookingController.java',
+      codeSnippet: `@RestController
+@RequestMapping("/api/v1/bookings")
+@RequiredArgsConstructor
+public class BookingController {
+
+    private final BookingService bookingService;
+
+    @PostMapping
+    public ResponseEntity<BookingResponse> createBooking(
+            @Valid @RequestBody BookingRequest request,
+            @AuthenticationPrincipal UserPrincipal user) {
+        
+        BookingResponse response = bookingService.reserveSeats(request, user.getId());
+        return ResponseEntity.status(HttpStatus.CREATED).body(response);
+    }
+
+    @GetMapping("/{id}")
+    public ResponseEntity<BookingResponse> getBooking(@PathVariable UUID id) {
+        return ResponseEntity.ok(bookingService.findById(id));
+    }
+}`,
+      sortDate: new Date(2026, 4, 1),
+    });
 
     // Projects as posts
     projectsData.forEach((p) => {
@@ -66,7 +104,6 @@ export default function PostsFeed() {
       });
     });
 
-    // Sort by date descending
     posts.sort((a, b) => b.sortDate - a.sortDate);
     return posts;
   }, []);
@@ -79,24 +116,27 @@ export default function PostsFeed() {
     });
   }, [allPosts, searchFilter]);
 
+  // Attach IntersectionObserver scroll reveal
+  useScrollReveal([filteredPosts]);
+
   return (
     <div style={{ display: 'flex', flexDirection: 'column', gap: '16px' }}>
-      {/* Create post prompt */}
-      <div className="card" style={{ padding: '12px 16px', display: 'flex', alignItems: 'center', gap: '10px' }}>
+      {/* Create post prompt card */}
+      <div className="card reveal-init" style={{ padding: '14px 16px', display: 'flex', alignItems: 'center', gap: '12px' }}>
         <img
           src="/pralad-profile.jpeg"
           alt="Pralad Neupane"
           width={40}
           height={40}
-          style={{ borderRadius: '50%', objectFit: 'cover' }}
+          style={{ borderRadius: '50%', objectFit: 'cover', aspectRatio: '1/1' }}
           loading="lazy"
         />
         <div
           style={{
             flex: 1,
-            padding: '10px 16px',
+            padding: '10px 18px',
             background: 'var(--color-comment)',
-            borderRadius: '20px',
+            borderRadius: '24px',
             fontSize: 'var(--font-size-sm)',
             color: 'var(--color-text-secondary)',
           }}
