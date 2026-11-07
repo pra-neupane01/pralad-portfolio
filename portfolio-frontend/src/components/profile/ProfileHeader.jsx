@@ -1,0 +1,166 @@
+import { Link } from 'react-router-dom';
+import { Mail, UserPlus, FileText } from 'lucide-react';
+import { profile } from '../../data/profile';
+
+export default function ProfileHeader() {
+  return (
+    <div style={{ maxWidth: '940px', margin: '0 auto' }}>
+      {/* Cover image */}
+      <div className="cover-image" role="img" aria-label="Cover photo - code and backend development themed" />
+
+      {/* Profile info row */}
+      <div
+        style={{
+          padding: '0 16px',
+          display: 'flex',
+          flexDirection: 'column',
+          alignItems: 'center',
+          marginTop: '-48px',
+          position: 'relative',
+          zIndex: 2,
+        }}
+      >
+        {/* Desktop: flex row layout */}
+        <div
+          style={{
+            display: 'flex',
+            flexDirection: 'column',
+            alignItems: 'center',
+            width: '100%',
+          }}
+          className="md:flex-row md:items-end md:gap-4"
+        >
+          {/* Avatar */}
+          <div style={{ flexShrink: 0 }}>
+            <img
+              src="/pralad-profile.jpeg"
+              alt={`${profile.fullName} profile photo`}
+              width={168}
+              height={168}
+              style={{
+                width: '128px',
+                height: '128px',
+                borderRadius: '50%',
+                border: '4px solid var(--color-card)',
+                objectFit: 'cover',
+                boxShadow: 'var(--shadow-lg)',
+              }}
+              className="md:w-[168px] md:h-[168px]"
+              loading="eager"
+              fetchpriority="high"
+            />
+          </div>
+
+          {/* Name + tagline */}
+          <div
+            style={{
+              textAlign: 'center',
+              marginTop: '8px',
+            }}
+            className="md:text-left md:mt-0 md:flex-1"
+          >
+            <h1
+              style={{
+                fontSize: 'var(--font-size-3xl)',
+                fontWeight: 800,
+                color: 'var(--color-text)',
+                margin: 0,
+                lineHeight: 1.2,
+              }}
+            >
+              {profile.fullName}
+            </h1>
+            <p
+              style={{
+                fontSize: 'var(--font-size-base)',
+                color: 'var(--color-text-secondary)',
+                margin: '4px 0 0',
+                fontWeight: 500,
+              }}
+            >
+              Java Backend Developer | Spring Boot | REST APIs
+            </p>
+          </div>
+        </div>
+
+        {/* Action buttons */}
+        <div
+          style={{
+            display: 'flex',
+            gap: '8px',
+            marginTop: '16px',
+            flexWrap: 'wrap',
+            justifyContent: 'center',
+          }}
+        >
+          <Link
+            to="/contact"
+            style={{
+              display: 'inline-flex',
+              alignItems: 'center',
+              gap: '6px',
+              padding: '8px 16px',
+              background: 'var(--color-primary)',
+              color: '#fff',
+              borderRadius: 'var(--radius-md)',
+              fontWeight: 600,
+              fontSize: 'var(--font-size-sm)',
+              textDecoration: 'none',
+              transition: 'background var(--transition-fast)',
+            }}
+          >
+            <Mail size={16} /> Message
+          </Link>
+          <a
+            href={profile.social.github}
+            target="_blank"
+            rel="noopener noreferrer"
+            style={{
+              display: 'inline-flex',
+              alignItems: 'center',
+              gap: '6px',
+              padding: '8px 16px',
+              background: 'var(--color-comment)',
+              color: 'var(--color-text)',
+              borderRadius: 'var(--radius-md)',
+              fontWeight: 600,
+              fontSize: 'var(--font-size-sm)',
+              textDecoration: 'none',
+              transition: 'background var(--transition-fast)',
+            }}
+          >
+            <UserPlus size={16} /> Follow
+          </a>
+          <a
+            href={profile.resumePath || '/resume.pdf'}
+            target="_blank"
+            rel="noopener noreferrer"
+            style={{
+              display: 'inline-flex',
+              alignItems: 'center',
+              gap: '6px',
+              padding: '8px 16px',
+              background: 'var(--color-comment)',
+              color: 'var(--color-text)',
+              borderRadius: 'var(--radius-md)',
+              fontWeight: 600,
+              fontSize: 'var(--font-size-sm)',
+              textDecoration: 'none',
+              transition: 'background var(--transition-fast)',
+            }}
+          >
+            <FileText size={16} /> Resume
+          </a>
+        </div>
+      </div>
+
+      {/* Divider */}
+      <div
+        style={{
+          borderBottom: '1px solid var(--color-border)',
+          margin: '16px 16px 0',
+        }}
+      />
+    </div>
+  );
+}

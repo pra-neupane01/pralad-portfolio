@@ -1,31 +1,38 @@
-import { Routes, Route } from 'react-router-dom';
-import MainLayout from '../layouts/MainLayout';
+import { lazy, Suspense } from 'react';
+import { Routes, Route, Navigate } from 'react-router-dom';
+import ProfileLayout from '../layouts/ProfileLayout';
+import LoadingSkeleton from '../components/common/LoadingSkeleton';
 
-// Pages
-import Home from '../pages/Home';
-import About from '../pages/About';
-import Skills from '../pages/Skills';
-import Projects from '../pages/Projects';
-import Education from '../pages/Education';
-import CredentialDetail from '../pages/CredentialDetail';
-import Services from '../pages/Services';
-import Contact from '../pages/Contact';
-import NotFound from '../pages/NotFound';
+// Code-split routes
+const PostsFeed = lazy(() => import('../pages/PostsFeed'));
+const AboutTab = lazy(() => import('../pages/AboutTab'));
+const ProjectsTab = lazy(() => import('../pages/ProjectsTab'));
+const PhotosTab = lazy(() => import('../pages/PhotosTab'));
+const ContactTab = lazy(() => import('../pages/ContactTab'));
+
+function SuspenseWrap({ children }) {
+  return (
+    <Suspense fallback={<LoadingSkeleton />}>
+      {children}
+    </Suspense>
+  );
+}
 
 export default function AppRoutes() {
   return (
     <Routes>
-      <Route path="/" element={<MainLayout />}>
-        <Route index element={<Home />} />
-        <Route path="about" element={<About />} />
-        <Route path="skills" element={<Skills />} />
-        <Route path="projects" element={<Projects />} />
-        <Route path="education" element={<Education />} />
-        <Route path="journey" element={<Education />} />
-        <Route path="education/:slug" element={<CredentialDetail />} />
-        <Route path="services" element={<Services />} />
-        <Route path="contact" element={<Contact />} />
-        <Route path="*" element={<NotFound />} />
+      <Route path="/" element={<ProfileLayout />}>
+        <Route index element={<SuspenseWrap><PostsFeed /></SuspenseWrap>} />
+        <Route path="about" element={<SuspenseWrap><AboutTab /></SuspenseWrap>} />
+        <Route path="projects" element={<SuspenseWrap><ProjectsTab /></SuspenseWrap>} />
+        <Route path="photos" element={<SuspenseWrap><PhotosTab /></SuspenseWrap>} />
+        <Route path="contact" element={<SuspenseWrap><ContactTab /></SuspenseWrap>} />
+        {/* Redirect old routes */}
+        <Route path="skills" element={<Navigate to="/about" replace />} />
+        <Route path="education" element={<Navigate to="/about" replace />} />
+        <Route path="services" element={<Navigate to="/about" replace />} />
+        <Route path="journey" element={<Navigate to="/about" replace />} />
+        <Route path="*" element={<Navigate to="/" replace />} />
       </Route>
     </Routes>
   );

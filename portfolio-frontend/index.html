@@ -1,5 +1,5 @@
 <!doctype html>
-<html lang="en" class="dark">
+<html lang="en">
   <head>
     <meta charset="UTF-8" />
     <link rel="icon" type="image/x-icon" href="/favicon.ico" />
@@ -16,6 +16,7 @@
     <meta property="og:description" content="Portfolio of Pralad Neupane — Java Backend Developer focused on Spring Boot, REST APIs, databases, and modern web technologies." />
     <meta property="og:image" content="/og-image.png" />
     <meta property="og:type" content="website" />
+    <meta property="og:url" content="https://praladneupane.com.np" />
 
     <!-- Twitter Card -->
     <meta name="twitter:card" content="summary_large_image" />
@@ -23,14 +24,65 @@
     <meta name="twitter:description" content="Java Backend Developer focused on Spring Boot, REST APIs, and modern web technologies." />
     <meta name="twitter:image" content="/og-image.png" />
 
-    <!-- Preconnect for Google Fonts -->
-    <link rel="preconnect" href="https://fonts.googleapis.com" />
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-    <link href="https://fonts.googleapis.com/css2?family=Caveat:wght@400;500;600;700&family=Courier+Prime:ital,wght@0,400;0,700;1,400&family=DM+Sans:ital,opsz,wght@0,9..40,300;0,9..40,400;0,9..40,500;0,9..40,600;0,9..40,700;1,9..40,400&family=Inter:wght@300;400;500;600;700&family=JetBrains+Mono:wght@400;500;600&family=Kalam:wght@300;400;700&family=Permanent+Marker&family=Playfair+Display:ital,wght@0,400;0,600;0,700;0,800;1,400;1,600&family=Plus+Jakarta+Sans:wght@400;500;600;700;800&family=Space+Grotesk:wght@400;500;600;700&display=swap" rel="stylesheet" />
+    <!-- JSON-LD Person Schema -->
+    <script type="application/ld+json">
+    {
+      "@context": "https://schema.org",
+      "@type": "Person",
+      "name": "Pralad Neupane",
+      "url": "https://praladneupane.com.np",
+      "image": "https://praladneupane.com.np/pralad-profile.jpeg",
+      "jobTitle": "Java Backend Developer",
+      "description": "Computing student passionate about AI/ML and backend development with Java, Spring Boot, and Python.",
+      "address": {
+        "@type": "PostalAddress",
+        "addressLocality": "Itahari",
+        "addressCountry": "Nepal"
+      },
+      "email": "praladneupane01@gmail.com",
+      "sameAs": [
+        "https://github.com/pra-neupane01",
+        "https://www.linkedin.com/in/pralad-neupane-435874392",
+        "https://www.instagram.com/praka5h_n"
+      ],
+      "alumniOf": {
+        "@type": "EducationalOrganization",
+        "name": "Itahari International College"
+      },
+      "knowsAbout": ["Java", "Spring Boot", "REST APIs", "PostgreSQL", "MySQL", "React", "Python", "TensorFlow"]
+    }
+    </script>
+
+    <!-- Canonical URL -->
+    <link rel="canonical" href="https://praladneupane.com.np" />
   </head>
-  <body class="bg-[#090d16] text-slate-100 antialiased selection:bg-emerald-500/20 selection:text-emerald-300">
+  <body>
     <div id="root"></div>
+
+    <!-- Noscript fallback for SEO crawlers -->
+    <noscript>
+      <div style="max-width:800px;margin:2rem auto;padding:1rem;font-family:sans-serif">
+        <h1>Pralad Neupane</h1>
+        <h2>Java Backend Developer | Spring Boot | REST APIs</h2>
+        <p>Computing student at Itahari International College (London Metropolitan University), based in Itahari, Nepal. Passionate about AI/ML and backend development.</p>
+        <h3>Skills</h3>
+        <p>Java, Spring Boot, Spring Security, REST API, PostgreSQL, MySQL, Python, TensorFlow, React.js, JavaScript, Docker, Git</p>
+        <h3>Projects</h3>
+        <ul>
+          <li><strong>Queen Bee Detector</strong> — Acoustic monitoring pipeline using CNN and TensorFlow for honeybee health analysis</li>
+          <li><strong>SajiloYatra</strong> — Bus scheduling REST API with Spring Boot, JWT, OAuth2, eSewa payments</li>
+          <li><strong>Esports Tournament Management</strong> — Full-stack platform with Spring Boot, React, WebSocket</li>
+          <li><strong>HamroPasal</strong> — Retail management platform with POS, inventory tracking, Docker</li>
+          <li><strong>TrustMart</strong> — Second-hand marketplace with escrow transactions</li>
+          <li><strong>ArthaFlow</strong> — Financial data processing engine</li>
+        </ul>
+        <h3>Contact</h3>
+        <p>Email: <a href="mailto:praladneupane01@gmail.com">praladneupane01@gmail.com</a></p>
+        <p>GitHub: <a href="https://github.com/pra-neupane01">github.com/pra-neupane01</a></p>
+        <p>LinkedIn: <a href="https://www.linkedin.com/in/pralad-neupane-435874392">linkedin.com/in/pralad-neupane</a></p>
+      </div>
+    </noscript>
+
     <script type="module" src="/src/main.jsx"></script>
   </body>
 </html>
-
