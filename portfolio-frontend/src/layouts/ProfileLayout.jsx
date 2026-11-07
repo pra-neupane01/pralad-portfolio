@@ -20,26 +20,28 @@ export default function ProfileLayout() {
       <Navbar />
 
       <main>
-        <ProfileHeader />
-
-        <div style={{ maxWidth: '940px', margin: '0 auto', padding: '0 16px' }}>
+        {/* Profile Header & Tabs container */}
+        <div className="profile-container">
+          <ProfileHeader />
           <ProfileTabs />
         </div>
 
-        <div className="profile-content" style={{ paddingTop: '16px', paddingBottom: '80px' }}>
-          {/* Left sidebar - Intro card (desktop) */}
-          <aside className="hidden md:block" style={{ position: 'sticky', top: '76px', alignSelf: 'start' }}>
+        {/* Responsive Content Layout */}
+        <div className="profile-content">
+          {/* Left Intro Card: Desktop sticky sidebar */}
+          <aside className="profile-sidebar-left">
             <IntroCard />
           </aside>
 
-          {/* Center feed + right sidebar */}
-          <div>
+          {/* Center Main Feed / Active Tab Content */}
+          <section className="profile-main-feed">
             <Outlet />
-            {/* Right sidebar shown below on mobile, inline on desktop */}
-            <div className="md:hidden" style={{ marginTop: '16px' }}>
-              <RightSidebar />
-            </div>
-          </div>
+          </section>
+
+          {/* Right Sidebar: Skills, Featured Projects, GitHub */}
+          <aside className="profile-sidebar-right">
+            <RightSidebar />
+          </aside>
         </div>
       </main>
 

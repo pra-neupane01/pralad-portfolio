@@ -1,6 +1,5 @@
 import { useMemo, useState } from 'react';
 import PostCard from '../components/feed/PostCard';
-import RightSidebar from '../components/sidebar/RightSidebar';
 import { projectsData } from '../data/projects';
 import { awardsData } from '../data/awards';
 import { certificationsData } from '../data/certifications';
@@ -81,65 +80,53 @@ export default function PostsFeed() {
   }, [allPosts, searchFilter]);
 
   return (
-    <div className="md:flex md:gap-4">
-      {/* Center feed */}
-      <div style={{ flex: 1, minWidth: 0 }}>
-        <div style={{ display: 'flex', flexDirection: 'column', gap: '16px' }}>
-          {/* Create post prompt */}
-          <div className="card" style={{ padding: '12px 16px', display: 'flex', alignItems: 'center', gap: '10px' }}>
-            <img
-              src="/pralad-profile.jpeg"
-              alt=""
-              width={40}
-              height={40}
-              style={{ borderRadius: '50%', objectFit: 'cover' }}
-              loading="lazy"
-            />
-            <div
-              style={{
-                flex: 1,
-                padding: '8px 16px',
-                background: 'var(--color-comment)',
-                borderRadius: '20px',
-                fontSize: 'var(--font-size-sm)',
-                color: 'var(--color-text-secondary)',
-              }}
-            >
-              Building something awesome...
-            </div>
-          </div>
-
-          {filteredPosts.length === 0 ? (
-            <div className="card" style={{ padding: '40px 16px', textAlign: 'center', color: 'var(--color-text-secondary)' }}>
-              No posts match your search.
-            </div>
-          ) : (
-            filteredPosts.map((post) => <PostCard key={post.id} post={post} />)
-          )}
+    <div style={{ display: 'flex', flexDirection: 'column', gap: '16px' }}>
+      {/* Create post prompt */}
+      <div className="card" style={{ padding: '12px 16px', display: 'flex', alignItems: 'center', gap: '10px' }}>
+        <img
+          src="/pralad-profile.jpeg"
+          alt="Pralad Neupane"
+          width={40}
+          height={40}
+          style={{ borderRadius: '50%', objectFit: 'cover' }}
+          loading="lazy"
+        />
+        <div
+          style={{
+            flex: 1,
+            padding: '10px 16px',
+            background: 'var(--color-comment)',
+            borderRadius: '20px',
+            fontSize: 'var(--font-size-sm)',
+            color: 'var(--color-text-secondary)',
+          }}
+        >
+          Building scalable backend systems & learning AI...
         </div>
       </div>
 
-      {/* Right sidebar (desktop only) */}
-      <div className="hidden md:block" style={{ width: '300px', flexShrink: 0, position: 'sticky', top: '76px', alignSelf: 'start' }}>
-        <RightSidebar />
-      </div>
+      {filteredPosts.length === 0 ? (
+        <div className="card" style={{ padding: '40px 16px', textAlign: 'center', color: 'var(--color-text-secondary)' }}>
+          No posts match your search.
+        </div>
+      ) : (
+        filteredPosts.map((post) => <PostCard key={post.id} post={post} />)
+      )}
     </div>
   );
 }
 
 function parsePeriod(period) {
   if (!period) return new Date(2024, 0, 1);
-  // Handle "Feb 2025 – Present", "2025", "2026" etc.
   const match = period.match(/(\d{4})/);
   if (match) {
     const year = parseInt(match[1]);
-    // Check for month
     const monthMatch = period.match(/(Jan|Feb|Mar|Apr|May|Jun|Jul|Aug|Sep|Oct|Nov|Dec)/i);
     if (monthMatch) {
       const months = { jan: 0, feb: 1, mar: 2, apr: 3, may: 4, jun: 5, jul: 6, aug: 7, sep: 8, oct: 9, nov: 10, dec: 11 };
       return new Date(year, months[monthMatch[1].toLowerCase()] || 0, 1);
     }
-    return new Date(year, 6, 1); // mid-year default
+    return new Date(year, 6, 1);
   }
   return new Date(2024, 0, 1);
 }

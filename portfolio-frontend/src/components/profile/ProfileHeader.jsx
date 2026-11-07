@@ -4,7 +4,7 @@ import { profile } from '../../data/profile';
 
 export default function ProfileHeader() {
   return (
-    <div style={{ maxWidth: '940px', margin: '0 auto' }}>
+    <div>
       {/* Cover image */}
       <div className="cover-image" role="img" aria-label="Cover photo - code and backend development themed" />
 
@@ -20,7 +20,7 @@ export default function ProfileHeader() {
           zIndex: 2,
         }}
       >
-        {/* Desktop: flex row layout */}
+        {/* Responsive header layout */}
         <div
           style={{
             display: 'flex',
@@ -28,7 +28,7 @@ export default function ProfileHeader() {
             alignItems: 'center',
             width: '100%',
           }}
-          className="md:flex-row md:items-end md:gap-4"
+          className="md:flex-row md:items-end md:gap-5"
         >
           {/* Avatar */}
           <div style={{ flexShrink: 0 }}>
@@ -45,7 +45,7 @@ export default function ProfileHeader() {
                 objectFit: 'cover',
                 boxShadow: 'var(--shadow-lg)',
               }}
-              className="md:w-[168px] md:h-[168px]"
+              className="md:w-[150px] md:h-[150px] lg:w-[168px] lg:h-[168px]"
               loading="eager"
               fetchpriority="high"
             />
@@ -55,17 +55,18 @@ export default function ProfileHeader() {
           <div
             style={{
               textAlign: 'center',
-              marginTop: '8px',
+              marginTop: '10px',
             }}
-            className="md:text-left md:mt-0 md:flex-1"
+            className="md:text-left md:mt-0 md:flex-1 md:pb-2"
           >
             <h1
               style={{
-                fontSize: 'var(--font-size-3xl)',
+                fontSize: 'clamp(1.5rem, 3vw, 2rem)',
                 fontWeight: 800,
                 color: 'var(--color-text)',
                 margin: 0,
                 lineHeight: 1.2,
+                letterSpacing: '-0.02em',
               }}
             >
               {profile.fullName}
@@ -74,83 +75,84 @@ export default function ProfileHeader() {
               style={{
                 fontSize: 'var(--font-size-base)',
                 color: 'var(--color-text-secondary)',
-                margin: '4px 0 0',
+                margin: '6px 0 0',
                 fontWeight: 500,
               }}
             >
               Java Backend Developer | Spring Boot | REST APIs
             </p>
           </div>
-        </div>
 
-        {/* Action buttons */}
-        <div
-          style={{
-            display: 'flex',
-            gap: '8px',
-            marginTop: '16px',
-            flexWrap: 'wrap',
-            justifyContent: 'center',
-          }}
-        >
-          <Link
-            to="/contact"
+          {/* Action buttons (Right aligned on desktop) */}
+          <div
             style={{
-              display: 'inline-flex',
-              alignItems: 'center',
-              gap: '6px',
-              padding: '8px 16px',
-              background: 'var(--color-primary)',
-              color: '#fff',
-              borderRadius: 'var(--radius-md)',
-              fontWeight: 600,
-              fontSize: 'var(--font-size-sm)',
-              textDecoration: 'none',
-              transition: 'background var(--transition-fast)',
+              display: 'flex',
+              gap: '8px',
+              marginTop: '16px',
+              flexWrap: 'wrap',
+              justifyContent: 'center',
             }}
+            className="md:mt-0 md:mb-2 md:justify-end"
           >
-            <Mail size={16} /> Message
-          </Link>
-          <a
-            href={profile.social.github}
-            target="_blank"
-            rel="noopener noreferrer"
-            style={{
-              display: 'inline-flex',
-              alignItems: 'center',
-              gap: '6px',
-              padding: '8px 16px',
-              background: 'var(--color-comment)',
-              color: 'var(--color-text)',
-              borderRadius: 'var(--radius-md)',
-              fontWeight: 600,
-              fontSize: 'var(--font-size-sm)',
-              textDecoration: 'none',
-              transition: 'background var(--transition-fast)',
-            }}
-          >
-            <UserPlus size={16} /> Follow
-          </a>
-          <a
-            href={profile.resumePath || '/resume.pdf'}
-            target="_blank"
-            rel="noopener noreferrer"
-            style={{
-              display: 'inline-flex',
-              alignItems: 'center',
-              gap: '6px',
-              padding: '8px 16px',
-              background: 'var(--color-comment)',
-              color: 'var(--color-text)',
-              borderRadius: 'var(--radius-md)',
-              fontWeight: 600,
-              fontSize: 'var(--font-size-sm)',
-              textDecoration: 'none',
-              transition: 'background var(--transition-fast)',
-            }}
-          >
-            <FileText size={16} /> Resume
-          </a>
+            <Link
+              to="/contact"
+              style={{
+                display: 'inline-flex',
+                alignItems: 'center',
+                gap: '6px',
+                padding: '8px 16px',
+                background: 'var(--color-primary)',
+                color: '#fff',
+                borderRadius: 'var(--radius-md)',
+                fontWeight: 600,
+                fontSize: 'var(--font-size-sm)',
+                textDecoration: 'none',
+                transition: 'background var(--transition-fast)',
+              }}
+            >
+              <Mail size={16} /> Message
+            </Link>
+            <a
+              href={profile.social.github}
+              target="_blank"
+              rel="noopener noreferrer"
+              style={{
+                display: 'inline-flex',
+                alignItems: 'center',
+                gap: '6px',
+                padding: '8px 16px',
+                background: 'var(--color-comment)',
+                color: 'var(--color-text)',
+                borderRadius: 'var(--radius-md)',
+                fontWeight: 600,
+                fontSize: 'var(--font-size-sm)',
+                textDecoration: 'none',
+                transition: 'background var(--transition-fast)',
+              }}
+            >
+              <UserPlus size={16} /> Follow
+            </a>
+            <a
+              href={profile.resumePath || '/resume.pdf'}
+              target="_blank"
+              rel="noopener noreferrer"
+              style={{
+                display: 'inline-flex',
+                alignItems: 'center',
+                gap: '6px',
+                padding: '8px 16px',
+                background: 'var(--color-comment)',
+                color: 'var(--color-text)',
+                borderRadius: 'var(--radius-md)',
+                fontWeight: 600,
+                fontSize: 'var(--font-size-sm)',
+                textDecoration: 'none',
+                transition: 'background var(--transition-fast)',
+              }}
+            >
+              <FileText size={16} /> Resume
+            </a>
+          </div>
         </div>
       </div>
 
